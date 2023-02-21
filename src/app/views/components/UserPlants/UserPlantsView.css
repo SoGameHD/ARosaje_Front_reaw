@@ -1,0 +1,75 @@
+.titleUserPlants {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.subtitleUserPlants {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+}
+
+/* Réglez les styles pour les écrans plus grands */
+@media only screen and (min-width: 1200px) {
+  .titleUserPlants {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 57px;
+    line-height: 64px;
+    margin-bottom: 8px;
+  }
+  .subtitleUserPlants {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+  }
+}
+
+/* Réglez les styles pour les écrans encore plus grands */
+@media only screen and (min-width: 1600px) {
+  .titleUserPlants {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 112px;
+    line-height: 120px;
+    margin-bottom: 2%;
+  }
+  .subtitleUserPlants {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+  }
+}
+
+
+.bgLinearButton {
+  background: linear-gradient(0deg, rgba(56, 106, 32, 0.02), rgba(56, 106, 32, 0.02)), #F4F6EA !important;
+}
+
+.fullWidth {
+  width: 100% !important;
+}
+
+.bgLinearButtonActive {
+  background-color: #386A20 !important;
+}
+
+.colorTextButtonActive {
+  color: #FFFFFF !important;
+}
+
+.colorTextButton {
+  color: #386A20 !important;
+}
+
+.imgDetailsPlant {
+  width: 100% !important;
+}
