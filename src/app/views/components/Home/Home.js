@@ -1,7 +1,8 @@
 import { Box, CssBaseline } from '@mui/material'
-import Dashboard from '../Dashboard/Dashboard'
+// import Dashboard from '../Dashboard/Dashboard'
 import Menu from '../Menu/Menu'
-import PlantPhotoTaker from '../Photo/Photo'
+// import PlantPhotoTaker from '../Photo/Photo'
+import UserPlantsView from '../UserPlants/UserPlantsView'
 
 const Home = () => {
   return (
@@ -9,9 +10,10 @@ const Home = () => {
       <CssBaseline />
       <Menu />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Dashboard />
+        {/* <Dashboard /> */}
+        <UserPlantsView />
       </Box>
-      <PlantPhotoTaker />
+      {/* <PlantPhotoTaker /> */}
     </Box>
   )
 }
