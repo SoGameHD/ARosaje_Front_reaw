@@ -1,8 +1,10 @@
 import { Box, Container, CssBaseline, Grid, Typography } from "@mui/material"
-import CardPlantsToKeep from "../UserPlants/CardPlantsToKeep";
+import CardPlantsToKeep from "../PlantsToKeep/CardPlantsToKeep";
 import DashboardCard from "./DashboardCard";
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import myPlantImage from '../../../images/mes-plantes.avif'
+import plantKept from '../../../images/plantes-gardees.avif'
 
 const Dashboard = () => {
   return (
@@ -19,14 +21,14 @@ const Dashboard = () => {
           <DashboardCard
           title={'Mes plantes'}
           description={"Retrouver les plantes que vous avez partagé. Vos plantes gardées et celles en attente d'un gardien."}
-          image={"https://picsum.photos/800/300"}
+          image={myPlantImage}
           />
         </Grid>
         <Grid item xs={"auto"} sm={"auto"} md={"auto"}>
           <DashboardCard
           title={'Plantes gardées'}
           description={"Retrouver les plantes que vous gardées."}
-          image={"https://picsum.photos/800/300"}
+          image={plantKept}
           />
         </Grid>
       </Grid>
