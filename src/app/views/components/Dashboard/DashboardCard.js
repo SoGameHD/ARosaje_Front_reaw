@@ -7,6 +7,9 @@ const DashboardCard = ({title, description, image}) => {
       sx={{
         backgroundColor: '#F8FAFD',
         borderRadius: "24px",
+        ":hover": {
+          backgroundColor: '#D9E7CB',
+        },
         width: {
           xs: 280,
           sm: 350,

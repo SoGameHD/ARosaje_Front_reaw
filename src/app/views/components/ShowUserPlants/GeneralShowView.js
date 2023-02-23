@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import ShowUserPlantsDesktop from './DetailsUserPlantsDesktopView';
+import ShowUserPlantsDesktop from './ShowUserPlantsDesktop';
 import ShowUserPlantsMobile from "./ShowUserPlantsMobile";
 
 const GeneralShowView = () => {

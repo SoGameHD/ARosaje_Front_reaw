@@ -4,7 +4,7 @@
   font-size: 32px;
   line-height: 40px;
   margin: 0;
-  margin-bottom: 8px;
+  margin-bottom: 2%;
 }
 
 .subtitleUserPlants {
@@ -13,6 +13,7 @@
   font-size: 16px;
   line-height: 24px;
   margin: 0;
+  margin-bottom: 2%;
 }
 
 /* Réglez les styles pour les écrans plus grands */
@@ -22,7 +23,7 @@
     font-weight: 400;
     font-size: 57px;
     line-height: 64px;
-    margin-bottom: 8px;
+    margin-bottom: 2%;
   }
   .subtitleUserPlants {
     font-style: normal;

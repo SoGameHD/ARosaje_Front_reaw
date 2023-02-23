@@ -68,6 +68,10 @@ const CardUserNotKeptPlants = ({image, description}) => {
           backgroundColor: "#F1F3E8",
           borderColor: "#43493E",
           borderRadius: 100,
+          ":hover": {
+            borderColor: '#386A20',
+            color: '#386A20',
+          },
         }}
         >
         Modifier
@@ -77,6 +81,10 @@ const CardUserNotKeptPlants = ({image, description}) => {
           color: "#FFFFFF",
           backgroundColor: "#386A20",
           borderRadius: 100,
+          ":hover": {
+            backgroundColor: '#FFFFFA',
+            color: '#386A20',
+          },
         }}
         >
         Ajouter un conseil

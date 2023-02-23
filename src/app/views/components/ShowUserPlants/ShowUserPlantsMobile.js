@@ -106,6 +106,10 @@ const ShowUserPlantsMobile = () => {
           sx={{
             color: "#43493E",
             backgroundColor: "#F1F3E8",
+            ":hover": {
+              borderColor: '#386A20',
+              color: '#386A20',
+            },
             mr: '6px',
           }}>
           Modifier
@@ -113,7 +117,11 @@ const ShowUserPlantsMobile = () => {
           <Button size="small" variant="contained" startIcon={<AddIcon color='#FFFFFF' />}
           sx={{
             color: "#FFFFFF",
-            backgroundColor: "#386A20"
+            backgroundColor: "#386A20",
+            ":hover": {
+              backgroundColor: '#FFFFFA',
+              color: '#386A20',
+            },
           }}>
           Ajouter un conseil
           </Button>

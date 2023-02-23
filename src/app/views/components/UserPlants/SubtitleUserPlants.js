@@ -1,4 +1,5 @@
 import { Container, CssBaseline } from "@mui/material"
+import './UserPlantsView.css'
 
 const SubtitleUserPlants = ({subtitle}) => {
   return (

@@ -211,6 +211,10 @@ const ShowUserPlantsDesktop = () => {
             backgroundColor: '#386A20',
             color: '#FFFFF',
             borderRadius: 100,
+            ":hover": {
+              backgroundColor: '#FFFFFA',
+              color: '#386A20',
+            },
           }}>
             Valider
           </Button>

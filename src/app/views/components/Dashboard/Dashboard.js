@@ -2,7 +2,6 @@ import { Box, Container, CssBaseline, Grid, Typography } from "@mui/material"
 import CardPlantsToKeep from "../PlantsToKeep/CardPlantsToKeep";
 import DashboardCard from "./DashboardCard";
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import myPlantImage from '../../../images/mes-plantes.avif'
 import plantKept from '../../../images/plantes-gardees.avif'
 
@@ -49,7 +48,6 @@ const Dashboard = () => {
             title={'Orchidée'}
             description={"Belle orchidée cherchant un gardien."}
             image={"https://picsum.photos/800/300"}
-            iconBtnAction1={<FavoriteBorderIcon />}
             actionBtn1={'Garder la plante'}
             iconBtnAction2={<VisibilityRoundedIcon />}
             actionBtn2={'Voir la plante'}
