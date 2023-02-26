@@ -6,8 +6,9 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import InfoIcon from '@mui/icons-material/Info'
-import { Yard, Home } from '@mui/icons-material'
+import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
+import PlantIcon from './svg/PlantIcon'
+import HomeIcon from './svg/HomeIcon'
 
 const drawerWidth = 240
 
@@ -52,35 +53,38 @@ const Menu = () => {
   const [open, setOpen] = React.useState(false)
 
   const handleDrawerOpen = () => {
-    setOpen(true)
-  }
-
-  // Todo : Fixer le bug de fermeture du menu
-  const handleDrawerClose = () => {
-    setOpen(false)
+    open ? setOpen(false) : setOpen(true);
   }
 
   return (
-    <Drawer variant="permanent" open={open}>
-      <List>
+    <Drawer variant="permanent" open={open} PaperProps={{ sx: {
+      backgroundColor: '#EBEFE2',
+    } }}>
+      <List sx={{  py: 5 }}>
         {['Accueil', 'Mes Plantes', 'Plantes gardées'].map((text, index) => (
           <ListItem key={text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton
+              onClick={handleDrawerOpen}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
-                px: 2.5
+                px: 2.5,
+                mb: 4,
               }}
             >
               <ListItemIcon
-                onClick={handleDrawerOpen}
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  ':hover': {
+                    borderRadius: "40px",
+                    width: 56,
+                    height: 32,
+                  }
                 }}
               >
-                {index === 0 ? <Home /> : index === 1 ? <Yard /> : <InfoIcon />}
+                {index === 0 ? <HomeIcon fontSize="small" /> : index === 1 ? <PlantIcon fontSize="small" /> : <YardOutlinedIcon fontSize="small" />}
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
