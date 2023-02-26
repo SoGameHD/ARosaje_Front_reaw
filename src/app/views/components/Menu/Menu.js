@@ -77,11 +77,6 @@ const Menu = () => {
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
-                  ':hover': {
-                    borderRadius: "40px",
-                    width: 56,
-                    height: 32,
-                  }
                 }}
               >
                 {index === 0 ? <HomeIcon fontSize="small" /> : index === 1 ? <PlantIcon fontSize="small" /> : <YardOutlinedIcon fontSize="small" />}
