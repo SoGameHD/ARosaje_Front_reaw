@@ -1,14 +1,24 @@
-import { Fab } from "@mui/material"
+import { useEffect, useState } from 'react';
+import { Button, IconButton } from "@mui/material"
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
+import { useMediaQuery } from 'react-responsive';
 
 const BtnTakePicture = () => {
+  const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 600 });
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    setIsLargeScreen(isDesktopOrLaptop);
+  }, [isDesktopOrLaptop]);
+
   return (
     <>
-    <Fab color="primary" aria-label="add" variant="extended"
+    <Button color="primary" aria-label="ajout photo" variant="contained"
     sx={{
       position: 'fixed',
       right: '8%',
       bottom: '8%',
+      borderRadius: "24%",
       background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
       ":hover": {
         backgroundColor: '#386A20',
@@ -16,11 +26,19 @@ const BtnTakePicture = () => {
       },
       color: '#000000',
       elevation: 5,
-      width: "74px",
-      height: "74px",
+      width: {
+        xs: "64px",
+        sm: "74px",
+        md: "74px",
+      },
+      height: {
+        xs: "64px",
+        sm: "74px",
+        md: "74px",
+      },
     }}>
-      <AddAPhotoOutlinedIcon fontSize="large" />
-    </Fab>
+      { isLargeScreen ? <AddAPhotoOutlinedIcon fontSize="large" /> : <AddAPhotoOutlinedIcon fontSize="medium" /> }
+    </Button>
     </>
   )
 }
