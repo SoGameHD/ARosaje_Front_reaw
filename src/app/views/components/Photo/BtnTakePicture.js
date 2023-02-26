@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, IconButton } from "@mui/material"
+import { Button } from "@mui/material"
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import { useMediaQuery } from 'react-responsive';
 
