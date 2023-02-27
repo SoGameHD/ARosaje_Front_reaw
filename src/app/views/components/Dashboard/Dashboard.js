@@ -16,14 +16,14 @@ const Dashboard = () => {
         </Typography>
       </Box>
       <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12 }}>
-        <Grid item xs={"auto"} sm={"auto"} md={"auto"}>
+        <Grid item xs={2} sm={"auto"} md={"auto"}>
           <DashboardCard
           title={'Mes plantes'}
           description={"Retrouver les plantes que vous avez partagé. Vos plantes gardées et celles en attente d'un gardien."}
           image={myPlantImage}
           />
         </Grid>
-        <Grid item xs={"auto"} sm={"auto"} md={"auto"}>
+        <Grid item xs={2} sm={"auto"} md={"auto"}>
           <DashboardCard
           title={'Plantes gardées'}
           description={"Retrouver les plantes que vous gardées."}
@@ -40,7 +40,7 @@ const Dashboard = () => {
       </Box>
       <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12 }}>
         {Array.from(Array(6)).map((_, index) => (
-          <Grid item xs={"auto"} sm={"auto"} md={"auto"} key={index}>
+          <Grid item xs={2} sm={"auto"} md={"auto"} key={index}>
             <CardPlantsToKeep
             username={'Yoda'}
             date1={'20/02/2023'}

@@ -17,7 +17,7 @@ const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
       <CardMedia
         sx={{ 
           height: {
-            xs: 180,
+            xs: 150,
             sm: 194,
             md: 230,
             xl: 260,
@@ -31,7 +31,11 @@ const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
         textAlign: "start",
       }}>
         <Typography gutterBottom sx={{
-          fontSize: "18px",
+          fontSize: {
+            xs: "14px",
+            sm: "16px",
+            md: "18px",
+          },
           fontWeight: 500,
         }}
         component="div">
@@ -39,7 +43,7 @@ const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
         </Typography>
         <Typography sx={{ 
           fontSize: {
-            xs: "12px",
+            xs: "10px",
             sm: "14px",
             md: "16px",
           },

@@ -11,10 +11,11 @@ const DashboardCard = ({title, description, image}) => {
           backgroundColor: '#D9E7CB',
         },
         width: {
-          xs: 280,
+          xs: "auto",
           sm: 350,
           md: 380
         },
+        height: "auto"
       }}>
         <CardMedia
           component="img"
