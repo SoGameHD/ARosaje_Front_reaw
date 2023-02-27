@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Menu, MenuItem, Typography } from "@mui/material"
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from "react";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const CardPlantsToKeep = ({username, date1, date2, title, description, image, iconBtnAction1, actionBtn1, iconBtnAction2, actionBtn2}) => {
+const CardPlantsToKeep = ({username, date1, date2, title, description, image, actionBtn1, iconBtnAction2, actionBtn2}) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isKept, setIsKept] = useState(false);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -11,6 +14,10 @@ const CardPlantsToKeep = ({username, date1, date2, title, description, image, ic
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleKeepIt = () => {
+    isKept ? setIsKept(false) : setIsKept(true);
   };
 
   return (
@@ -111,12 +118,16 @@ const CardPlantsToKeep = ({username, date1, date2, title, description, image, ic
           justifyContent: "end",
           p: 2,
         }}>
-          <Button size="small" variant="outlined" startIcon={iconBtnAction1} 
+          <Button onClick={handleKeepIt} size="small" variant="outlined" startIcon={isKept ? <FavoriteIcon sx={{ color: 'red', }} /> : <FavoriteBorderIcon /> } 
           sx={{
             color: "#43493E",
             borderColor: '#386A20',
             backgroundColor: "#F1F3E8",
             borderRadius: 100,
+            ":hover": {
+              borderColor: '#386A20',
+              backgroundColor: '#FFFFFA',
+            },
           }}
           >
           {actionBtn1}

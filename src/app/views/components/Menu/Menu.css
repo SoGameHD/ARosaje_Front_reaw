@@ -1,15 +1,15 @@
 nav {
-	 height: 50 px;
-	 background: linear-gradient(45deg, rbg(156,14,156), midnightblue);
+	height: 50 px;
+	background: linear-gradient(45deg, rbg(156,14,156), midnightblue);
 }
 .liste {
-	 list-style-type: none;
-	 height: 100%;
-	 background: linear-gradient(45deg, rbg(156,14,156), midnightblue);
-	 display: flex;
-	 justify-content: center;
-	 align-items: center;
-	 position: relative;
+	list-style-type: none;
+	height: 100%;
+	background: linear-gradient(45deg, rbg(156,14,156), midnightblue);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 .item {
 	margin-right: 10px;

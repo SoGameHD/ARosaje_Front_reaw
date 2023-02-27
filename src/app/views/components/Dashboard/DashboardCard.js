@@ -7,11 +7,15 @@ const DashboardCard = ({title, description, image}) => {
       sx={{
         backgroundColor: '#F8FAFD',
         borderRadius: "24px",
+        ":hover": {
+          backgroundColor: '#D9E7CB',
+        },
         width: {
-          xs: 280,
+          xs: "auto",
           sm: 350,
           md: 380
         },
+        height: "auto"
       }}>
         <CardMedia
           component="img"

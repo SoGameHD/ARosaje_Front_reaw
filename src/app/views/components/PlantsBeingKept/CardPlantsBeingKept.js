@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 
-const CardUserKeptPlants = ({image, username, description}) => {
+const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
   return (
     <Card sx={{ 
       maxWidth: 345,
@@ -31,25 +31,26 @@ const CardUserKeptPlants = ({image, username, description}) => {
         textAlign: "start",
       }}>
         <Typography gutterBottom sx={{
-          fontSize: "18px",
+          fontSize: {
+            xs: "14px",
+            sm: "16px",
+            md: "18px",
+          },
           fontWeight: 500,
         }}
         component="div">
           Orchidées
         </Typography>
         <Typography sx={{ 
-          fontSize: "16px",
+          fontSize: {
+            xs: "10px",
+            sm: "14px",
+            md: "16px",
+          },
           }}
           color="text.secondary">
-          Gardée par {username}
+          Du {dateStart} Au {dateEnd}.
         </Typography>
-        <Typography sx={{ 
-            fontSize: "16px",
-            mt: '4%'
-            }}
-            color="text.primary">
-            {description}
-          </Typography>
       </CardContent>
       <CardActions sx={{
         display: {
@@ -79,4 +80,4 @@ const CardUserKeptPlants = ({image, username, description}) => {
   );
 }
 
-export default CardUserKeptPlants
+export default CardPlantsBeingKept
