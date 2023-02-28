@@ -8,7 +8,7 @@ const DashboardCard = ({path, title, description, image}) => {
 
   return (
     <>
-    <Link  to={path} key={title} onClick={() => navigate(path)} className='no-underline'>
+    <Link to={path} key={title} onClick={() => navigate(path)} className='no-underline'>
       <Card
       raised={hover ? true : false}
       onMouseEnter={()=> setHover(true)}

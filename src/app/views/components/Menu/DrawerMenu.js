@@ -47,7 +47,7 @@ const DrawerMenu = () => {
       </List>
       <Divider />
       <List sx={{  py: 5 }}>
-        {[{'Accueil':'/'}, {'Mes Plantes':'/mes-plantes'}, {'Plantes gardées':'/plantes-gardées'}].map((item, index) => {
+        {[{'Accueil':'/'}, {'Mes Plantes':'/mes-plantes'}, {'Plantes gardées':'/plantes-gardees'}].map((item, index) => {
           const text = Object.keys(item)[0];
           const path = Object.values(item)[0];
           return (

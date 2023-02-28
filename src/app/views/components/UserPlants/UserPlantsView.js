@@ -34,10 +34,7 @@ function UserPlantsView() {
       }
       <Grid container direction={'row'}
       sx={{
-        pt: 3,
-        pb: 3,
-        pl: 0,
-        pr: 0,
+        pt: 3, pb: 3, pl: 0, pr: 0,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-evenly !important',

@@ -5,10 +5,16 @@ import Menu from '../Menu/Menu'
 import BtnTakePicture from '../Photo/BtnTakePicture'
 import Navigator from '../navigation/Navigator';
 // import PlantPhotoTaker from '../Photo/Photo'
+import { useLocation } from "react-router-dom"
 
 const Home = () => {
   const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 600 });
   const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const location = useLocation();
+
+  // Vérifier si la route courante correspond à l'une des trois routes spécifiées
+  const isCurrentRouteValid = ['/', '/mes-plantes', '/plantes-gardees'].includes(location.pathname);
+
 
   useEffect(() => {
     setIsLargeScreen(isDesktopOrLaptop);
@@ -26,7 +32,9 @@ const Home = () => {
       >
         <Menu />
         <Navigator />
-        <BtnTakePicture />
+        {isCurrentRouteValid && (
+          <BtnTakePicture />
+        )}
       </Box>
       {/* <PlantPhotoTaker /> */}
     </Box>

@@ -129,7 +129,7 @@ const DesktopMenu = () => {
                 </Button>
                 : 
                 <Button
-                  onClick={()=>navigate("/plantes-gardées")}
+                  onClick={()=>navigate("/plantes-gardees")}
                   sx={{ 
                     "& .MuiButton-startIcon": { margin: "0px" },
                     textTransform: 'unset !important',
