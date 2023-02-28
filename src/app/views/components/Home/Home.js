@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Box, CssBaseline } from '@mui/material'
-import Dashboard from '../Dashboard/Dashboard'
 import Menu from '../Menu/Menu'
 import BtnTakePicture from '../Photo/BtnTakePicture'
-// import PlantsBeingKeptView from '../PlantsBeingKept/PlantsBeingKeptView'
+import Navigator from '../navigation/Navigator';
 // import PlantPhotoTaker from '../Photo/Photo'
-// import UserPlantsView from '../UserPlants/UserPlantsView'
 
 const Home = () => {
   const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 600 });
@@ -17,17 +15,18 @@ const Home = () => {
   }, [isDesktopOrLaptop]);
 
   return (
-    <Box sx={{ 
-      display: 'flex',
-      flexDirection: isLargeScreen ? 'unset' : 'column',
-    }}>
+    <Box>
       <CssBaseline />
-      <Menu />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{
+        display: 'flex',
+        flexDirection: isLargeScreen ? 'unset' : 'column',
+        flexGrow: 1,
+        p: 3,
+        }}
+      >
+        <Menu />
+        <Navigator />
         <BtnTakePicture />
-        <Dashboard />
-        {/* <UserPlantsView /> */}
-        {/* <PlantsBeingKeptView /> */}
       </Box>
       {/* <PlantPhotoTaker /> */}
     </Box>

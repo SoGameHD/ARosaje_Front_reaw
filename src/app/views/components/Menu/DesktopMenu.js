@@ -9,6 +9,7 @@ import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
 import PlantIcon from './svg/PlantIcon'
 import HomeIcon from './svg/HomeIcon'
 import { Button, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -50,6 +51,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 // Composant Menu Exporté
 const DesktopMenu = () => {
+  const navigate = useNavigate();
+
   return (
     <Drawer variant="permanent" sx={{ width: "88px", }} PaperProps={{ sx: {
       backgroundColor: '#EBEFE2',
@@ -77,7 +80,8 @@ const DesktopMenu = () => {
               >
                 {
                 index === 0 ?
-                <Button 
+                <Button
+                  onClick={()=>navigate("/")}
                   sx={{ 
                     "& .MuiButton-startIcon": { margin: "0px" },
                     textTransform: 'unset !important',
@@ -97,7 +101,8 @@ const DesktopMenu = () => {
                   </Typography>
                 </Button> : 
                 index === 1 ? 
-                <Button 
+                <Button
+                  onClick={()=>navigate("/mes-plantes")}
                   sx={{ 
                     "& .MuiButton-startIcon": { margin: "0px" },
                     textTransform: 'unset !important',
@@ -120,7 +125,8 @@ const DesktopMenu = () => {
                   </Typography>
                 </Button>
                 : 
-                <Button 
+                <Button
+                  onClick={()=>navigate("/plantes-gardées")}
                   sx={{ 
                     "& .MuiButton-startIcon": { margin: "0px" },
                     textTransform: 'unset !important',
