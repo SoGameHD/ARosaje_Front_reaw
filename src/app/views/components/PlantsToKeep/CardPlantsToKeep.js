@@ -3,11 +3,13 @@ import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Link, useNavigate } from "react-router-dom";
 
-const CardPlantsToKeep = ({username, date1, date2, title, description, image, actionBtn1, iconBtnAction2, actionBtn2}) => {
+const CardPlantsToKeep = ({path, username, date1, date2, title, description, image, actionBtn1, iconBtnAction2, actionBtn2}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isKept, setIsKept] = useState(false);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -69,45 +71,47 @@ const CardPlantsToKeep = ({username, date1, date2, title, description, image, ac
               width: '20ch',
             },
         }}>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={() => navigate(path)}>
             {iconBtnAction2}
             {actionBtn2}
           </MenuItem>
         </Menu>
-        <CardMedia
-          sx={{ 
-            height: {
-              xs: 180,
-              sm: 194,
-              md: 230,
-              xl: 260,
-            },
-            borderRadius: {
-              xs: '12px',
-              sm: '12px',
-              md: 0
-            },
-          }}
-          image={image}
-          title="green flower"
-        />
-        <CardContent sx={{
-          textAlign: "start",
-        }}>
-          <Typography gutterBottom sx={{
-            fontSize: "18px",
-            fontWeight: 500,
-          }}
-          component="div">
-            {title}
-          </Typography>
-          <Typography sx={{ 
-            fontSize: "16px",
+        <Link to={path} key={title} onClick={() => navigate(path)} className='no-underline'>
+          <CardMedia
+            sx={{ 
+              height: {
+                xs: 180,
+                sm: 194,
+                md: 230,
+                xl: 260,
+              },
+              borderRadius: {
+                xs: '12px',
+                sm: '12px',
+                md: 0
+              },
             }}
-            color="text.secondary">
-            {description}
-          </Typography>
-        </CardContent>
+            image={image}
+            title="green flower"
+          />
+          <CardContent sx={{
+            textAlign: "start",
+          }}>
+            <Typography gutterBottom sx={{
+              fontSize: "18px",
+              fontWeight: 500,
+            }}
+            component="div">
+              {title}
+            </Typography>
+            <Typography sx={{ 
+              fontSize: "16px",
+              }}
+              color="text.secondary">
+              {description}
+            </Typography>
+          </CardContent>
+        </Link>
         <CardActions sx={{
           display: {
             xs: "none",

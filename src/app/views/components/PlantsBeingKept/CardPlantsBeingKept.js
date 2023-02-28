@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import AddIcon from '@mui/icons-material/Add';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 
 const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
   return (
@@ -62,7 +62,7 @@ const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
         justifyContent: "end",
         p: 2,
       }}>
-        <Button size="small" variant="contained" startIcon={<AddIcon color='#FFFFFF' />}
+        <Button size="small" variant="contained" startIcon={<VisibilityRoundedIcon color='#FFFFFF' />}
         sx={{
           color: "#FFFFFF",
           backgroundColor: "#386A20",
@@ -73,7 +73,7 @@ const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
           },
         }}
         >
-        Ajouter un conseil
+        Voir les conseils
         </Button>
       </CardActions>
     </Card>

@@ -5,53 +5,56 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import EditIcon from '@mui/icons-material/Edit';
-import AddIcon from '@mui/icons-material/Add';
+import { Link, useNavigate } from 'react-router-dom';
 
-const CardUserNotKeptPlants = ({image, description}) => {
+const CardUserNotKeptPlants = ({path, plantName, image, date1, date2, action, icon}) => {
+  const navigate = useNavigate();
+  
   return (
     <Card sx={{ 
       maxWidth: 345,
       borderRadius: '12px',
       backgroundColor: "#F1F3E8",
     }}>
-      <CardMedia
-        sx={{ 
-          height: {
-            xs: 150,
-            sm: 194,
-            md: 230,
-            xl: 260,
-          },
-          borderRadius: "12px",
-        }}
-        image={image}
-        title="green iguana"
-      />
-      <CardContent sx={{
-        textAlign: "start",
-      }}>
-        <Typography gutterBottom sx={{
-          fontSize: "18px",
-          fontWeight: 500,
-        }}
-        component="div">
-          Orchidées
-        </Typography>
-        <Typography sx={{ 
-          fontSize: "16px",
+      <Link to={path} onClick={() => navigate(path)} className='no-underline'>
+        <CardMedia
+          sx={{ 
+            height: {
+              xs: 150,
+              sm: 194,
+              md: 230,
+              xl: 260,
+            },
+            borderRadius: "12px",
           }}
-          color="text.secondary">
-          En attente d’un Gardien
-        </Typography>
-        <Typography sx={{ 
-            fontSize: "16px",
-            mt: '4%'
-            }}
-            color="text.primary">
-            {description}
+          image={image}
+          title="plante verte"
+        />
+        <CardContent sx={{
+          textAlign: "start",
+        }}>
+          <Typography gutterBottom sx={{
+            fontSize: "18px",
+            fontWeight: 500,
+          }}
+          component="div">
+            {plantName}
           </Typography>
-      </CardContent>
+          <Typography sx={{ 
+            fontSize: "14px",
+            }}
+            color="text.secondary">
+            En attente d’un Gardien
+          </Typography>
+          <Typography sx={{ 
+              fontSize: "12px",
+              mt: '4%'
+              }}
+              color="text.primary">
+              Du {date1} Au {date2}
+            </Typography>
+        </CardContent>
+      </Link>
       <CardActions sx={{
         display: {
           xs: "none",
@@ -62,32 +65,19 @@ const CardUserNotKeptPlants = ({image, description}) => {
         justifyContent: "end",
         p: 2,
       }}>
-        <Button size="small" variant="outlined" startIcon={<EditIcon sx={{ color: "#43493E" }} />} 
-        sx={{
-          color: "#43493E",
-          backgroundColor: "#F1F3E8",
-          borderColor: "#43493E",
-          borderRadius: 100,
-          ":hover": {
-            borderColor: '#386A20',
-            color: '#386A20',
-          },
-        }}
+        <Button size="small" variant="contained" startIcon={icon}
+          onClick={() => navigate(path)}
+          sx={{
+            color: "#FFFFFF",
+            backgroundColor: "#386A20",
+            borderRadius: 100,
+            ":hover": {
+              backgroundColor: '#FFFFFA',
+              color: '#386A20',
+            },
+          }}
         >
-        Modifier
-        </Button>
-        <Button size="small" variant="contained" startIcon={<AddIcon color='#FFFFFF' />}
-        sx={{
-          color: "#FFFFFF",
-          backgroundColor: "#386A20",
-          borderRadius: 100,
-          ":hover": {
-            backgroundColor: '#FFFFFA',
-            color: '#386A20',
-          },
-        }}
-        >
-        Ajouter un conseil
+        {action}
         </Button>
       </CardActions>
     </Card>

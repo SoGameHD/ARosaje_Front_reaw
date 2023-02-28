@@ -1,10 +1,20 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const DashboardCard = ({title, description, image}) => {
+const DashboardCard = ({path, title, description, image}) => {
+  const [hover, setHover] = useState(false)
+  const navigate = useNavigate();
+
   return (
     <>
+    <Link to={path} key={title} onClick={() => navigate(path)} className='no-underline'>
       <Card
+      raised={hover ? true : false}
+      onMouseEnter={()=> setHover(true)}
+      onMouseLeave={()=> setHover(false)}
       sx={{
+        cursor: 'pointer',
         backgroundColor: '#F8FAFD',
         borderRadius: "24px",
         ":hover": {
@@ -35,6 +45,7 @@ const DashboardCard = ({title, description, image}) => {
           </Typography>
         </CardContent>
       </Card>
+    </Link>
     </>
   )
 }

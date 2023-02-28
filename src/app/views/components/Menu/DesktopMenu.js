@@ -67,7 +67,8 @@ const DesktopMenu = () => {
                 px: 2.5,
                 mb: 4,
                 ':hover': {
-                  backgroundColor: 'none',
+                  backgroundColor: 'transparent',
+                  color: 'transparent',
                 }
               }}
             >
@@ -85,6 +86,7 @@ const DesktopMenu = () => {
                   sx={{ 
                     "& .MuiButton-startIcon": { margin: "0px" },
                     textTransform: 'unset !important',
+                    color: '#386A20',
                     ':hover': {
                       backgroundColor: 'transparent',
                     },
@@ -106,6 +108,7 @@ const DesktopMenu = () => {
                   sx={{ 
                     "& .MuiButton-startIcon": { margin: "0px" },
                     textTransform: 'unset !important',
+                    color: '#386A20',
                     ':hover': {
                       backgroundColor: 'transparent',
                     },
@@ -126,10 +129,11 @@ const DesktopMenu = () => {
                 </Button>
                 : 
                 <Button
-                  onClick={()=>navigate("/plantes-gardées")}
+                  onClick={()=>navigate("/plantes-gardees")}
                   sx={{ 
                     "& .MuiButton-startIcon": { margin: "0px" },
                     textTransform: 'unset !important',
+                    color: '#386A20',
                     ':hover': {
                       backgroundColor: 'transparent',
                     },

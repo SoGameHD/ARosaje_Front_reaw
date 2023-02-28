@@ -6,51 +6,59 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
+import { Link, useNavigate } from 'react-router-dom';
 
-const CardUserKeptPlants = ({image, username, description}) => {
+const CardUserKeptPlants = ({path, plantName, image, username, date1, date2, action, icon}) => {
+  const navigate = useNavigate();
+
   return (
     <Card sx={{ 
-      maxWidth: 345,
-      borderRadius: '12px',
-      backgroundColor: "#F1F3E8",
-    }}>
-      <CardMedia
-        sx={{ 
-          height: {
-            xs: 150,
-            sm: 194,
-            md: 230,
-            xl: 260,
-          },
-          borderRadius: "12px",
-        }}
-        image={image}
-        title="green iguana"
-      />
-      <CardContent sx={{
-        textAlign: "start",
-      }}>
-        <Typography gutterBottom sx={{
-          fontSize: "18px",
-          fontWeight: 500,
-        }}
-        component="div">
-          Orchidées
-        </Typography>
-        <Typography sx={{ 
-          fontSize: "16px",
+        maxWidth: 345,
+        borderRadius: '12px',
+        backgroundColor: "#F1F3E8",
+      }}
+    >
+      <Link to={path} onClick={() => navigate(path)} className='no-underline'>
+        <CardMedia
+          sx={{ 
+            height: {
+              xs: 150,
+              sm: 194,
+              md: 230,
+              xl: 260,
+            },
+            borderRadius: "12px",
           }}
-          color="text.secondary">
-          Gardée par {username}
-        </Typography>
-        <Typography sx={{ 
-            fontSize: "16px",
-            mt: '4%'
+          image={image}
+          title="image plante"
+        />
+        <CardContent sx={{
+          textAlign: "start",
+        }}>
+          <Typography gutterBottom sx={{
+            fontSize: "18px",
+            fontWeight: 500,
+          }}
+          component="div">
+            {plantName}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "14px",
+            }}
+            color="text.secondary">
+            Gardée par {username}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "12px",
+              mt: '4%'
             }}
             color="text.primary">
-            {description}
+            Du {date1} Au {date2}
           </Typography>
-      </CardContent>
+        </CardContent>
+      </Link>
       <CardActions sx={{
         display: {
           xs: "none",
@@ -61,7 +69,8 @@ const CardUserKeptPlants = ({image, username, description}) => {
         justifyContent: "end",
         p: 2,
       }}>
-        <Button size="small" variant="contained" startIcon={<AddIcon color='#FFFFFF' />}
+      <Button size="small" variant="contained" startIcon={icon}
+        onClick={() => navigate(path)}
         sx={{
           color: "#FFFFFF",
           backgroundColor: "#386A20",
@@ -71,9 +80,9 @@ const CardUserKeptPlants = ({image, username, description}) => {
             color: '#386A20',
           },
         }}
-        >
-        Ajouter un conseil
-        </Button>
+      >
+      {action}
+      </Button>
       </CardActions>
     </Card>
   );
