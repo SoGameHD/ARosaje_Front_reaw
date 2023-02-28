@@ -18,6 +18,7 @@ const Dashboard = () => {
       <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12 }}>
         <Grid item xs={2} sm={"auto"} md={"auto"}>
           <DashboardCard
+          path={'/mes-plantes'}
           title={'Mes plantes'}
           description={"Retrouver les plantes que vous avez partagé. Vos plantes gardées et celles en attente d'un gardien."}
           image={myPlantImage}
@@ -25,6 +26,7 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={2} sm={"auto"} md={"auto"}>
           <DashboardCard
+          path={'/plantes-gardées'}
           title={'Plantes gardées'}
           description={"Retrouver les plantes que vous gardées."}
           image={plantKept}
