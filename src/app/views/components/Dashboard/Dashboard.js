@@ -38,9 +38,9 @@ const Dashboard = () => {
           Plantes à garder
         </Typography>
       </Box>
-      <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12 }}>
+      <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12, lg: 12 }}>
         {Array.from(Array(6)).map((_, index) => (
-          <Grid item xs={2} sm={"auto"} md={"auto"} key={index}>
+          <Grid item xs={2} sm={"auto"} md={"auto"} lg={3} key={index}>
             <CardPlantsToKeep
             username={'Yoda'}
             date1={'20/02/2023'}

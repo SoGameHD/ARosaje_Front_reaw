@@ -11,8 +11,11 @@ import HomeIcon from './svg/HomeIcon'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Box, Divider, IconButton } from '@mui/material'
+import { Link, useNavigate } from 'react-router-dom';
 
 const DrawerMenu = () => {
+  const navigate = useNavigate();
+
   const [state, setState] = React.useState({
     left: false,
   });
@@ -28,8 +31,6 @@ const DrawerMenu = () => {
   const list = (anchor) => (
     <Box
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         {['ARosa-je'].map((text, index) => (
@@ -46,29 +47,43 @@ const DrawerMenu = () => {
       </List>
       <Divider />
       <List sx={{  py: 5 }}>
-        {['Accueil', 'Mes Plantes', 'Plantes gardées'].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: 'center',
-                px: 2.5,
-                mb: 4,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                {index === 0 ? <HomeIcon fontSize="small" /> : index === 1 ? <PlantIcon fontSize="small" /> : <YardOutlinedIcon fontSize="small" />}
-              </ListItemIcon>
-              <ListItemText primary={text} sx={{ px: 2.5 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {[{'Accueil':'/'}, {'Mes Plantes':'/mes-plantes'}, {'Plantes gardées':'/plantes-gardées'}].map((item, index) => {
+          const text = Object.keys(item)[0];
+          const path = Object.values(item)[0];
+          return (
+            <Link to={path} key={text} onClick={() => navigate(path)} className='no-underline'>
+              <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: 'center',
+                    px: 2.5,
+                    mb: 4,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {index === 0
+                    ?
+                    <HomeIcon fontSize="small" />
+                    :
+                    index === 1
+                    ?
+                    <PlantIcon fontSize="small" />
+                    :
+                    <YardOutlinedIcon fontSize="small" />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ px: 2.5, color:'#43493E' }} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )
+        })}
       </List>
     </Box>
   );
