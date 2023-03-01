@@ -16,6 +16,7 @@ function UserPlantsView() {
   const handleClickNotKept = () => {
     setIsKeptPlants(false);
   };
+  
   return (
     <>
       <CssBaseline />
