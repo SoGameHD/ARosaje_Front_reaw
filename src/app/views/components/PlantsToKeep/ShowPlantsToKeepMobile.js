@@ -5,21 +5,32 @@ import AddIcon from '@mui/icons-material/Add';
 import Add from '@mui/icons-material/Add';
 import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
 import { useNavigate } from "react-router-dom";
+import { Form, Field } from 'react-final-form'
+import axios from 'axios'
 
-const conseils = [
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-  "Conseil 2",
-  "Conseil 3",
-  "Conseil 4",
-  "Conseil 5",
-  "Conseil 6",
-  "Conseil 7",
-  "Conseil 8",
-];
-
-const ShowPlantsToKeepMobile = () => {
+const ShowPlantsToKeepMobile = (props) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { plant } = props
+
+  function post(values) {
+    const data = {
+      "content": JSON.stringify(values.message, null, 2)
+    };
+    const url = `/addAdvice?plantId=${plant.id}&botanistId=-1`;
+    axios.post(`${process.env.REACT_APP_API_URL}`.concat(url), data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }})
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      setOpen(false)
+      window.location.reload()
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -94,10 +105,10 @@ const ShowPlantsToKeepMobile = () => {
               Conseils botaniste
             </Typography>
             <List>
-              {conseils.map((conseil, index) => (
+              {plant.advices.map(advice => (
                 <>
-                <ListItem key={index}>
-                  <ListItemText primary={conseil} />
+                <ListItem key={advice.id}>
+                  <ListItemText primary={advice.content} />
                 </ListItem>
                 <Divider />
                 </>
@@ -135,21 +146,20 @@ const ShowPlantsToKeepMobile = () => {
         <AddCommentOutlinedIcon fontSize="large"/>
       </DialogTitle>
       <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>Ajouter un conseil</DialogTitle>
-      <DialogContent sx={{ pt: '20px !important' }}>
-        <TextField
-          id="outlined-multiline-static"
-          label="Conseil"
-          multiline
-          rows={6}
-          sx={{
-            width: 420
-          }}
+      <Form
+          onSubmit={post}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <DialogContent sx={{ pt: '20px !important', width: 420 }}>
+                <Field name="message" component="textarea" rows={6} placeholder="Conseil" />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
+                <Button startIcon={<Add />} sx={{ color: '#386A20' }} type="submit">Ajouter</Button>
+              </DialogActions>
+            </form>
+          )}
         />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
-        <Button startIcon={<Add />} onClick={handleClose} sx={{ color: '#386A20' }}>Ajouter</Button>
-      </DialogActions>
     </Dialog>
     </Box>
   );

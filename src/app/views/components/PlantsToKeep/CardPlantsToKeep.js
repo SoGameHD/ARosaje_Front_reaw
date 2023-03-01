@@ -81,7 +81,7 @@ const CardPlantsToKeep = ({path, username, date1, date2, title, description, ima
             sx={{ 
               height: {
                 xs: 180,
-                sm: 194,
+                sm: 180,
                 md: 230,
                 xl: 260,
               },
