@@ -15,6 +15,7 @@
     "dayjs": "^1.11.7",
     "final-form": "^4.20.9",
     "playwright": "^1.31.1",
+    "final-form": "^4.20.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-final-form": "^6.5.9",
