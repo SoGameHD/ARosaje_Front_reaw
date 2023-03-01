@@ -45,53 +45,58 @@ const ShowUserPlantsMobile = () => {
   };
 
   return (
-    <Box sx={{
-      display: {
-        xs: "block",
-        sm: "block",
-        xl: "flex",
-      },
-    }}>
+    <Box
+      sx={{
+        display: {
+          xs: 'block',
+          sm: 'block',
+          xl: 'flex'
+        }
+      }}
+    >
       <Grid container spacing={1} sx={{ mb: '8%', mt: '8%' }}>
         <Grid item>
           <IconButton onClick={() => navigate('/mes-plantes')}>
             <ArrowBackIcon
-            sx={{
-              display: {
-                xs: "bloc",
-                sm: "block",
-                md: "none",
-                xl: "none",
-              },
-              marginRight: '5%',
-            }}/>
+              sx={{
+                display: {
+                  xs: 'bloc',
+                  sm: 'block',
+                  md: 'none',
+                  xl: 'none'
+                },
+                marginRight: '5%'
+              }}
+            />
           </IconButton>
         </Grid>
         <Grid item>
           <Typography variant="h4" gutterBottom>
             Mes plantes
           </Typography>
-          <Typography variant="subtitle1" gutterBottom >
+          <Typography variant="subtitle1" gutterBottom>
             Plantes en attente d'un gardien
           </Typography>
         </Grid>
       </Grid>
-      <Card sx={{
-        minHeight: 'calc(100vh - 100px)',
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        backgroundColor: "#F1F3E8",
-        borderTopLeftRadius: "12px",
-        borderTopRightRadius: "12px",
-      }}>
+      <Card
+        sx={{
+          minHeight: 'calc(100vh - 100px)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          backgroundColor: '#F1F3E8',
+          borderTopLeftRadius: '12px',
+          borderTopRightRadius: '12px'
+        }}
+      >
         <CardMedia
           component="img"
           sx={{
             height: 400,
-            width: "100%",
-            objectFit: "cover",
-            borderRadius: "12px",
+            width: '100%',
+            objectFit: 'cover',
+            borderRadius: '12px'
           }}
           image="https://picsum.photos/800/300"
         />
@@ -111,10 +116,10 @@ const ShowUserPlantsMobile = () => {
             <List>
               {conseils.map((conseil, index) => (
                 <>
-                <ListItem key={index}>
-                  <ListItemText primary={conseil} />
-                </ListItem>
-                <Divider />
+                  <ListItem key={index}>
+                    <ListItemText primary={conseil} />
+                  </ListItem>
+                  <Divider />
                 </>
               ))}
             </List>
@@ -129,43 +134,47 @@ const ShowUserPlantsMobile = () => {
           bottom: '2%'
         }}
       >
-        <Button size="small" variant="outlined"
-          onClick={handleClickOpenEdition} 
-          startIcon={<EditIcon sx={{ color: "#43493E" }} />} 
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={handleClickOpenEdition}
+          startIcon={<EditIcon sx={{ color: '#43493E' }} />}
           sx={{
-            color: "#43493E",
-            backgroundColor: "#F1F3E8",
+            color: '#43493E',
+            backgroundColor: '#F1F3E8',
             borderRadius: 100,
             borderColor: '#386A20',
-            ":hover": {
+            ':hover': {
               borderColor: '#386A20',
-              backgroundColor: "#FFFFFF",
-              color: '#386A20',
+              backgroundColor: '#FFFFFF',
+              color: '#386A20'
             },
-            mr: '6px',
+            mr: '6px'
           }}
         >
-        Modifier
+          Modifier
         </Button>
-        <Button size="small" variant="contained"
-          onClick={handleClickOpen} 
-          startIcon={<AddIcon color='#FFFFFF' />}
+        <Button
+          size="small"
+          variant="contained"
+          onClick={handleClickOpen}
+          startIcon={<AddIcon color="#FFFFFF" />}
           sx={{
-            color: "#FFFFFF",
-            backgroundColor: "#386A20",
+            color: '#FFFFFF',
+            backgroundColor: '#386A20',
             borderRadius: 100,
-            ":hover": {
+            ':hover': {
               backgroundColor: '#FFFFFA',
-              color: '#386A20',
-            },
+              color: '#386A20'
+            }
           }}
         >
-        Ajouter un conseil
+          Ajouter un conseil
         </Button>
       </Box>
-        <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ textAlign: 'center', pb: 0 }}>
-          <AddCommentOutlinedIcon fontSize="large"/>
+          <AddCommentOutlinedIcon fontSize="large" />
         </DialogTitle>
         <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>Ajouter un conseil</DialogTitle>
         <DialogContent sx={{ pt: '20px !important' }}>
@@ -180,77 +189,90 @@ const ShowUserPlantsMobile = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
-          <Button startIcon={<Add />} onClick={handleClose} sx={{ color: '#386A20' }}>Ajouter</Button>
+          <Button onClick={handleClose} sx={{ color: '#386A20' }}>
+            Annulé
+          </Button>
+          <Button startIcon={<Add />} onClick={handleClose} sx={{ color: '#386A20' }}>
+            Ajouter
+          </Button>
         </DialogActions>
       </Dialog>
       <Dialog open={edition} onClose={handleClose}>
-        <DialogTitle sx={{ textAlign: 'start'}}>
+        <DialogTitle sx={{ textAlign: 'start' }}>
           <IconButton onClick={handleCloseEdition} sx={{ marginRight: '4%' }}>
             <ArrowBackIcon
-            fontSize='large'
-            sx={{
-              color: '#000000',
-            }}/>
+              fontSize="large"
+              sx={{
+                color: '#000000'
+              }}
+            />
           </IconButton>
           Édition de la plante
-          </DialogTitle>
-          <DialogContent sx={{
-            display: 'flex',
-          }}>
-            <Box sx={{
+        </DialogTitle>
+        <DialogContent
+          sx={{
+            display: 'flex'
+          }}
+        >
+          <Box
+            sx={{
               width: 260,
               height: 300,
-              borderRadius: "70px",
-            }}>
-              <img src="https://picsum.photos/800/300" alt="titre plante" width={"100%"} height={"100%"} style={{  borderRadius: "70px" }} />
-            </Box>
-            <Box display={'flex'} flexDirection={'column'} justifyContent={'space-around'} padding={5}>
-              <TextField id="outlined-basic" label="Nom plante" variant="outlined" />
-              <Box
+              borderRadius: '70px'
+            }}
+          >
+            <img src="https://picsum.photos/800/300" alt="titre plante" width={'100%'} height={'100%'} style={{ borderRadius: '70px' }} />
+          </Box>
+          <Box display={'flex'} flexDirection={'column'} justifyContent={'space-around'} padding={5}>
+            <TextField id="outlined-basic" label="Nom plante" variant="outlined" />
+            <Box
               sx={{
                 backgroundColor: '#C3D4B6',
                 padding: 2,
-                borderRadius: "20px",
+                borderRadius: '20px'
               }}
-              >
-                <Typography variant="h6" sx={{ mb: "1%", ml: "4%" }}>
-                  Date gardinage
-                </Typography>
-                <Divider sx={{ mb: 2 }} />
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    disableFuture
-                    label="Date"
-                    openTo="year"
-                    views={['year', 'month', 'day']}
-                    value={value}
-                    onChange={(newValue) => {
-                      setValue(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                  </LocalizationProvider>
-              </Box>
+            >
+              <Typography variant="h6" sx={{ mb: '1%', ml: '4%' }}>
+                Date gardinage
+              </Typography>
+              <Divider sx={{ mb: 2 }} />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  disableFuture
+                  label="Date"
+                  openTo="year"
+                  views={['year', 'month', 'day']}
+                  value={value}
+                  onChange={(newValue) => {
+                    setValue(newValue)
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
             </Box>
-          </DialogContent>
+          </Box>
+        </DialogContent>
         <DialogActions>
-          <Button variant="contained" startIcon={<DoneRoundedIcon />} onClick={handleCloseEdition}
-          sx={{ 
-            backgroundColor: '#386A20',
-            color: '#FFFFF',
-            borderRadius: 100,
-            ":hover": {
-              backgroundColor: '#FFFFFA',
-              color: '#386A20',
-            },
-          }}>
+          <Button
+            variant="contained"
+            startIcon={<DoneRoundedIcon />}
+            onClick={handleCloseEdition}
+            sx={{
+              backgroundColor: '#386A20',
+              color: '#FFFFF',
+              borderRadius: 100,
+              ':hover': {
+                backgroundColor: '#FFFFFA',
+                color: '#386A20'
+              }
+            }}
+          >
             Valider
           </Button>
         </DialogActions>
       </Dialog>
     </Box>
-  );
+  )
 }
 
 export default ShowUserPlantsMobile
