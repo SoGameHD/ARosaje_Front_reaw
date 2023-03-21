@@ -5,6 +5,7 @@ import CardPlantsBeingKept from '../PlantsBeingKept/CardPlantsBeingKept'
 import Dashboard from '../Dashboard/Dashboard'
 import GeneralShowView from '../ShowUserPlants/GeneralShowView'
 import GeneralShowPlantsToKeep from '../PlantsToKeep/GeneralShowPlantsToKeep'
+import PlantsCreate from '../PlantsCreate/PlantsCreate'
 
 
 const Navigator = () => {
@@ -16,6 +17,7 @@ const Navigator = () => {
       <Route path='mes-plantes/:id' element={<GeneralShowView />} />
       <Route path='plantes-gardees' element={<PlantsBeingKeptView />} />
       <Route path='plantes-gardees/:id' element={<CardPlantsBeingKept />} />
+      <Route path='ajouter-une-plante' element={<PlantsCreate />} />
     </Routes>
   )
 }
