@@ -92,7 +92,7 @@ const CardPlantsToKeep = ({path, username, date1, date2, title, description, ima
               },
             }}
             image={image}
-            title="green flower"
+            title={title}
           />
           <CardContent sx={{
             textAlign: "start",

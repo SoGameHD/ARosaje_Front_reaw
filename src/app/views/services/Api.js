@@ -36,8 +36,18 @@ const getPlantById = async (id) => {
   }
 }
 
+const getPhotoById = async (id) => {
+  try {
+    const response = await api.get(`plants/1/pictures/${id}`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
   getUsersPlants,
   getPlants,
   getPlantById,
+  getPhotoById,
 }
