@@ -2,18 +2,22 @@ import React, { useState, useRef } from 'react';
 import { TextField, Grid, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Typography } from '@mui/material';
 import axios from 'axios';
 import Webcam from 'react-webcam';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 
 
 const PlantsCreate = () => {
 
-  const titleRef = useRef('')
-  const descRef = useRef('')
-  const startDateRef = useRef('')
-  const endDateRef = useRef('')
+  const titleRef = useRef(null)
+  const descRef = useRef(null)
+  const startDateRef = useRef(null)
   const [image, setImage] = useState(null);
   const [open, setOpen] = useState(false);
   const webcamRef = useRef(null);
   const [isEnabled, setEnable] = useState(false);
+  const [endDateRef, setValue] = useState(null);
+  
 
 
 
@@ -25,7 +29,8 @@ const PlantsCreate = () => {
   const sendDataToApi = () => {
     const formData = new FormData();
     const plant = JSON.stringify({
-      "title":titleRef.current.value
+      "title":titleRef.current.value,
+      "description":descRef.current.value
     })
     
     formData.append("ownerId", -1)
@@ -68,6 +73,7 @@ const PlantsCreate = () => {
 
           <Typography variant="h3" sx={{ position: 'absolute',top: '15%'}}>Ajouter une plante</Typography>
           <form>
+          <LocalizationProvider dateAdapter={AdapterDayjs} >
             <TextField
               style={{ width: "100%" }}
               type="text"
@@ -94,14 +100,27 @@ const PlantsCreate = () => {
               variant="outlined"
               inputRef={startDateRef}
             />
-           
-            <TextField
-              style={{ width: "45%", marginTop: "5%" }}
-              label="Date fin gardiennage"
-              variant="outlined"
-              inputRef={endDateRef}
-            />
 
+
+            <DatePicker 
+              label="Date fin gardiennage" 
+              value={endDateRef}
+              onChange={(newValue) => setValue(newValue)}
+              format="DD-MM-YYYY"
+            />
+           
+
+            
+         
+            <DatePicker 
+              label="Date fin gardiennage" 
+              value={endDateRef}
+              onChange={(newValue) => setValue(newValue)}
+              format="DD-MM-YYYY"
+            />
+    
+   
+            
             <Button variant="contained" color="primary"
               sx={{ marginTop: "5%", marginLeft:"25%", width: "50%", background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
               ":hover": {
@@ -125,7 +144,7 @@ const PlantsCreate = () => {
           onClick={sendDataToApi}>
               Ajouter la plante
             </Button>
-            
+            </LocalizationProvider>
           </form>
      
     </Grid> 
