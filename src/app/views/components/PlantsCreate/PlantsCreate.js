@@ -85,7 +85,7 @@ const PlantsCreate = () => {
       style={{ minHeight: '90vh' }}
     >
 
-          <Typography variant="h3" sx={{ position: 'absolute',top: '15%'}}>Ajouter une plante</Typography>
+          <Typography variant="h3" sx={{paddingBottom:"5%"}}>Ajouter une plante</Typography>
           <form>
           <LocalizationProvider dateAdapter={AdapterDayjs} >
             <TextField
