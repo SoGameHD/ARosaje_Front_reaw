@@ -4,22 +4,24 @@ import axios from 'axios';
 import Webcam from 'react-webcam';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
+import moment from 'moment/moment';
+
 
 
 const PlantsCreate = () => {
 
   const titleRef = useRef(null)
   const descRef = useRef(null)
-  const startDateRef = useRef(null)
+  const [startDateRef, setStartValue] = useState(null);
+  const [endDateRef, setEndValue] = useState(null);
   const [image, setImage] = useState(null);
   const [open, setOpen] = useState(false);
   const webcamRef = useRef(null);
-  const [isEnabled, setEnable] = useState(false);
-  const [endDateRef, setValue] = useState(null);
-  
-
-
+  const [titleError, setTitleError] = useState(false);
+  const [descError, setDescError] = useState(false);
+  const [startDateError, setStartDateError] = useState(false);
+  const [endDateError, setEndDateError] = useState(false);
+  const [pictureError, setPictureError] = useState(false);
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -27,23 +29,35 @@ const PlantsCreate = () => {
   }
 
   const sendDataToApi = () => {
-    const formData = new FormData();
-    const plant = JSON.stringify({
-      "title":titleRef.current.value,
-      "description":descRef.current.value
-    })
-    
-    formData.append("ownerId", -1)
-    formData.append("plant", plant)
-    formData.append("file", dataURItoBlob(image));
-
-    axios.post("http://localhost:8080/addPlant", formData)
-      .then(response => {
-        console.log(response);
+    if(image!=null && titleRef.current.value != null && descRef.current.value && (moment(startDateRef?.format('MM/DD/YYYY')).isValid() && startDateRef != null) && (moment(endDateRef?.format('MM/DD/YYYY')).isValid() && endDateRef != null)) {
+      const formData = new FormData();
+      const plant = JSON.stringify({
+        "title":titleRef.current.value,
+        "description":descRef.current.value,
+        "start_date":startDateRef,
+        "end_date":endDateRef
       })
-      .catch(error => {
-        console.log(error);
-      });
+      
+      formData.append("ownerId", -1)
+      formData.append("plant", plant)
+      formData.append("file", dataURItoBlob(image));
+  
+      axios.post("http://localhost:8080/addPlant", formData)
+        .then(response => {
+          window.location.reload(false);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      setTitleError(titleRef.current.value === "" ? true : false)
+      setDescError(descRef.current.value === "" ? true : false)
+      setStartDateError((moment(startDateRef?.format('MM/DD/YYYY')).isValid() && startDateRef != null) ? false : true)
+      setEndDateError((moment(endDateRef?.format('MM/DD/YYYY')).isValid() && endDateRef != null) ? false : true)
+      setPictureError( image===null ? true : false)
+      
+    }
+    
   }
 
   const resetPicture = () => {
@@ -75,6 +89,7 @@ const PlantsCreate = () => {
           <form>
           <LocalizationProvider dateAdapter={AdapterDayjs} >
             <TextField
+              error = {titleError}
               style={{ width: "100%" }}
               type="text"
               label="Nom"
@@ -84,6 +99,7 @@ const PlantsCreate = () => {
             <br/>
             
             <TextField
+              error = {descError}
               style={{ width: "100%", marginTop: "5%" }}
               type="text"
               multiline
@@ -91,46 +107,53 @@ const PlantsCreate = () => {
               variant="outlined"
               maxRows={3}
               inputRef={descRef}
+              
             />
             <br/>
-            
-            <TextField
-              style={{ width: "45%", marginTop: "5%", marginRight: "10%" }}
-              label="Date début gardiennage"
-              variant="outlined"
-              inputRef={startDateRef}
-            />
-
 
             <DatePicker 
-              label="Date fin gardiennage" 
-              value={endDateRef}
-              onChange={(newValue) => setValue(newValue)}
+              sx={{ width: "45%", marginTop: "5%", marginRight: "10%",
+              ...(startDateError === true && {
+                border: '1px solid red', 
+                borderRadius: 1
+              })
+            }}
+              label="Date début gardiennage" 
+              value={startDateRef}
+              onChange={(newValue) => setStartValue(newValue)}
               format="DD-MM-YYYY"
-            />
-           
-
-            
+            />    
          
             <DatePicker 
+              sx={{ width: "45%", marginTop: "5%",  
+              ...(endDateError === true && {
+                border: '1px solid red', 
+                borderRadius: 1
+              })
+            }}
               label="Date fin gardiennage" 
               value={endDateRef}
-              onChange={(newValue) => setValue(newValue)}
+              onChange={(newValue) => setEndValue(newValue)}
               format="DD-MM-YYYY"
             />
     
    
             
             <Button variant="contained" color="primary"
-              sx={{ marginTop: "5%", marginLeft:"25%", width: "50%", background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
+              sx={{ ...(pictureError === true && {
+                border: '1px solid red', 
+                borderRadius: 1
+              }),
+              marginTop: "5%", marginLeft:"25%", width: "50%", background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
               ":hover": {
                 backgroundColor: '#386A20',
                 color: '#FFFFFA',
+                
               },
               color: '#000000'}}
               onClick={() => setOpen(true)}
             >
-            Prendre une photo  
+            { image == null ? "Prendre une photo" : "Voir la photo" }
             </Button>  
             
             <br />

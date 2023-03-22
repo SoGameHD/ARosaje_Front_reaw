@@ -1,14 +1,10 @@
 import React, { useState,useEffect } from 'react';
-import Webcam from 'react-webcam';
-import { Button, colors} from "@mui/material"
-import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
+import { Button} from "@mui/material"
+import AddIcon from '@mui/icons-material/Add';
 import { useMediaQuery } from 'react-responsive';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
-import { Typography } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
-const BtnTakePicture = () => {
+const BtnCreatePlant = () => {
   const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 600 });
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const navigate = useNavigate();
@@ -20,7 +16,7 @@ const BtnTakePicture = () => {
   return (
     <>
       <div>
-        <Button onClick={()=>navigate("/ajouter-une-plante")} color="primary" aria-label="ajout photo" variant="contained"
+        <Button onClick={()=>navigate("/ajouter-une-plante")} color="primary"  variant="contained"
         sx={{
           position: 'fixed',
           right: '8%',
@@ -44,7 +40,7 @@ const BtnTakePicture = () => {
             md: "74px",
           },
         }}>
-          { isLargeScreen ? <AddAPhotoOutlinedIcon fontSize="large" /> : <AddAPhotoOutlinedIcon fontSize="medium" /> }
+          { isLargeScreen ? <AddIcon fontSize="large" /> : <AddIcon fontSize="medium" /> }
         </Button>
       </div>
     
@@ -52,4 +48,4 @@ const BtnTakePicture = () => {
 );
 };
 
-export default BtnTakePicture; 
+export default BtnCreatePlant; 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Box, CssBaseline } from '@mui/material'
 import Menu from '../Menu/Menu'
-import BtnTakePicture from '../Photo/BtnTakePicture'
+import BtnCreatePlant from '../PlantsCreate/BtnCreatePlant';
 import Navigator from '../navigation/Navigator';
 // import PlantPhotoTaker from '../Photo/Photo'
 import { useLocation } from "react-router-dom"
@@ -33,7 +33,7 @@ const Home = () => {
         <Menu />
         <Navigator />
         {isCurrentRouteValid && (
-          <BtnTakePicture />
+          <BtnCreatePlant />
         )}
       </Box>
       {/* <PlantPhotoTaker /> */}
