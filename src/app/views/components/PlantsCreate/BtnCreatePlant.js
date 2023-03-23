@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Button} from "@mui/material"
-import AddIcon from '@mui/icons-material/Add';
+import AddAPhotoOutlined from '@mui/icons-material/AddAPhotoOutlined';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom'
 
@@ -40,7 +40,7 @@ const BtnCreatePlant = () => {
             md: "74px",
           },
         }}>
-          { isLargeScreen ? <AddIcon fontSize="large" /> : <AddIcon fontSize="medium" /> }
+          { isLargeScreen ? <AddAPhotoOutlined fontSize="large" /> : <AddAPhotoOutlined fontSize="medium" /> }
         </Button>
       </div>
     
