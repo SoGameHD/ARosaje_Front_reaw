@@ -6,6 +6,8 @@ import Dashboard from '../Dashboard/Dashboard'
 import GeneralShowView from '../ShowUserPlants/GeneralShowView'
 import GeneralShowPlantsToKeep from '../PlantsToKeep/GeneralShowPlantsToKeep'
 import PlantsCreate from '../PlantsCreate/PlantsCreate'
+import UserRegister from '../User/Register/UserRegister'
+import UserLogin from '../User/Login/UserLogin'
 
 
 const Navigator = () => {
@@ -18,6 +20,8 @@ const Navigator = () => {
       <Route path='plantes-gardees' element={<PlantsBeingKeptView />} />
       <Route path='plantes-gardees/:id' element={<CardPlantsBeingKept />} />
       <Route path='ajouter-une-plante' element={<PlantsCreate />} />
+      <Route path='inscription' element={<UserRegister />} />
+      <Route path='connexion' element={<UserLogin />} />
     </Routes>
   )
 }
