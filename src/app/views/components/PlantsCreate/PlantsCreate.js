@@ -45,7 +45,7 @@ const PlantsCreate = () => {
   
       axios.post("http://localhost:8080/addPlant", formData)
         .then(response => {
-          window.location.reload(false);
+          navigate('/mes-plantes');
         })
         .catch(error => {
           console.log(error);
