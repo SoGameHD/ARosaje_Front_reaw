@@ -5,11 +5,12 @@ import Webcam from 'react-webcam';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import moment from 'moment/moment';
+import { useNavigate } from 'react-router-dom'
 
 
 
 const PlantsCreate = () => {
-
+  const navigate = useNavigate();
   const titleRef = useRef(null)
   const descRef = useRef(null)
   const [startDateRef, setStartValue] = useState(null);
@@ -76,6 +77,7 @@ const PlantsCreate = () => {
 
   return (
     <>
+    <Button variant="outlined" style={{position:"absolute", top:"2%", left:"8%", color:"grey", borderColor:"grey"}} onClick={()=>navigate("/")}>Annuler</Button>
     <Grid
       container
       spacing={0}
