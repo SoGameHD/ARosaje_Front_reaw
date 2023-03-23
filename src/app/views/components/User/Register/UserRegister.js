@@ -1,30 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 const UserRegister = () => {
   const navigate = useNavigate();
+  const [last_nameError, setLast_nameError] = useState(false)
+  const [first_nameError, setFirst_nameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
+  const [roleError, setRole] = useState(false)
+  
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const user = JSON.stringify({
-      "firstname":data.get('first_name'),
-      "lastname":data.get('last_name'),
-      "email":data.get('email'),
-      "password":data.get('password'),
-      "role":data.get('role'),
-      
-    })
-    data.append("user", user)
-    axios.post("http://localhost:8080/register", data)
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error);
-    });
+    if(data.get('first_name') != "" && data.get('last_name') != "" && data.get('email') != "" && data.get('password') != "" && data.get('role') != "") {
+      const user = JSON.stringify({
+        "firstname":data.get('first_name'),
+        "lastname":data.get('last_name'),
+        "email":data.get('email'),
+        "password":data.get('password'),
+        "role":data.get('role'),
+        
+      })
+      data.append("user", user)
+      axios.post("http://localhost:8080/register", data)
+          .then(response => {
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error);
+      });
+    } else {
+      setEmailError(data.get('email') == "" ? true : false)
+      setPasswordError(data.get('password') == "" ? true : false)
+      setFirst_nameError(data.get('first_name') == "" ? true : false)
+      setLast_nameError(data.get('last_name') == "" ? true : false)
+      setRole(data.get('role') == "" ? true : false)
+    }
   };
 
   return (
@@ -45,6 +60,7 @@ const UserRegister = () => {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
+              error = {first_nameError}
               margin="normal"
               required
               fullWidth
@@ -54,6 +70,7 @@ const UserRegister = () => {
               id="first_name"
             />
             <TextField
+              error = {last_nameError}
               margin="normal"
               required
               fullWidth
@@ -63,14 +80,17 @@ const UserRegister = () => {
               id="last_name"
             />
             <TextField
+              error = {emailError}
               margin="normal"
               required
               fullWidth
+              type="email"
               id="email"
               label="Email"
               name="email"
             />
             <TextField
+              error = {passwordError}
               margin="normal"
               required
               fullWidth
@@ -80,6 +100,7 @@ const UserRegister = () => {
               id="password"
             />
             <TextField
+              error = {roleError}
               margin="normal"
               required
               fullWidth

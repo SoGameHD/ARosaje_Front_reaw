@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 const UserLogin = () => {
   const navigate = useNavigate();
+  const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const user = JSON.stringify({
-      "email":data.get('email'),
-      "password":data.get('password')
-    })
-    data.append("user", user)
-    axios.post("http://localhost:8080/login", data)
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error);
-    });
+  
+    if(data.get('email') != "" && data.get('password') != "") {
+      const user = JSON.stringify({
+        "email":data.get('email'),
+        "password":data.get('password')
+      })
+      data.append("user", user)
+      axios.post("http://localhost:8080/login", data)
+          .then(response => {
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error);
+      });
+    } else {
+      setEmailError(data.get('email') == "" ? true : false)
+      setPasswordError(data.get('password') == "" ? true : false)
+    }
+    
   };
 
   return (
@@ -41,6 +50,7 @@ const UserLogin = () => {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+              error = {emailError}
               margin="normal"
               required
               fullWidth
@@ -51,10 +61,11 @@ const UserLogin = () => {
               autoFocus
             />
             <TextField
+              error = {passwordError}
               margin="normal"
               required
               fullWidth
-              name="Mot de passe"
+              name="password"
               label="Mot de passe"
               type="password"
               id="password"
