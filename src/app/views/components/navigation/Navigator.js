@@ -8,6 +8,7 @@ import GeneralShowPlantsToKeep from '../PlantsToKeep/GeneralShowPlantsToKeep'
 import PlantsCreate from '../PlantsCreate/PlantsCreate'
 import UserRegister from '../User/Register/UserRegister'
 import UserLogin from '../User/Login/UserLogin'
+import UserProfil from '../User/Profil/UserProfil'
 
 
 const Navigator = () => {
@@ -22,6 +23,7 @@ const Navigator = () => {
       <Route path='ajouter-une-plante' element={<PlantsCreate />} />
       <Route path='inscription' element={<UserRegister />} />
       <Route path='connexion' element={<UserLogin />} />
+      <Route path='profil' element={<UserProfil />} />
     </Routes>
   )
 }
