@@ -10,11 +10,15 @@ const UserRegister = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = JSON.stringify({
+      "firstname":data.get('first_name'),
+      "lastname":data.get('last_name'),
       "email":data.get('email'),
-      "pwd":data.get('password')
+      "password":data.get('password'),
+      "role":data.get('role'),
+      
     })
     data.append("user", user)
-    axios.post("http://localhost:8080/userLogin", data)
+    axios.post("http://localhost:8080/register", data)
         .then(response => {
           console.log(response)
         })
@@ -37,9 +41,27 @@ const UserRegister = () => {
         >
          
           <Typography component="h1" variant="h5">
-            Connexion
+            Inscription
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="first_name"
+              label="Nom"
+              type="text"
+              id="first_name"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="last_name"
+              label="Prénom"
+              type="text"
+              id="last_name"
+            />
             <TextField
               margin="normal"
               required
@@ -47,18 +69,24 @@ const UserRegister = () => {
               id="email"
               label="Email"
               name="email"
-              autoComplete="email"
-              autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="Mot de passe"
+              name="password"
               label="Mot de passe"
               type="password"
               id="password"
-              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="role"
+              label="Rôle"
+              type="text"
+              id="role"
             />
             <Button
               type="submit"
@@ -71,13 +99,13 @@ const UserRegister = () => {
           },
           color: '#000000'}}
             >
-              Connexion
+              Inscription
             </Button>
             <Grid container>
               
               <Grid item>
-                <Link onClick={()=>navigate("/inscription")} variant="body2">
-                  {"Vous n'avez pas de compte ? Inscrivez-vous"}
+                <Link onClick={()=>navigate("/connexion")} variant="body2">
+                  {"Vous avez un compte ? Connectez-vous"}
                 </Link>
               </Grid>
             </Grid>
