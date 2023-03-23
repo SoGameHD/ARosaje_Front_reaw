@@ -11,11 +11,10 @@ const UserLogin = () => {
     const data = new FormData(event.currentTarget);
     const user = JSON.stringify({
       "email":data.get('email'),
-      "pwd":data.get('password')
+      "password":data.get('password')
     })
     data.append("user", user)
-    console.log(data)
-    axios.post("http://localhost:8080/userLogin", data)
+    axios.post("http://localhost:8080/login", data)
         .then(response => {
           console.log(response)
         })
