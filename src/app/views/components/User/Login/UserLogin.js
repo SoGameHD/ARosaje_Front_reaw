@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import { authenticate, getCurrentUser } from '../../../services/auth.service';
 
 const UserLogin = () => {
   const navigate = useNavigate();
@@ -13,18 +13,16 @@ const UserLogin = () => {
     const data = new FormData(event.currentTarget);
   
     if(data.get('email') != "" && data.get('password') != "") {
-      const user = JSON.stringify({
-        "email":data.get('email'),
-        "password":data.get('password')
-      })
-      data.append("user", user)
-      axios.post("http://localhost:8080/login", data)
-          .then(response => {
-            console.log(response)
-          })
-          .catch(error => {
-            console.log(error);
-      });
+
+      authenticate(data).then(response => {
+         navigate("/");
+        })
+        .catch(error => {
+          console.log(error);
+          
+        });
+
+    
     } else {
       setEmailError(data.get('email') == "" ? true : false)
       setPasswordError(data.get('password') == "" ? true : false)

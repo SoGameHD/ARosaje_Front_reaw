@@ -1,4 +1,4 @@
-import * as React from 'react'
+import react, {useState} from 'react'
 import { styled } from '@mui/material/styles'
 import MuiDrawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
@@ -10,6 +10,7 @@ import PlantIcon from './svg/PlantIcon'
 import HomeIcon from './svg/HomeIcon'
 import { Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { logout } from '../../services/auth.service'
 
 const drawerWidth = 240
 
@@ -158,6 +159,13 @@ const DesktopMenu = () => {
           </ListItem>
         ))}
       </List>
+      <div style={{position: "fixed", bottom: '5%', textAlign: "center", paddingBottom: 10}}>
+        <Button variant="text" sx={{fontSize: '12px', color: '#43493E'}} onClick={logout}>Déconnexion</Button>
+      </div>
+      <div style={{position: "fixed", bottom: 0, textAlign: "center", paddingBottom: 10}}>
+        <Button variant="text" sx={{fontSize: '12px', color: '#43493E'}}>CGV</Button>
+      </div>
+      
     </Drawer>
   )
 }

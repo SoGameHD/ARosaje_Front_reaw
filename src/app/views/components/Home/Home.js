@@ -5,15 +5,15 @@ import Menu from '../Menu/Menu'
 import BtnCreatePlant from '../PlantsCreate/BtnCreatePlant';
 import Navigator from '../navigation/Navigator';
 // import PlantPhotoTaker from '../Photo/Photo'
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const Home = () => {
   const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 600 });
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const location = useLocation();
-
   // Vérifier si la route courante correspond à l'une des trois routes spécifiées
   const isCurrentRouteValid = ['/', '/mes-plantes', '/plantes-gardees'].includes(location.pathname);
+
 
 
   useEffect(() => {
