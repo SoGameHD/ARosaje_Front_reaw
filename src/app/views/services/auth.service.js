@@ -70,26 +70,26 @@ if(token) {
 }
 
 function checkToken() {
-let token = localStorage.getItem("token");
-if(token) {
-  let decodedToken = jwtDecode(token);
-  let currentDate = new Date();
-  if (decodedToken.exp * 1000 < currentDate.getTime()) {
-    localStorage.clear();
-    return false;
+  let token = localStorage.getItem("token");
+  if(token) {
+    let decodedToken = jwtDecode(token);
+    let currentDate = new Date();
+    if (decodedToken.exp * 1000 < currentDate.getTime()) {
+      localStorage.clear();
+      return false;
+    } else {
+      return true;
+    }
   } else {
-    return true;
+    return false;
   }
-} else {
-  return false;
-}
-
 }
 
 export {
     authenticate,
     logout,
     register,
-    getCurrentUser
+    getCurrentUser,
+    checkToken
   }
   

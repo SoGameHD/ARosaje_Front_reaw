@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, Card, CardContent, CardActions} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import { deleteUser } from '../../../services/Api';
 
 const UserProfil = () => {
   const navigate = useNavigate();
@@ -17,8 +17,7 @@ const UserProfil = () => {
     event.preventDefault();
     const data = new FormData();
     data.append("userId", user.id)
-    axios.delete("http://localhost:8080/user", data)
-        .then(response => {
+    deleteUser(data).then(response => {
         console.log(response)
         })
         .catch(error => {
@@ -61,6 +60,7 @@ const UserProfil = () => {
         <Button
       size="medium"
       variant="contained"
+      onClick={handleSubmit}
       sx={{
         background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #f44336",
         ":hover": {
@@ -93,7 +93,6 @@ const UserProfil = () => {
           Modifier le compte
         </Button>
       </Box>
-     
     </>
   );
 }

@@ -10,8 +10,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import DeleteIcon from '@mui/icons-material/Delete';
 import dayjs from 'dayjs';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { deletePlant } from "../../services/Api";
 
 const conseils = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
@@ -31,9 +31,6 @@ const ShowUserPlantsDesktop = (props) => {
   const { plant } = props;
   const navigate = useNavigate();
 
-  
- 
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -50,15 +47,14 @@ const ShowUserPlantsDesktop = (props) => {
     setEdition(false);
   };
 
-  const deletePlant = () => {
+  const handleDeletePlant = () => {
+    const idPlant = plant.id;
     try {
-    axios.delete("http://localhost:8080/deletePlant/" + plant.id)
-      .then(response => {
+      deletePlant(idPlant).then(response => {
         navigate('/mes-plantes');
       })
       .catch(error => {
         console.log(error);
-        
       });
     } catch {
       navigate('/mes-plantes');
@@ -110,7 +106,7 @@ const ShowUserPlantsDesktop = (props) => {
               }}
               >
                 <IconButton
-                  onClick={deletePlant} 
+                  onClick={handleDeletePlant} 
                   aria-label="delete"
                   size="large"
                   style={{

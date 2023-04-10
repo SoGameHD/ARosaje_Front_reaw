@@ -13,7 +13,6 @@ const UserLogin = () => {
     const data = new FormData(event.currentTarget);
   
     if(data.get('email') != "" && data.get('password') != "") {
-
       authenticate(data).then(response => {
         navigate("/");
         })
@@ -21,8 +20,6 @@ const UserLogin = () => {
           console.log(error);
           
         });
-
-    
     } else {
       setEmailError(data.get('email') == "" ? true : false)
       setPasswordError(data.get('password') == "" ? true : false)
@@ -42,7 +39,7 @@ const UserLogin = () => {
             alignItems: 'center',
           }}
         >
-         
+        
           <Typography component="h1" variant="h5">
             Connexion
           </Typography>
