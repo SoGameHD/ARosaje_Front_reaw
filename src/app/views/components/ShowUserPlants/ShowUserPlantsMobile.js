@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import { deletePlant } from "../../services/Api";
 
 const conseils = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
@@ -31,19 +31,18 @@ const ShowUserPlantsMobile = (props) => {
   const navigate = useNavigate();
   const { plant } = props;
 
-  const deletePlant = () => {
+  const handleDeletePlant = () => {
+    const idPlant = plant.id;
     try {
-      axios.delete("http://localhost:8080/deletePlant/" + plant.id)
-        .then(response => {
-          navigate('/mes-plantes');
-        })
-        .catch(error => {
-          console.log(error);
-          
-        });
-      } catch {
+      deletePlant(idPlant).then(response => {
         navigate('/mes-plantes');
-      }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    } catch {
+      navigate('/mes-plantes');
+    }
   }
 
   const handleClickOpen = () => {
@@ -156,7 +155,7 @@ const ShowUserPlantsMobile = (props) => {
         <Button
       size="small"
       variant="outlined"
-      onClick={deletePlant}
+      onClick={handleDeletePlant}
       startIcon={<DeleteIcon sx={{ color: '#43493E' }} />}
       sx={{
         color: '#43493E',

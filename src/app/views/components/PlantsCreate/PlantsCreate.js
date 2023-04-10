@@ -1,13 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { TextField, Grid, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Typography } from '@mui/material';
-import axios from 'axios';
 import Webcam from 'react-webcam';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom'
-
-
+import { postPlant } from '../../services/Api';
 
 const PlantsCreate = () => {
   const navigate = useNavigate();
@@ -42,9 +40,8 @@ const PlantsCreate = () => {
       formData.append("ownerId", -1)
       formData.append("plant", plant)
       formData.append("file", dataURItoBlob(image));
-  
-      axios.post("http://localhost:8080/addPlant", formData)
-        .then(response => {
+
+      postPlant(formData).then(response => {
           navigate('/mes-plantes');
         })
         .catch(error => {
@@ -56,9 +53,7 @@ const PlantsCreate = () => {
       setStartDateError((moment(startDateRef?.format('MM/DD/YYYY')).isValid() && startDateRef != null) ? false : true)
       setEndDateError((moment(endDateRef?.format('MM/DD/YYYY')).isValid() && endDateRef != null) ? false : true)
       setPictureError( image===null ? true : false)
-      
     }
-    
   }
 
   const resetPicture = () => {
@@ -86,7 +81,6 @@ const PlantsCreate = () => {
       justifyContent="center"
       style={{ minHeight: '90vh' }}
     >
-
           <Typography variant="h3" sx={{paddingBottom:"5%"}}>Ajouter une plante</Typography>
           <form>
           <LocalizationProvider dateAdapter={AdapterDayjs} >
@@ -112,7 +106,6 @@ const PlantsCreate = () => {
               
             />
             <br/>
-
             <DatePicker 
               sx={{ width: "45%", marginTop: "5%", marginRight: "10%",
               ...(startDateError === true && {
@@ -125,7 +118,6 @@ const PlantsCreate = () => {
               onChange={(newValue) => setStartValue(newValue)}
               format="DD-MM-YYYY"
             />    
-         
             <DatePicker 
               sx={{ width: "45%", marginTop: "5%",  
               ...(endDateError === true && {
@@ -138,8 +130,6 @@ const PlantsCreate = () => {
               onChange={(newValue) => setEndValue(newValue)}
               format="DD-MM-YYYY"
             />
-    
-   
             
             <Button variant="contained" color="primary"
               sx={{ ...(pictureError === true && {
@@ -171,10 +161,8 @@ const PlantsCreate = () => {
             </Button>
             </LocalizationProvider>
           </form>
-     
-    </Grid> 
+    </Grid>
     <Dialog open={open} onClose={() => setOpen(false)} maxWidth="false">
-       
         <DialogTitle>
           Prendre une photo
         </DialogTitle>
