@@ -38,7 +38,11 @@ const getPhotoById = async (id) => {
 
 const postPlant = async (formData) => {
   try {
-    const response = await instance.post(`addPlant`, formData)
+    const response = await instance.post(`addPlant`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     return response.data
   } catch (error) {
     console.error(error)

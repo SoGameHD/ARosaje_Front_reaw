@@ -6,8 +6,8 @@ import { register } from '../../../services/auth.service';
 
 const UserRegister = () => {
   const navigate = useNavigate();
-  const [last_nameError, setLast_nameError] = useState(false)
-  const [first_nameError, setFirst_nameError] = useState(false)
+  const [lastnameError, setlastnameError] = useState(false)
+  const [firstnameError, setfirstnameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [typeError, setType] = useState(false)
@@ -17,7 +17,7 @@ const UserRegister = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if(data.get('first_name') != "" && data.get('last_name') != "" && data.get('email') != "" && data.get('password') != "" && data.get('type') != "") {
+    if(data.get('firstname') != "" && data.get('lastname') != "" && data.get('email') != "" && data.get('password') != "" && data.get('type') != "") {
       register(data).then(response => {
         navigate("/connexion");
         })
@@ -28,8 +28,8 @@ const UserRegister = () => {
     } else {
       setEmailError(data.get('email') == "" ? true : false)
       setPasswordError(data.get('password') == "" ? true : false)
-      setFirst_nameError(data.get('first_name') == "" ? true : false)
-      setLast_nameError(data.get('last_name') == "" ? true : false)
+      setfirstnameError(data.get('firstname') == "" ? true : false)
+      setlastnameError(data.get('lastname') == "" ? true : false)
       setType(data.get('type') == "" ? true : false)
     }
   };
@@ -52,24 +52,24 @@ const UserRegister = () => {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
-              error = {first_nameError}
+              error = {firstnameError}
               margin="normal"
               required
               fullWidth
-              name="first_name"
+              name="firstname"
               label="Nom"
               type="text"
-              id="first_name"
+              id="firstname"
             />
             <TextField
-              error = {last_nameError}
+              error = {lastnameError}
               margin="normal"
               required
               fullWidth
-              name="last_name"
+              name="lastname"
               label="Prénom"
               type="text"
-              id="last_name"
+              id="lastname"
             />
             <TextField
               error = {emailError}

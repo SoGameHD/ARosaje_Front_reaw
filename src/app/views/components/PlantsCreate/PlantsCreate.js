@@ -6,6 +6,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom'
 import { postPlant } from '../../services/Api';
+import { getCurrentUser } from '../../services/auth.service';
 
 const PlantsCreate = () => {
   const navigate = useNavigate();
@@ -21,11 +22,16 @@ const PlantsCreate = () => {
   const [startDateError, setStartDateError] = useState(false);
   const [endDateError, setEndDateError] = useState(false);
   const [pictureError, setPictureError] = useState(false);
+  const [user, setUser] = useState(null)
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImage(imageSrc);
   }
+
+  getCurrentUser().then(response => {
+    setUser(response.id)
+  })
 
   const sendDataToApi = () => {
     if(image!=null && titleRef.current.value != null && descRef.current.value && (moment(startDateRef?.format('MM/DD/YYYY')).isValid() && startDateRef != null) && (moment(endDateRef?.format('MM/DD/YYYY')).isValid() && endDateRef != null)) {
@@ -37,9 +43,9 @@ const PlantsCreate = () => {
         "end_date":endDateRef
       })
       
-      formData.append("ownerId", -1)
-      formData.append("plant", plant)
+      formData.append("ownerId", user);
       formData.append("file", dataURItoBlob(image));
+      formData.append("plant", plant);
 
       postPlant(formData).then(response => {
           navigate('/mes-plantes');
