@@ -2,23 +2,27 @@ import Add from '@mui/icons-material/Add';
 import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
 import { Box, Button, Card, CardContent, CardMedia, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, List, ListItem, ListItemText, TextField, Typography } from "@mui/material"
-import React, { useState } from "react";
-import { Form, Field } from 'react-final-form'
+import React, { useRef, useState } from "react";
 import axios from 'axios'
 
 const ShowPlantsToKeepDesktop = (props) => {
   const [open, setOpen] = useState(false);
   const { plant } = props
 
-  function post(values) {
-    const data = {
-      "content": JSON.stringify(values.message, null, 2)
-    };
-    const url = `/addAdvice?plantId=${plant.id}&botanistId=-1`;
-    axios.post(`${process.env.REACT_APP_API_URL}`.concat(url), data, {
-      headers: {
-        'Content-Type': 'application/json'
-      }})
+  const adviceRef = useRef('')
+
+  const sendDataToApi = () => {
+    const formData = new FormData();
+    const advice = JSON.stringify({
+      "content": adviceRef.current.value
+    })
+    
+    formData.append("plantId", plant.id)
+    formData.append("botanistId", -1)
+    formData.append("advice", advice)
+
+    const url = `/addAdvice`;
+    axios.post(`${process.env.REACT_APP_API_URL}`.concat(url), formData)
       .then(response => {
         console.log(response);
       })
@@ -36,6 +40,9 @@ const ShowPlantsToKeepDesktop = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const pathPlant = 'http://' + plant.pictures[0]
+
   return (
     <>
       <Container maxWidth="xl">
@@ -54,16 +61,18 @@ const ShowPlantsToKeepDesktop = (props) => {
               width: {
                 sm: 300,
                 md: 390,
+                lg: 'auto'
               },
               height: {
                 sm: 345,
                 md: 445,
+                lg: 'auto'
               },
               borderRadius: "28px" }} 
-            image="https://picsum.photos/800/300"
+            image={pathPlant}
             alt="Live from space album cover"
           />
-          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
             <CardContent sx={{ display: 'flex', flexDirection:'column', pl: "6%", pt: "6%" }}>
               <Typography component="div" variant="h4">
                 {plant.title}
@@ -72,8 +81,7 @@ const ShowPlantsToKeepDesktop = (props) => {
                 Du {plant.start_date} Au {plant.end_date}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div" sx={{ mt: "6%" }}>
-                Description plante <br />
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus tenetur voluptatum earum expedita accusantium consequuntur, blanditiis tempora eaque quisquam illum. Obcaecati, iure possimus.
+                {plant.description}
               </Typography>
             </CardContent>
           </Box>
@@ -115,20 +123,20 @@ const ShowPlantsToKeepDesktop = (props) => {
           <AddCommentOutlinedIcon fontSize="large"/>
         </DialogTitle>
         <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>Ajouter un conseil</DialogTitle>
-        <Form
-          onSubmit={post}
-          render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <DialogContent sx={{ pt: '20px !important', width: 420 }}>
-                <Field name="message" component="textarea" rows={6} placeholder="Conseil" />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
-                <Button startIcon={<Add />} sx={{ color: '#386A20' }} type="submit">Ajouter</Button>
-              </DialogActions>
-            </form>
-          )}
-        />
+        <DialogContent sx={{ pt: '20px !important', width: 420 }}>
+          <TextField
+            id="outlined-multiline-static"
+            label="Conseil"
+            multiline
+            sx={{ width: '100%' }}
+            rows={6}
+            inputRef={adviceRef}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
+          <Button startIcon={<Add />} sx={{ color: '#386A20' }} onClick={sendDataToApi}>Ajouter</Button>
+        </DialogActions>
       </Dialog>
     </>
   )

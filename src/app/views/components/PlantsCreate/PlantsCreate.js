@@ -108,10 +108,8 @@ const PlantsCreate = () => {
               onChange={(newValue) => setValue(newValue)}
               format="DD-MM-YYYY"
             />
-           
 
             
-         
             <DatePicker 
               label="Date fin gardiennage" 
               value={endDateRef}
@@ -119,7 +117,6 @@ const PlantsCreate = () => {
               format="DD-MM-YYYY"
             />
     
-   
             
             <Button variant="contained" color="primary"
               sx={{ marginTop: "5%", marginLeft:"25%", width: "50%", background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
@@ -146,10 +143,8 @@ const PlantsCreate = () => {
             </Button>
             </LocalizationProvider>
           </form>
-     
     </Grid> 
     <Dialog open={open} onClose={() => setOpen(false)} maxWidth="false">
-       
         <DialogTitle>
           Prendre une photo
         </DialogTitle>
