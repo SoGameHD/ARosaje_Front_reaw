@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { register } from '../../../services/auth.service';
 
 const UserRegister = () => {
   const navigate = useNavigate();
@@ -9,36 +10,27 @@ const UserRegister = () => {
   const [first_nameError, setFirst_nameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
-  const [roleError, setRole] = useState(false)
+  const [typeError, setType] = useState(false)
   
   
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if(data.get('first_name') != "" && data.get('last_name') != "" && data.get('email') != "" && data.get('password') != "" && data.get('role') != "") {
-      const user = JSON.stringify({
-        "firstname":data.get('first_name'),
-        "lastname":data.get('last_name'),
-        "email":data.get('email'),
-        "password":data.get('password'),
-        "role":data.get('role'),
-        
-      })
-      data.append("user", user)
-      axios.post("http://localhost:8080/register", data)
-          .then(response => {
-            console.log(response)
-          })
-          .catch(error => {
-            console.log(error);
-      });
+    if(data.get('first_name') != "" && data.get('last_name') != "" && data.get('email') != "" && data.get('password') != "" && data.get('type') != "") {
+      register(data).then(response => {
+        navigate("/connexion");
+        })
+        .catch(error => {
+          console.log(error);
+          
+        });
     } else {
       setEmailError(data.get('email') == "" ? true : false)
       setPasswordError(data.get('password') == "" ? true : false)
       setFirst_nameError(data.get('first_name') == "" ? true : false)
       setLast_nameError(data.get('last_name') == "" ? true : false)
-      setRole(data.get('role') == "" ? true : false)
+      setType(data.get('type') == "" ? true : false)
     }
   };
 
@@ -54,7 +46,7 @@ const UserRegister = () => {
             alignItems: 'center',
           }}
         >
-         
+        
           <Typography component="h1" variant="h5">
             Inscription
           </Typography>
@@ -100,14 +92,14 @@ const UserRegister = () => {
               id="password"
             />
             <TextField
-              error = {roleError}
+              error = {typeError}
               margin="normal"
               required
               fullWidth
-              name="role"
+              name="type"
               label="Rôle"
               type="text"
-              id="role"
+              id="type"
             />
             <Button
               type="submit"

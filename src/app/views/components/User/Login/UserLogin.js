@@ -15,7 +15,7 @@ const UserLogin = () => {
     if(data.get('email') != "" && data.get('password') != "") {
 
       authenticate(data).then(response => {
-         navigate("/");
+        navigate("/");
         })
         .catch(error => {
           console.log(error);
