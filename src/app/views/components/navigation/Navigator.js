@@ -11,6 +11,8 @@ import UserLogin from '../User/Login/UserLogin'
 import UserProfil from '../User/Profil/UserProfil'
 import { useEffect, useState } from 'react'
 import { checkToken } from '../../services/auth.service'
+import Cgu from '../CGU/cgu'
+
 
 const Navigator = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -45,6 +47,7 @@ const Navigator = () => {
       <Route path='inscription' element={<UserRegister />} />
       <Route path='connexion' element={<UserLogin />} />
       <Route path='profil' element={isAuthenticated ? <UserProfil /> : <Navigate to="/connexion" />} />
+      <Route path='traitement-des-données' element={<Cgu />} />
     </Routes>
   )
 }

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
+import React, { useRef, useState } from 'react';
+import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, Checkbox} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { register } from '../../../services/auth.service';
@@ -11,10 +11,12 @@ const UserRegister = () => {
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [typeError, setType] = useState(false)
+  const [checked, setChecked] = useState(false)
+ 
   
-  
-
+  const handleClick = () => setChecked(!checked)
   const handleSubmit = (event) => {
+  
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if(data.get('firstname') != "" && data.get('lastname') != "" && data.get('email') != "" && data.get('password') != "" && data.get('type') != "") {
@@ -101,7 +103,9 @@ const UserRegister = () => {
               type="text"
               id="type"
             />
+            <input onClick={handleClick} checked={checked} type="checkbox" /> J'accepte <Link onClick={()=>navigate("/traitement-des-données")}>les conditions de collecte et de traitement des données</Link>.
             <Button
+              disabled={!checked}
               type="submit"
               fullWidth
               variant="contained"

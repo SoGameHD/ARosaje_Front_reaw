@@ -162,7 +162,7 @@ const DesktopMenu = () => {
         <Button variant="text" sx={{fontSize: '12px', color: '#43493E'}} onClick={logout}>Déconnexion</Button>
       </div>
       <div style={{position: "fixed", bottom: 0, textAlign: "center", paddingBottom: 10}}>
-        <Button variant="text" sx={{fontSize: '12px', color: '#43493E'}}>CGV</Button>
+        <Button variant="text" sx={{fontSize: '12px', color: '#43493E'}} onClick={()=>navigate("/traitement-des-données")}>RGPD</Button>
       </div>
       
     </Drawer>
