@@ -2,28 +2,20 @@ import Add from '@mui/icons-material/Add';
 import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
 import { Box, Button, Card, CardContent, CardMedia, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, List, ListItem, ListItemText, TextField, Typography } from "@mui/material"
-import React, { useRef, useState } from "react";
-import axios from 'axios'
+import React, { useState } from "react";
+import { Form, Field } from 'react-final-form';
+import { postAdvice } from '../../services/Api';
 
 const ShowPlantsToKeepDesktop = (props) => {
   const [open, setOpen] = useState(false);
   const { plant } = props
 
-  const adviceRef = useRef('')
-
-  const sendDataToApi = () => {
-    const formData = new FormData();
-    const advice = JSON.stringify({
-      "content": adviceRef.current.value
-    })
-    
-    formData.append("plantId", plant.id)
-    formData.append("botanistId", -1)
-    formData.append("advice", advice)
-
-    const url = `/addAdvice`;
-    axios.post(`${process.env.REACT_APP_API_URL}`.concat(url), formData)
-      .then(response => {
+  function post(values) {
+    const data = {
+      "content": JSON.stringify(values.message, null, 2)
+    };
+    const idPlant = plant.id
+    postAdvice(idPlant, data).then(response => {
         console.log(response);
       })
       .catch(error => {

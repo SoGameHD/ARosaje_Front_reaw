@@ -5,8 +5,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Add from '@mui/icons-material/Add';
 import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
 import { useNavigate } from "react-router-dom";
-import { Form, Field } from 'react-final-form'
-import axios from 'axios'
+import { Form, Field } from 'react-final-form';
+import { postAdvice } from "../../services/Api";
 
 const ShowPlantsToKeepMobile = (props) => {
   const [open, setOpen] = useState(false);
@@ -17,12 +17,8 @@ const ShowPlantsToKeepMobile = (props) => {
     const data = {
       "content": JSON.stringify(values.message, null, 2)
     };
-    const url = `/addAdvice?plantId=${plant.id}&botanistId=-1`;
-    axios.post(`${process.env.REACT_APP_API_URL}`.concat(url), data, {
-      headers: {
-        'Content-Type': 'application/json'
-      }})
-      .then(response => {
+    const idPlant = plant.id
+    postAdvice(idPlant, data).then(response => {
         console.log(response);
       })
       .catch(error => {

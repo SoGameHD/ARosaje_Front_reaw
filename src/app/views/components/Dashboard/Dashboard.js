@@ -54,7 +54,7 @@ const Dashboard = () => {
       </Box>
       <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12, lg: 12 }}>
       {
-        plants.map(plant => {
+        plants?.map(plant => {
           const pathPlant = 'http://' + plant.pictures[0]
           return (
             <Grid item xs={2} sm={"auto"} md={"auto"} lg={3} key={plant}>

@@ -8,7 +8,10 @@ import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import DeleteIcon from '@mui/icons-material/Delete';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
+import { deletePlant } from "../../services/Api";
 
 const conseils = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
@@ -21,13 +24,13 @@ const conseils = [
   "Conseil 8",
 ];
 
-
-
-const ShowUserPlantsDesktop = () => {
+const ShowUserPlantsDesktop = (props) => {
   const [open, setOpen] = useState(false);
   const [edition, setEdition] = useState(false);
   const [value, setValue] = useState(dayjs('2022-04-07'));
-  
+  const { plant } = props;
+  const navigate = useNavigate();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -43,6 +46,20 @@ const ShowUserPlantsDesktop = () => {
   const handleCloseEdition = () => {
     setEdition(false);
   };
+
+  const handleDeletePlant = () => {
+    const idPlant = plant.id;
+    try {
+      deletePlant(idPlant).then(response => {
+        navigate('/mes-plantes');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    } catch {
+      navigate('/mes-plantes');
+    }
+  }
 
   return (
     <>
@@ -88,6 +105,17 @@ const ShowUserPlantsDesktop = () => {
                 justifyContent: "flex-end",
               }}
               >
+                <IconButton
+                  onClick={handleDeletePlant} 
+                  aria-label="delete"
+                  size="large"
+                  style={{
+                    borderRadius: 16,
+                    background: "#f44336",
+                    color: '#000000',
+                    elevation: 5,
+                    marginRight: "1%"
+                }}><DeleteIcon/></IconButton>
                 <IconButton
                   onClick={handleClickOpenEdition} 
                   aria-label="edition"

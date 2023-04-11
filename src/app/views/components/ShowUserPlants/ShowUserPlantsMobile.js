@@ -9,7 +9,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
+import { deletePlant } from "../../services/Api";
 
 const conseils = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
@@ -22,11 +24,26 @@ const conseils = [
   "Conseil 8",
 ];
 
-const ShowUserPlantsMobile = () => {
+const ShowUserPlantsMobile = (props) => {
   const [open, setOpen] = useState(false);
   const [edition, setEdition] = useState(false);
   const [value, setValue] = useState(dayjs('2022-04-07'));
   const navigate = useNavigate();
+  const { plant } = props;
+
+  const handleDeletePlant = () => {
+    const idPlant = plant.id;
+    try {
+      deletePlant(idPlant).then(response => {
+        navigate('/mes-plantes');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    } catch {
+      navigate('/mes-plantes');
+    }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -128,12 +145,33 @@ const ShowUserPlantsMobile = () => {
       </Card>
       <Box
         sx={{
-          display: 'block',
-          position: 'fixed',
-          right: '2%',
-          bottom: '2%'
+          display: "grid",
+          position: "fixed",
+          rowGap: "5%",
+          left: "50%",
+          bottom: "3%"
         }}
       >
+        <Button
+      size="small"
+      variant="outlined"
+      onClick={handleDeletePlant}
+      startIcon={<DeleteIcon sx={{ color: '#43493E' }} />}
+      sx={{
+        color: '#43493E',
+        backgroundColor: '#F1F3E8',
+        borderRadius: 100,
+        borderColor: '#f44336',
+        ':hover': {
+          borderColor: '#f44336',
+          backgroundColor: '#F1F3E8',
+          color: '#f44336'
+        },
+        mr: '6px'
+      }}
+    >
+      Supprimer
+    </Button>
         <Button
           size="small"
           variant="outlined"

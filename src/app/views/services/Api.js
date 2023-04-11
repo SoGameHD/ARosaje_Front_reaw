@@ -1,17 +1,17 @@
-import axios from 'axios'
+import instance from './axiosConfig';
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-  timeout: 10000
-})
+const getUsersPlants = async () => {
+  try {
+    const response = await instance.get('/plants')
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 const getPlants = async () => {
   try {
-    const response = await api.get('/getPlants')
+    const response = await instance.get('/getPlants')
     return response.data
   } catch (error) {
     console.error(error)
@@ -20,7 +20,60 @@ const getPlants = async () => {
 
 const getPlantById = async (id) => {
   try {
-    const response = await api.get(`/getPlant/${id}`)
+    const response = await instance.get(`/getPlant/${id}`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const getPhotoById = async (id) => {
+  try {
+    const response = await instance.get(`plants/1/pictures/${id}`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const postPlant = async (formData) => {
+  try {
+    const response = await instance.post(`addPlant`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const postAdvice = async (idPlant, data) => {
+  try {
+    const response = await instance.post(`/addAdvice?plantId=${idPlant}&botanistId=-1`, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }})
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const deletePlant = async (idPlant) => {
+  try {
+    const response = await instance.delete("deletePlant/" + idPlant)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const deleteUser = async (data) => {
+  try {
+    const response = await instance.delete("user", data)
+        
     return response.data
   } catch (error) {
     console.error(error)
@@ -30,4 +83,9 @@ const getPlantById = async (id) => {
 export {
   getPlants,
   getPlantById,
+  getPhotoById,
+  postPlant,
+  postAdvice,
+  deletePlant,
+  deleteUser,
 }
