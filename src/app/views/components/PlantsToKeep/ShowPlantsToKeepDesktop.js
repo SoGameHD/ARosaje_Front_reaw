@@ -115,20 +115,20 @@ const ShowPlantsToKeepDesktop = (props) => {
           <AddCommentOutlinedIcon fontSize="large"/>
         </DialogTitle>
         <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>Ajouter un conseil</DialogTitle>
-        <DialogContent sx={{ pt: '20px !important', width: 420 }}>
-          <TextField
-            id="outlined-multiline-static"
-            label="Conseil"
-            multiline
-            sx={{ width: '100%' }}
-            rows={6}
-            inputRef={adviceRef}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
-          <Button startIcon={<Add />} sx={{ color: '#386A20' }} onClick={sendDataToApi}>Ajouter</Button>
-        </DialogActions>
+        <Form
+          onSubmit={post}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <DialogContent sx={{ pt: '20px !important', width: 420 }}>
+                <Field name="message" component="textarea" rows={6} placeholder="Conseil" />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
+                <Button startIcon={<Add />} sx={{ color: '#386A20' }} type="submit">Ajouter</Button>
+              </DialogActions>
+            </form>
+          )}
+        />
       </Dialog>
     </>
   )
