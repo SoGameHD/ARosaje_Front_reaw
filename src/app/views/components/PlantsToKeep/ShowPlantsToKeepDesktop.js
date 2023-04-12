@@ -32,6 +32,9 @@ const ShowPlantsToKeepDesktop = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const pathPlant = 'http://' + plant.pictures[0]
+
   return (
     <>
       <Container maxWidth="xl">
@@ -50,16 +53,18 @@ const ShowPlantsToKeepDesktop = (props) => {
               width: {
                 sm: 300,
                 md: 390,
+                lg: 'auto'
               },
               height: {
                 sm: 345,
                 md: 445,
+                lg: 'auto'
               },
               borderRadius: "28px" }} 
-            image="https://picsum.photos/800/300"
+            image={pathPlant}
             alt="Live from space album cover"
           />
-          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
             <CardContent sx={{ display: 'flex', flexDirection:'column', pl: "6%", pt: "6%" }}>
               <Typography component="div" variant="h4">
                 {plant.title}
@@ -68,8 +73,7 @@ const ShowPlantsToKeepDesktop = (props) => {
                 Du {plant.start_date} Au {plant.end_date}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div" sx={{ mt: "6%" }}>
-                Description plante <br />
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus tenetur voluptatum earum expedita accusantium consequuntur, blanditiis tempora eaque quisquam illum. Obcaecati, iure possimus.
+                {plant.description}
               </Typography>
             </CardContent>
           </Box>

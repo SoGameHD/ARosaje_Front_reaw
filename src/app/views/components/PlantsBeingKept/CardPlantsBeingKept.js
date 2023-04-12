@@ -6,8 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import { useNavigate } from 'react-router-dom';
 
-const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
+const CardPlantsBeingKept = ({path, image, dateStart, dateEnd}) => {
+  const navigate = useNavigate();
+
   return (
     <Card sx={{ 
       maxWidth: 345,
@@ -62,7 +65,7 @@ const CardPlantsBeingKept = ({image, dateStart, dateEnd}) => {
         justifyContent: "end",
         p: 2,
       }}>
-        <Button size="small" variant="contained" startIcon={<VisibilityRoundedIcon color='#FFFFFF' />}
+        <Button onClick={() => navigate(path)} size="small" variant="contained" startIcon={<VisibilityRoundedIcon color='#FFFFFF' />}
         sx={{
           color: "#FFFFFF",
           backgroundColor: "#386A20",

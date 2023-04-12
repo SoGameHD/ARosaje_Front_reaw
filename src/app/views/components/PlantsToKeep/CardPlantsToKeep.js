@@ -40,7 +40,7 @@ const CardPlantsToKeep = ({path, username, date1, date2, title, description, ima
           }}
           avatar={
             <Avatar sx={{ bgcolor: "#D0E6C3" }} aria-label="recipe">
-              R
+              Y
             </Avatar>
           }
           action={

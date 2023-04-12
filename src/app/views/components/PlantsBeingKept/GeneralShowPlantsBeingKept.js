@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useParams } from 'react-router-dom';
 import { getPlantById } from '../../services/Api';
-import ShowPlantsToKeepDesktop from './ShowPlantsToKeepDesktop';
-import ShowPlantsToKeepMobile from './ShowPlantsToKeepMobile';
+import ShowPlantsBeingKeptDesktop from './ShowPlantsBeingKeptDesktop';
+import ShowPlantsBeingKeptMobile from './ShowPlantsBeingKeptMobile';
 
 const GeneralShowPlantsToKeep = () => {
   const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 768 });
@@ -27,7 +27,7 @@ const GeneralShowPlantsToKeep = () => {
   return (
     plant && (
       <>
-        {isLargeScreen ? <ShowPlantsToKeepDesktop plant={plant} /> : <ShowPlantsToKeepMobile plant={plant} />}
+        {isLargeScreen ? <ShowPlantsBeingKeptDesktop plant={plant} /> : <ShowPlantsBeingKeptMobile plant={plant} />}
       </>
     )
   )

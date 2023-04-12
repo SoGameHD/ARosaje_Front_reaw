@@ -4,10 +4,20 @@ import '../UserPlants/UserPlantsView.css'
 import UserKeptPlantsList from "./UserKeptPlantsList"
 import { Check } from "@mui/icons-material"
 import SubtitleUserPlants from "./SubtitleUserPlants"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { getPlants } from "../../services/Api";
 
 function UserPlantsView() {
   const [isKeptPlants, setIsKeptPlants] = useState(false)
+  const [plants, setPlants] = useState([])
+  
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getPlants()
+      setPlants(data)
+    }
+    getData()
+  }, [])
 
   const handleClickKept = () => {
     setIsKeptPlants(true);
@@ -97,7 +107,7 @@ function UserPlantsView() {
             </Button>
           </Grid>
         </Grid>
-        {isKeptPlants ? <UserKeptPlantsList /> : <UserNotKeptPlantsList />}
+        {isKeptPlants ? <UserKeptPlantsList plant={plants} /> : <UserNotKeptPlantsList />}
       </Container>
     </>
   )

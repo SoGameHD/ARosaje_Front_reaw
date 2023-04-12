@@ -123,7 +123,7 @@ const PlantsCreate = () => {
               value={startDateRef}
               onChange={(newValue) => setStartValue(newValue)}
               format="DD-MM-YYYY"
-            />    
+            />
             <DatePicker 
               sx={{ width: "45%", marginTop: "5%",  
               ...(endDateError === true && {
@@ -135,8 +135,7 @@ const PlantsCreate = () => {
               value={endDateRef}
               onChange={(newValue) => setEndValue(newValue)}
               format="DD-MM-YYYY"
-            />
-            
+            />            
             <Button variant="contained" color="primary"
               sx={{ ...(pictureError === true && {
                 border: '1px solid red', 

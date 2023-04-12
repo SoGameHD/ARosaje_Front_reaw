@@ -81,7 +81,6 @@ const deleteUser = async (data) => {
 }
 
 export {
-  getUsersPlants,
   getPlants,
   getPlantById,
   getPhotoById,

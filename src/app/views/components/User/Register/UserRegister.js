@@ -12,7 +12,6 @@ const UserRegister = () => {
   const [passwordError, setPasswordError] = useState(false)
   const [typeError, setType] = useState(false)
   const [checked, setChecked] = useState(false)
- 
   
   const handleClick = () => setChecked(!checked)
   const handleSubmit = (event) => {
@@ -103,25 +102,28 @@ const UserRegister = () => {
               type="text"
               id="type"
             />
-            <input onClick={handleClick} checked={checked} type="checkbox" /> J'accepte <Link onClick={()=>navigate("/traitement-des-données")}>les conditions de collecte et de traitement des données</Link>.
+            <input onClick={handleClick} checked={checked} type="checkbox" /> J'accepte {" "}
+            <Link onClick={()=>navigate("/traitement-des-données")} sx={{ cursor: 'pointer' }}>
+              les conditions de collecte et de traitement des données
+            </Link>.
             <Button
               disabled={!checked}
               type="submit"
               fullWidth
               variant="contained"
               sx={{ width: "100%",marginTop: '5%', marginBottom: '2%', background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
-          ":hover": {
-            backgroundColor: '#386A20',
-            color: '#FFFFFA',
-          },
-          color: '#000000'}}
+                ":hover": {
+                  backgroundColor: '#386A20',
+                  color: '#FFFFFA',
+                },
+                color: '#000000'
+              }}
             >
               Inscription
             </Button>
             <Grid container>
-              
               <Grid item>
-                <Link onClick={()=>navigate("/connexion")} variant="body2">
+                <Link onClick={()=>navigate("/connexion")} variant="body2"  sx={{ cursor: 'pointer' }}>
                   {"Vous avez un compte ? Connectez-vous"}
                 </Link>
               </Grid>

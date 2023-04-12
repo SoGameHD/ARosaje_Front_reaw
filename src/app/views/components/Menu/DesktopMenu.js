@@ -5,6 +5,9 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import GppGoodIcon from '@mui/icons-material/GppGood';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PlantIcon from './svg/PlantIcon'
 import HomeIcon from './svg/HomeIcon'
 import { Button, Typography } from '@mui/material'
@@ -58,7 +61,7 @@ const DesktopMenu = () => {
       backgroundColor: '#EBEFE2',
     } }}>
       <List sx={{  py: 5 }}>
-        {['Accueil', 'Mes Plantes', 'Plantes gardées'].map((text, index) => (
+        {['Accueil', 'Mes Plantes', 'Plantes gardées', 'Profil'].map((text, index) => (
           <ListItem key={text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               sx={{
@@ -93,7 +96,6 @@ const DesktopMenu = () => {
                   }}
                   startIcon={<HomeIcon fontSize="small" sx={{ color: '#43493E' }} />}
                   variant="text"
-                  // onClick={handleClickOpen} 
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -101,8 +103,8 @@ const DesktopMenu = () => {
                   <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
                     Accueil
                   </Typography>
-                </Button> : 
-                index === 1 ? 
+                </Button>
+                : index === 1 ? 
                 <Button
                   onClick={()=>navigate("/mes-plantes")}
                   sx={{ 
@@ -115,11 +117,11 @@ const DesktopMenu = () => {
                   }}
                   startIcon={<PlantIcon fontSize="small" sx={{ color: '#43493E' }} />}
                   variant="text"
-                  // onClick={handleClickOpen} 
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                }}>
+                  }}
+                >
                   <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
                     Mes
                   </Typography>
@@ -127,7 +129,7 @@ const DesktopMenu = () => {
                     Plantes
                   </Typography>
                 </Button>
-                : 
+                : index === 2 ?
                 <Button
                   onClick={()=>navigate("/plantes-gardees")}
                   sx={{ 
@@ -152,17 +154,80 @@ const DesktopMenu = () => {
                     gardées
                   </Typography>
                 </Button>
+                : 
+                <Button
+                  onClick={()=>navigate("/profil")}
+                  sx={{ 
+                    "& .MuiButton-startIcon": { margin: "0px" },
+                    textTransform: 'unset !important',
+                    color: '#386A20',
+                    ':hover': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}
+                  startIcon={<AccountCircleIcon fontSize="small" sx={{ color: '#43493E' }} />}
+                  variant="text"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}>
+                  <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
+                    Profil
+                  </Typography>
+                </Button>
                 }
               </ListItemIcon>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <div style={{position: "fixed", bottom: '5%', textAlign: "center", paddingBottom: 10}}>
-        <Button variant="text" sx={{fontSize: '12px', color: '#43493E'}} onClick={logout}>Déconnexion</Button>
+      <div style={{position: "fixed", bottom: '7%', textAlign: "center", paddingBottom: 10}}>
+        <Button
+          variant="text" 
+          sx={{
+            fontSize: '12px',
+            "& .MuiButton-startIcon": { margin: "0px" },
+            textTransform: 'unset !important',
+            color: '#43493E',
+            ':hover': {
+              backgroundColor: 'transparent',
+            },
+          }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+          onClick={logout} 
+          startIcon={<LogoutIcon />}
+        >
+          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
+            Déconnexion
+          </Typography>
+        </Button>
       </div>
-      <div style={{position: "fixed", bottom: 0, textAlign: "center", paddingBottom: 10}}>
-        <Button variant="text" sx={{fontSize: '12px', color: '#43493E'}} onClick={()=>navigate("/traitement-des-données")}>RGPD</Button>
+      <div style={{position: "fixed", bottom: 0, textAlign: "center", paddingBottom: 10, marginLeft: '8px'}}>
+        <Button 
+          variant="text" 
+          sx={{
+            fontSize: '12px',
+            color: '#43493E',
+            "& .MuiButton-startIcon": { margin: "0px" },
+            textTransform: 'unset !important',
+            ':hover': {
+              backgroundColor: 'transparent',
+            },
+          }} 
+          onClick={()=>navigate("/traitement-des-données")} 
+          startIcon={<GppGoodIcon />}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
+            RGPD
+          </Typography>
+        </Button>
       </div>
       
     </Drawer>

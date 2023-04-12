@@ -55,6 +55,7 @@ const Dashboard = () => {
       <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12, lg: 12 }}>
       {
         plants?.map(plant => {
+          const pathPlant = 'http://' + plant.pictures[0]
           return (
             <Grid item xs={2} sm={"auto"} md={"auto"} lg={3} key={plant}>
             <CardPlantsToKeep
@@ -64,7 +65,8 @@ const Dashboard = () => {
               date1={plant.start_date}
               date2={plant.end_date}
               title={plant.title}
-              image={"https://picsum.photos/800/300"}
+              description={plant.description}
+              image={pathPlant}
               actionBtn1={'Garder la plante'}
               iconBtnAction2={<VisibilityRoundedIcon />}
               actionBtn2={'Voir la plante'}
