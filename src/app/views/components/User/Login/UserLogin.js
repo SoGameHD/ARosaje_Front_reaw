@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import { authenticate, getCurrentUser } from '../../../services/auth.service';
+import { authenticate } from '../../../services/auth.service';
 
 const UserLogin = () => {
   const navigate = useNavigate();
@@ -72,18 +72,19 @@ const UserLogin = () => {
               fullWidth
               variant="contained"
               sx={{ width: "100%",marginTop: '5%', marginBottom: '2%', background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
-          ":hover": {
-            backgroundColor: '#386A20',
-            color: '#FFFFFA',
-          },
-          color: '#000000'}}
+                ":hover": {
+                  backgroundColor: '#386A20',
+                  color: '#FFFFFA',
+                },
+                color: '#000000'
+              }}
             >
               Connexion
             </Button>
             <Grid container>
               
               <Grid item>
-                <Link onClick={()=>navigate("/inscription")} variant="body2">
+                <Link onClick={()=>navigate("/inscription")} variant="body2" sx={{ cursor: 'pointer' }}>
                   {"Vous n'avez pas de compte ? Inscrivez-vous"}
                 </Link>
               </Grid>
