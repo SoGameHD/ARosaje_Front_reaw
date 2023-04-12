@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import { authenticate } from '../../../services/auth.service';
+import { authenticate, checkToken } from '../../../services/auth.service';
 
 const UserLogin = () => {
   const navigate = useNavigate();
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isValid = checkToken();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -15,7 +17,6 @@ const UserLogin = () => {
     if(data.get('email') != "" && data.get('password') != "") {
       authenticate(data).then(response => {
         window.location.reload()
-        navigate("/");
         })
         .catch(error => {
           console.log(error);
@@ -27,6 +28,27 @@ const UserLogin = () => {
     }
     
   };
+
+  useEffect(() => {
+    // Vérifiez si l'utilisateur est connecté ici
+    const loggedIn = checkLoginStatus();
+    setIsAuthenticated(loggedIn);
+  }, []);
+
+  function checkLoginStatus() {
+    // Vérifiez les informations d'authentification de l'utilisateur ici
+    // Si l'utilisateur est connecté, renvoyez true
+    // Sinon, renvoyez false
+    if (isValid === true) {
+      return true
+    } else {
+      return false;
+    }
+  }
+
+  if (isAuthenticated === true) {
+    navigate("/");
+  }
 
   return (
     <>

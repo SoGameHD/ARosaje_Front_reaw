@@ -5,7 +5,8 @@ import Menu from '../Menu/Menu'
 import BtnCreatePlant from '../PlantsCreate/BtnCreatePlant';
 import Navigator from '../navigation/Navigator';
 // import PlantPhotoTaker from '../Photo/Photo'
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
+import { checkToken } from '../../services/auth.service';
 
 const Home = () => {
   const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 600 });
@@ -13,12 +14,29 @@ const Home = () => {
   const location = useLocation();
   // Vérifier si la route courante correspond à l'une des trois routes spécifiées
   const isCurrentRouteValid = ['/', '/mes-plantes', '/plantes-gardees'].includes(location.pathname);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isValid = checkToken();
 
-
+  useEffect(() => {
+    // Vérifiez si l'utilisateur est connecté ici
+    const loggedIn = checkLoginStatus();
+    setIsAuthenticated(loggedIn);
+  }, []);
 
   useEffect(() => {
     setIsLargeScreen(isDesktopOrLaptop);
   }, [isDesktopOrLaptop]);
+
+  function checkLoginStatus() {
+    // Vérifiez les informations d'authentification de l'utilisateur ici
+    // Si l'utilisateur est connecté, renvoyez true
+    // Sinon, renvoyez false
+    if (isValid === true) {
+      return true
+    } else {
+      return false;
+    }
+  }
 
   return (
     <Box>
@@ -30,7 +48,9 @@ const Home = () => {
         p: 3,
         }}
       >
-        <Menu />
+        {isAuthenticated && (
+          <Menu />
+        )}
         <Navigator />
         {isCurrentRouteValid && (
           <BtnCreatePlant />
