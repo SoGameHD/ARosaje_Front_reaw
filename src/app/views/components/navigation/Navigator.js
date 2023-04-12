@@ -42,7 +42,7 @@ const Navigator = () => {
       <Route path='mes-plantes' element={isAuthenticated ? <UserPlantsView /> : <Navigate to="/connexion" />} />
       <Route path='mes-plantes/:id' element={isAuthenticated ? <GeneralShowView /> : <Navigate to="/connexion" />} />
       <Route path='plantes-gardees' element={isAuthenticated ? <PlantsBeingKeptView /> : <Navigate to="/connexion" />} />
-      <Route path='plantes-gardees/:id' element={isAuthenticated ? <CardPlantsBeingKept /> : <Navigate to="/connexion" />} />
+      <Route path='plantes-gardees/:id' element={isAuthenticated ? <GeneralShowPlantsBeingKept /> : <Navigate to="/connexion" />} />
       <Route path='ajouter-une-plante' element={isAuthenticated ? <PlantsCreate /> : <Navigate to="/connexion" />} />
       <Route path='inscription' element={<UserRegister />} />
       <Route path='connexion' element={<UserLogin />} />
