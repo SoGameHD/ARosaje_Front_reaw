@@ -48,7 +48,7 @@ const getCurrentUser = async () => {
   try {
     const email = getCurrentUserEmail();
     if(email != false) {
-      const response = await api.get(`/getUser?email=`+ email)
+      const response = await api.get(`/user?email=`+ email)
       return response.data
     } else {
       return false
