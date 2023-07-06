@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Grid, Typography } from "@mui/material"
+import { Box, Container, Grid, Typography } from "@mui/material"
 import CardPlantsToKeep from "../PlantsToKeep/CardPlantsToKeep";
 import DashboardCard from "./DashboardCard";
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
@@ -23,7 +23,6 @@ const Dashboard = () => {
 
   return (
     <>
-    <CssBaseline />
     <Container maxWidth="xl">
       <Box>
         <Typography gutterBottom variant="h3">
