@@ -12,7 +12,7 @@ const getUsersPlants = async () => {
 
 const getPlants = async () => {
   try {
-    const response = await instance.get('/getPlants')
+    const response = await instance.get('/plants')
     return response.data
   } catch (error) {
     console.error(error)
@@ -21,7 +21,7 @@ const getPlants = async () => {
 
 const getPlantById = async (id) => {
   try {
-    const response = await instance.get(`/getPlant/${id}`)
+    const response = await instance.get(`plant/${id}`)
     return response.data
   } catch (error) {
     console.error(error)
@@ -39,7 +39,7 @@ const getPhotoById = async (id) => {
 
 const postPlant = async (formData) => {
   try {
-    const response = await instance.post(`addPlant`, formData, {
+    const response = await instance.post(`plant`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -52,7 +52,7 @@ const postPlant = async (formData) => {
 
 const postAdvice = async (idPlant, data) => {
   try {
-    const response = await instance.post(`/addAdvice?plantId=${idPlant}&botanistId=-1`, data, {
+    const response = await instance.post(`/advice?plantId=${idPlant}&botanistId=-1`, data, {
       headers: {
         'Content-Type': 'application/json'
       }})
@@ -64,7 +64,7 @@ const postAdvice = async (idPlant, data) => {
 
 const deletePlant = async (idPlant) => {
   try {
-    const response = await instance.delete("deletePlant/" + idPlant)
+    const response = await instance.delete("plant/" + idPlant)
     return response.data
   } catch (error) {
     console.error(error)

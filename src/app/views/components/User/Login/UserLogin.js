@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
@@ -31,21 +30,19 @@ const UserLogin = () => {
   };
 
   useEffect(() => {
-    // Vérifiez si l'utilisateur est connecté ici
+		const checkLoginStatus = () => {
+			// Vérifiez les informations d'authentification de l'utilisateur ici
+			// Si l'utilisateur est connecté, renvoyez true
+			// Sinon, renvoyez false
+			if (isValid === true) {
+				return true
+			} else {
+				return false;
+			}
+		}
     const loggedIn = checkLoginStatus();
     setIsAuthenticated(loggedIn);
-  }, []);
-
-  const checkLoginStatus = () => {
-    // Vérifiez les informations d'authentification de l'utilisateur ici
-    // Si l'utilisateur est connecté, renvoyez true
-    // Sinon, renvoyez false
-    if (isValid === true) {
-      return true
-    } else {
-      return false;
-    }
-  }
+  }, [isValid]);
 
   if (isAuthenticated === true) {
     navigate("/");

@@ -8,6 +8,7 @@ import Navigator from '../navigation/Navigator';
 // import PlantPhotoTaker from '../Photo/Photo'
 import { useLocation } from "react-router-dom"
 import { checkToken } from '../../services/auth.service';
+import { getPlants } from '../../services/Api';
 
 const Home = () => {
   const isDesktopOrLaptop = useMediaQuery({ minDeviceWidth: 600 });
@@ -38,7 +39,7 @@ const Home = () => {
       return false;
     }
   }
-
+	console.log('test', getPlants())
   return (
     <Box>
       <CssBaseline />

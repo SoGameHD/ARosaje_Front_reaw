@@ -6,8 +6,11 @@ import myPlantImage from '../../../images/mes-plantes.avif'
 import plantKept from '../../../images/plantes-gardees.avif'
 import { useEffect, useState } from "react";
 import { getPlants } from "../../services/Api";
+import { useLang } from "../../../contexts/lang-context";
 
 const Dashboard = () => {
+	const lg = useLang('common.root')
+
   const [plants, setPlants] = useState([])
   
   useEffect(() => {
@@ -24,7 +27,7 @@ const Dashboard = () => {
     <Container maxWidth="xl">
       <Box>
         <Typography gutterBottom variant="h3">
-          ARosa-je
+          {lg('appName')}
         </Typography>
       </Box>
       <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12 }}>
