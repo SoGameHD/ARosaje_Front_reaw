@@ -3,7 +3,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import CardUserKeptPlants from "./CardUserKeptPlants";
 
 const UserKeptPlantsList = (props) => {
-  const { plant } = props;
   return (
     <>
     <CssBaseline />

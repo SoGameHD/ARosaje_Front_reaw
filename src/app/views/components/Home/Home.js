@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Box, CssBaseline } from '@mui/material'

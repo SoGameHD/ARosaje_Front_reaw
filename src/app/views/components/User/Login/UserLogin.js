@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
@@ -14,7 +15,7 @@ const UserLogin = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
   
-    if(data.get('email') != "" && data.get('password') != "") {
+    if(data.get('email') !== "" && data.get('password') !== "") {
       authenticate(data).then(response => {
         window.location.reload()
         })
@@ -23,8 +24,8 @@ const UserLogin = () => {
           
         });
     } else {
-      setEmailError(data.get('email') == "" ? true : false)
-      setPasswordError(data.get('password') == "" ? true : false)
+      setEmailError(data.get('email') === "" ? true : false)
+      setPasswordError(data.get('password') === "" ? true : false)
     }
     
   };
@@ -35,7 +36,7 @@ const UserLogin = () => {
     setIsAuthenticated(loggedIn);
   }, []);
 
-  function checkLoginStatus() {
+  const checkLoginStatus = () => {
     // Vérifiez les informations d'authentification de l'utilisateur ici
     // Si l'utilisateur est connecté, renvoyez true
     // Sinon, renvoyez false

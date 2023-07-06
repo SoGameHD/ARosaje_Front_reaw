@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
-import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, Checkbox} from '@mui/material';
+import React, { useState } from 'react';
+import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
 import { register } from '../../../services/auth.service';
 
 const UserRegister = () => {
@@ -18,7 +17,7 @@ const UserRegister = () => {
   
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if(data.get('firstname') != "" && data.get('lastname') != "" && data.get('email') != "" && data.get('password') != "" && data.get('type') != "") {
+    if(data.get('firstname') !== "" && data.get('lastname') !== "" && data.get('email') !== "" && data.get('password') !== "" && data.get('type') !== "") {
       register(data).then(response => {
         navigate("/connexion");
         })
@@ -27,11 +26,11 @@ const UserRegister = () => {
           
         });
     } else {
-      setEmailError(data.get('email') == "" ? true : false)
-      setPasswordError(data.get('password') == "" ? true : false)
-      setfirstnameError(data.get('firstname') == "" ? true : false)
-      setlastnameError(data.get('lastname') == "" ? true : false)
-      setType(data.get('type') == "" ? true : false)
+      setEmailError(data.get('email') === "" ? true : false)
+      setPasswordError(data.get('password') === "" ? true : false)
+      setfirstnameError(data.get('firstname') === "" ? true : false)
+      setlastnameError(data.get('lastname') === "" ? true : false)
+      setType(data.get('type') === "" ? true : false)
     }
   };
 

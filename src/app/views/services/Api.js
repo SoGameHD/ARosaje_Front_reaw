@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import instance from './axiosConfig';
 
 const getUsersPlants = async () => {
