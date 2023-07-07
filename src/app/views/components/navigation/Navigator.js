@@ -12,6 +12,8 @@ import UserProfil from '../User/Profil/UserProfil'
 import { useEffect, useState } from 'react'
 import { checkToken } from '../../services/auth.service'
 import Cgu from '../CGU/cgu'
+import ConversationList from '../Conversation/ConversationList'
+import Conversation from '../Conversation/Conversation'
 
 
 const Navigator = () => {
@@ -48,6 +50,8 @@ const Navigator = () => {
       <Route path='connexion' element={<UserLogin />} />
       <Route path='profil' element={isAuthenticated ? <UserProfil /> : <Navigate to="/connexion" />} />
       <Route path='traitement-des-données' element={<Cgu />} />
+      <Route path='conversation' element={<ConversationList />} />
+      <Route path='conversation/:id' element={<Conversation />} />
     </Routes>
   )
 }

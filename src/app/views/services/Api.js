@@ -80,6 +80,42 @@ const deleteUser = async (data) => {
   }
 }
 
+const sendMessage = async (conv_id, user_id, content) => {
+  try {
+    const response = await instance.post(`message?conv=${conv_id}&user=${user_id}&content=${content}`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const createConversation = async (name, sender_id, recept_id, content) => {
+  try {
+    const response = await instance.post(`/conversation?name=${name}&sender=${sender_id}&recept=${recept_id}&content=test`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const getMessage = async (conv_id) => {
+  try {
+    const response = await instance.get(`message?conv_id=${conv_id}`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const getConversation = async (user_id) => {
+  try {
+    const response = await instance.get(`conversation?user_id=${user_id}`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
   getPlants,
   getPlantById,
@@ -88,4 +124,9 @@ export {
   postAdvice,
   deletePlant,
   deleteUser,
+  sendMessage,
+  createConversation,
+  getMessage,
+  getConversation
+
 }
