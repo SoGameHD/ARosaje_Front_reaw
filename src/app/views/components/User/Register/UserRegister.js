@@ -57,20 +57,20 @@ const UserRegister = () => {
               margin="normal"
               required
               fullWidth
-              name="firstname"
+              name="lastname"
               label="Nom"
               type="text"
-              id="firstname"
+              id="lastname"
             />
             <TextField
               error = {lastnameError}
               margin="normal"
               required
               fullWidth
-              name="lastname"
+              name="firstname"
               label="Prénom"
               type="text"
-              id="lastname"
+              id="firstname"
             />
             <TextField
               error = {emailError}
