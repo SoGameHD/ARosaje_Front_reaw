@@ -116,6 +116,15 @@ const getConversation = async (user_id) => {
   }
 }
 
+const getConversationById = async (conv_id, user_id) => {
+  try {
+    const response = await instance.get(`conversation/${conv_id}?user_id=${user_id}`)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
   getPlants,
   getPlantById,
@@ -127,6 +136,7 @@ export {
   sendMessage,
   createConversation,
   getMessage,
-  getConversation
+  getConversation,
+  getConversationById
 
 }

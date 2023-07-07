@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Box, Typography, Card, CardContent, CardActions, TextField, Skeleton } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getMessage, sendMessage } from '../../services/Api';
-import { getCurrentUser } from "../../services/auth.service";
+import { sendMessage, getConversationById } from '../../services/Api';
+import { getCurrentUser } from '../../services/auth.service';
 
 const Conversation = () => {
   const [message, setMessage] = useState('');
@@ -17,28 +17,54 @@ const Conversation = () => {
       try {
         const currentUser = await getCurrentUser();
         setUser(currentUser.id);
-
-        const messages = await getMessage(currentUser.id);
-        setConversation(messages);
-        setIsLoading(false);
       } catch (error) {
         console.log(error);
-        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchConversation = async () => {
+      try {
+        if (user) {
+          console.log(user)
+          const messages = await getConversationById(id, user);
+          setConversation(messages);
+          console.log(messages)
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchConversation();
+  }, [user, id]);
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      try {
+        const updatedMessages = await getConversationById(id, user);
+        setConversation(updatedMessages);
+      } catch (error) {
+        console.log(error);
+      }
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [id, user]);
+
   const handleSendMessage = () => {
     if (message.trim() !== '') {
-      //const newMessage = { id: Date.now(), sender: 'user', content: message };
-      sendMessage(id, user, message).then(response => {
-        getMessage(user).then(res => {
+      sendMessage(id, user, message).then((response) => {
+        getConversationById(id, user).then((res) => {
           setConversation(res);
-        })
-      })
-  
+        });
+      });
+
       setMessage('');
     }
   };
@@ -52,14 +78,10 @@ const Conversation = () => {
           <Skeleton variant="rectangular" height={100} sx={{ mb: 1 }} />
         </Box>
         <CardActions>
-          <TextField
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type a message..."
-            fullWidth
-            disabled
-          />
-          <Button variant="contained" disabled>Send</Button>
+          <TextField value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Type a message..." fullWidth disabled />
+          <Button variant="contained" disabled>
+            Send
+          </Button>
         </CardActions>
       </Box>
     );
@@ -67,17 +89,18 @@ const Conversation = () => {
 
   return (
     <>
-      <Box display="flex" flexDirection="column" height="100%">
+      <Box display="flex" flexDirection="column" height="100%" border="1px solid black" borderRadius="4px" p={2}>
+        <Typography variant="h6" color="text.secondary" mb={2}>{ conversation?.name }</Typography> {/* Ajout du nom de la conversation */}
         <Box flex="1" overflow="auto">
-          {conversation.map((message) => (
+        {conversation?.message
+          ?.sort((a, b) => new Date(a.date) - new Date(b.date))
+          ?.map((message) => (
             <Card key={message.id} variant="outlined" sx={{ mb: 1 }}>
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  {message.user.id === user ? (
-                    <Box textAlign="right">{message.message}</Box>
-                  ) : (
-                    <Box textAlign="left">{message.message}</Box>
-                  )}
+                  <Box textAlign={message.user.id === user ? "right" : "left"}>
+                    {message.message}
+                  </Box>
                 </Typography>
               </CardContent>
             </Card>
@@ -87,10 +110,10 @@ const Conversation = () => {
           <TextField
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type a message..."
+            placeholder="Ecrire un message..."
             fullWidth
           />
-          <Button variant="contained" onClick={handleSendMessage}>Send</Button>
+          <Button variant="contained" onClick={handleSendMessage}>Envoyer</Button>
         </CardActions>
       </Box>
     </>
