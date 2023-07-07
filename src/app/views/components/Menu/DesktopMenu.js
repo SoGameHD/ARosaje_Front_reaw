@@ -61,7 +61,7 @@ const DesktopMenu = () => {
       backgroundColor: '#EBEFE2',
     } }}>
       <List sx={{  py: 5 }}>
-        {['Accueil', 'Mes Plantes', 'Plantes gardées', 'Profil'].map((text, index) => (
+        {['Accueil', 'Mes Plantes', 'Plantes gardées', 'Profil', 'Conversation'].map((text, index) => (
           <ListItem key={text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               sx={{
@@ -154,7 +154,7 @@ const DesktopMenu = () => {
                     gardées
                   </Typography>
                 </Button>
-                : 
+                : index === 3 ?
                 <Button
                   onClick={()=>navigate("/profil")}
                   sx={{ 
@@ -173,6 +173,27 @@ const DesktopMenu = () => {
                 }}>
                   <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
                     Profil
+                  </Typography>
+                </Button>
+                :
+                <Button
+                  onClick={()=>navigate("/conversation")}
+                  sx={{ 
+                    "& .MuiButton-startIcon": { margin: "0px" },
+                    textTransform: 'unset !important',
+                    color: '#386A20',
+                    ':hover': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}
+                  startIcon={<AccountCircleIcon fontSize="small" sx={{ color: '#43493E' }} />}
+                  variant="text"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}>
+                  <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
+                    Conversation
                   </Typography>
                 </Button>
                 }

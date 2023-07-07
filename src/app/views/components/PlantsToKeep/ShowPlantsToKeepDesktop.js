@@ -4,11 +4,18 @@ import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
 import { Box, Button, Card, CardContent, CardMedia, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, List, ListItem, ListItemText, TextField, Typography } from "@mui/material"
 import React, { useState } from "react";
 import { Form, Field } from 'react-final-form';
-import { postAdvice } from '../../services/Api';
+import { postAdvice, createConversation } from '../../services/Api';
+import {getCurrentUser} from '../../services/auth.service';
 
 const ShowPlantsToKeepDesktop = (props) => {
   const [open, setOpen] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
   const { plant } = props
+  const [user, setUser] = useState(null)
+
+  getCurrentUser().then(response => {
+    setUser(response.id)
+  })
 
   function post(values) {
     const data = {
@@ -24,6 +31,17 @@ const ShowPlantsToKeepDesktop = (props) => {
       setOpen(false)
       window.location.reload()
   }
+
+  function postMessage() {
+
+    createConversation(plant.title, user, plant.owner_user.id, "test").then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    })
+    setOpenMessage(false)
+      
+  }
   
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,6 +49,14 @@ const ShowPlantsToKeepDesktop = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickOpenMessage = () => {
+    setOpenMessage(true);
+  };
+
+  const handleCloseMessage = () => {
+    setOpenMessage(false);
   };
 
   const pathPlant = 'http://' + plant.pictures[0]
@@ -109,6 +135,21 @@ const ShowPlantsToKeepDesktop = (props) => {
         }}>
           Ajouter un conseil
         </Button>
+        <Button
+          size="large"
+          variant="contained"
+          onClick={handleClickOpenMessage} 
+          style={{
+            position: 'fixed',
+            right: '25%',
+            bottom: '8%',
+            borderRadius: 16,
+            background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
+            color: '#000000',
+            elevation: 5,
+        }}>
+          Envoyer un message
+        </Button>
       </Container>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ textAlign: 'center', pb: 0 }}>
@@ -123,8 +164,25 @@ const ShowPlantsToKeepDesktop = (props) => {
                 <Field name="message" component="textarea" rows={6} placeholder="Conseil" />
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
+                <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annuler</Button>
                 <Button startIcon={<Add />} sx={{ color: '#386A20' }} type="submit">Ajouter</Button>
+              </DialogActions>
+            </form>
+          )}
+        />
+      </Dialog>
+      <Dialog open={openMessage} onClose={handleCloseMessage}>
+        <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>Envoyer un message</DialogTitle>
+        <Form
+          onSubmit={postMessage}
+          render={({ handleSubmitMessage }) => (
+            <form onSubmit={handleSubmitMessage}>
+              <DialogContent sx={{ pt: '20px !important', width: 420 }}>
+                <Field name="message" component="textarea" rows={6} placeholder="Message" />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleCloseMessage} sx={{ color: '#386A20' }}>Annuler</Button>
+                <Button onClick={postMessage} startIcon={<Add />} sx={{ color: '#386A20' }} >Envoyer</Button>
               </DialogActions>
             </form>
           )}
