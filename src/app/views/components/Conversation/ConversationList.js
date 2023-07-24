@@ -5,7 +5,7 @@ import { getCurrentUser } from "../../services/auth.service";
 import { getConversation } from "../../services/Api";
 
 const ConversationList = () => {
-  const [conversations, setConversations] = useState(null);
+  const [conversations, setConversations] = useState();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate(); // Utilisation du hook useNavigate pour la redirection
@@ -17,7 +17,9 @@ const ConversationList = () => {
         setUser(currentUser.id);
 
         const conversationData = await getConversation(currentUser.id);
-        setConversations(conversationData);
+        if(conversationData != null & conversationData != undefined & conversationData != "" & conversationData.length != 0) {
+          setConversations(conversationData);
+        }
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -61,7 +63,7 @@ const ConversationList = () => {
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <List style={{ flex: 1, width: "100%" }}>
-        {conversations.map((conversation) => (
+        {conversations?.map((conversation) => (
           <React.Fragment key={conversation.id}>
             <ListItem button onClick={() => handleConversationClick(conversation.id)}>
               <ListItemText
