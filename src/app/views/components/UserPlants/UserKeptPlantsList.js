@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Grid, CssBaseline } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import CardUserKeptPlants from "./CardUserKeptPlants";

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useParams } from 'react-router-dom';
@@ -18,7 +17,7 @@ const GeneralShowPlantsToKeep = () => {
       setPlant(data)
     }
     getData()
-  }, [])
+  }, [params.id])
 
   useEffect(() => {
     setIsLargeScreen(isDesktopOrLaptop);

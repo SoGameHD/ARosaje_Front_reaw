@@ -17,7 +17,7 @@ const ConversationList = () => {
         setUser(currentUser.id);
 
         const conversationData = await getConversation(currentUser.id);
-        if(conversationData != null & conversationData != undefined & conversationData != "" & conversationData.length != 0) {
+        if(conversationData !== null & conversationData !== undefined & conversationData !== "" & conversationData.length !== 0) {
           setConversations(conversationData);
         }
         setIsLoading(false);
@@ -34,7 +34,7 @@ const ConversationList = () => {
     return () => {
       clearInterval(interval); // Nettoyer l'intervalle lors du démontage du composant
     };
-  }, []);
+  }, [user]);
 
   const handleConversationClick = (conversationId) => {
     navigate(`/conversation/${conversationId}`); // Redirection vers l'URL spécifique de la conversation

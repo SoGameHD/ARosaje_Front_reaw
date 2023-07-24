@@ -22,20 +22,9 @@ const Navigator = () => {
 
   useEffect(() => {
     // Vérifiez si l'utilisateur est connecté ici
-    const loggedIn = checkLoginStatus();
+    const loggedIn = isValid === true ? true : false
     setIsAuthenticated(loggedIn);
-  }, []);
-
-  function checkLoginStatus() {
-    // Vérifiez les informations d'authentification de l'utilisateur ici
-    // Si l'utilisateur est connecté, renvoyez true
-    // Sinon, renvoyez false
-    if (isValid === true) {
-      return true
-    } else {
-      return false;
-    }
-  }
+  }, [isValid]);
 
   return (
     <Routes>

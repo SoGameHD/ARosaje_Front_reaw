@@ -47,7 +47,7 @@ const logout = async () => {
 const getCurrentUser = async () => {
   try {
     const email = getCurrentUserEmail();
-    if(email != false) {
+    if(email !== false) {
       const response = await api.get(`/user?email=`+ email)
       return response.data
     } else {

@@ -22,7 +22,7 @@ const GeneralShowView = () => {
       setPlant(data)
     }
     getData()
-  }, [])
+  }, [params.id])
 
   return (
     <>

@@ -14,7 +14,7 @@ const UserLogin = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
   
-    if(data.get('email') != "" && data.get('password') != "") {
+    if(data.get('email') !== "" && data.get('password') !== "") {
       authenticate(data).then(response => {
         window.location.reload()
         })
@@ -23,28 +23,17 @@ const UserLogin = () => {
           
         });
     } else {
-      setEmailError(data.get('email') == "" ? true : false)
-      setPasswordError(data.get('password') == "" ? true : false)
+      setEmailError(data.get('email') === "" ? true : false)
+      setPasswordError(data.get('password') === "" ? true : false)
     }
     
   };
 
   useEffect(() => {
     // Vérifiez si l'utilisateur est connecté ici
-    const loggedIn = checkLoginStatus();
+    const loggedIn = isValid === true ? true : false;
     setIsAuthenticated(loggedIn);
-  }, []);
-
-  function checkLoginStatus() {
-    // Vérifiez les informations d'authentification de l'utilisateur ici
-    // Si l'utilisateur est connecté, renvoyez true
-    // Sinon, renvoyez false
-    if (isValid === true) {
-      return true
-    } else {
-      return false;
-    }
-  }
+  }, [isValid])
 
   if (isAuthenticated === true) {
     navigate("/");

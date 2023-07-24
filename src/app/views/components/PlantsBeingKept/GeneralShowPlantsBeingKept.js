@@ -18,7 +18,7 @@ const GeneralShowPlantsToKeep = () => {
       setPlant(data)
     }
     getData()
-  }, [])
+  }, [params.id])
 
   useEffect(() => {
     setIsLargeScreen(isDesktopOrLaptop);
