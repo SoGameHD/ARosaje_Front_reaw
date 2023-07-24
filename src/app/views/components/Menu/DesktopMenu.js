@@ -4,15 +4,16 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
-import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
-import LogoutIcon from '@mui/icons-material/Logout';
-import GppGoodIcon from '@mui/icons-material/GppGood';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import YardOutlinedIcon from '@mui/icons-material/YardOutlined'
+import LogoutIcon from '@mui/icons-material/Logout'
+import GppGoodIcon from '@mui/icons-material/GppGood'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import PlantIcon from './svg/PlantIcon'
 import HomeIcon from './svg/HomeIcon'
 import { Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../services/auth.service'
+import { EmailRounded, MailRounded } from '@mui/icons-material'
 
 const drawerWidth = 240
 
@@ -54,13 +55,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 // Composant Menu Exporté
 const DesktopMenu = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
-    <Drawer variant="permanent" sx={{ width: "88px", }} PaperProps={{ sx: {
-      backgroundColor: '#EBEFE2',
-    } }}>
-      <List sx={{  py: 5 }}>
+    <Drawer
+      variant="permanent"
+      sx={{ width: '88px' }}
+      PaperProps={{
+        sx: {
+          backgroundColor: '#EBEFE2'
+        }
+      }}
+    >
+      <List sx={{ py: 5 }}>
         {['Accueil', 'Mes Plantes', 'Plantes gardées', 'Profil', 'Conversation'].map((text, index) => (
           <ListItem key={text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton
@@ -71,7 +78,7 @@ const DesktopMenu = () => {
                 mb: 4,
                 ':hover': {
                   backgroundColor: 'transparent',
-                  color: 'transparent',
+                  color: 'transparent'
                 }
               }}
             >
@@ -79,178 +86,162 @@ const DesktopMenu = () => {
                 sx={{
                   minWidth: 0,
                   mr: 'auto',
-                  justifyContent: 'center',
+                  justifyContent: 'center'
                 }}
               >
-                {
-                index === 0 ?
-                <Button
-                  onClick={()=>navigate("/")}
-                  sx={{ 
-                    "& .MuiButton-startIcon": { margin: "0px" },
-                    textTransform: 'unset !important',
-                    color: '#386A20',
-                    ':hover': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}
-                  startIcon={<HomeIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                  variant="text"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}>
-                  <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-                    Accueil
-                  </Typography>
-                </Button>
-                : index === 1 ? 
-                <Button
-                  onClick={()=>navigate("/mes-plantes")}
-                  sx={{ 
-                    "& .MuiButton-startIcon": { margin: "0px" },
-                    textTransform: 'unset !important',
-                    color: '#386A20',
-                    ':hover': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}
-                  startIcon={<PlantIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                  variant="text"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-                    Mes
-                  </Typography>
-                  <Typography sx={{ fontSize: '12px', color: '#43493E' }}>
-                    Plantes
-                  </Typography>
-                </Button>
-                : index === 2 ?
-                <Button
-                  onClick={()=>navigate("/plantes-gardees")}
-                  sx={{ 
-                    "& .MuiButton-startIcon": { margin: "0px" },
-                    textTransform: 'unset !important',
-                    color: '#386A20',
-                    ':hover': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}
-                  startIcon={<YardOutlinedIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                  variant="text"
-                  // onClick={handleClickOpen} 
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}>
-                  <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-                    Plantes
-                  </Typography>
-                  <Typography sx={{ fontSize: '12px', color: '#43493E' }}>
-                    gardées
-                  </Typography>
-                </Button>
-                : index === 3 ?
-                <Button
-                  onClick={()=>navigate("/profil")}
-                  sx={{ 
-                    "& .MuiButton-startIcon": { margin: "0px" },
-                    textTransform: 'unset !important',
-                    color: '#386A20',
-                    ':hover': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}
-                  startIcon={<AccountCircleIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                  variant="text"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}>
-                  <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-                    Profil
-                  </Typography>
-                </Button>
-                :
-                <Button
-                  onClick={()=>navigate("/conversation")}
-                  sx={{ 
-                    "& .MuiButton-startIcon": { margin: "0px" },
-                    textTransform: 'unset !important',
-                    color: '#386A20',
-                    ':hover': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}
-                  startIcon={<AccountCircleIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                  variant="text"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}>
-                  <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-                    Conversation
-                  </Typography>
-                </Button>
-                }
+                {index === 0 ? (
+                  <Button
+                    onClick={() => navigate('/')}
+                    sx={{
+                      '& .MuiButton-startIcon': { margin: '0px' },
+                      textTransform: 'unset !important',
+                      color: '#386A20',
+                      ':hover': {
+                        backgroundColor: 'transparent'
+                      }
+                    }}
+                    startIcon={<HomeIcon fontSize="small" sx={{ color: '#43493E' }} />}
+                    variant="text"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Accueil</Typography>
+                  </Button>
+                ) : index === 1 ? (
+                  <Button
+                    onClick={() => navigate('/mes-plantes')}
+                    sx={{
+                      '& .MuiButton-startIcon': { margin: '0px' },
+                      textTransform: 'unset !important',
+                      color: '#386A20',
+                      ':hover': {
+                        backgroundColor: 'transparent'
+                      }
+                    }}
+                    startIcon={<PlantIcon fontSize="small" sx={{ color: '#43493E' }} />}
+                    variant="text"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Mes</Typography>
+                    <Typography sx={{ fontSize: '12px', color: '#43493E' }}>Plantes</Typography>
+                  </Button>
+                ) : index === 2 ? (
+                  <Button
+                    onClick={() => navigate('/plantes-gardees')}
+                    sx={{
+                      '& .MuiButton-startIcon': { margin: '0px' },
+                      textTransform: 'unset !important',
+                      color: '#386A20',
+                      ':hover': {
+                        backgroundColor: 'transparent'
+                      }
+                    }}
+                    startIcon={<YardOutlinedIcon fontSize="small" sx={{ color: '#43493E' }} />}
+                    variant="text"
+                    // onClick={handleClickOpen}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Plantes</Typography>
+                    <Typography sx={{ fontSize: '12px', color: '#43493E' }}>gardées</Typography>
+                  </Button>
+                ) : index === 3 ? (
+                  <Button
+                    onClick={() => navigate('/profil')}
+                    sx={{
+                      '& .MuiButton-startIcon': { margin: '0px' },
+                      textTransform: 'unset !important',
+                      color: '#386A20',
+                      ':hover': {
+                        backgroundColor: 'transparent'
+                      }
+                    }}
+                    startIcon={<AccountCircleIcon fontSize="small" sx={{ color: '#43493E' }} />}
+                    variant="text"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Profil</Typography>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => navigate('/conversation')}
+                    sx={{
+                      '& .MuiButton-startIcon': { margin: '0px' },
+                      textTransform: 'unset !important',
+                      color: '#386A20',
+                      ':hover': {
+                        backgroundColor: 'transparent'
+                      }
+                    }}
+                    startIcon={<EmailRounded fontSize="small" sx={{ color: '#43493E' }} />}
+                    variant="text"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Conversation</Typography>
+                  </Button>
+                )}
               </ListItemIcon>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <div style={{position: "fixed", bottom: '7%', textAlign: "center", paddingBottom: 10}}>
+      <div style={{ position: 'fixed', bottom: '7%', textAlign: 'center', paddingBottom: 10 }}>
         <Button
-          variant="text" 
+          variant="text"
           sx={{
             fontSize: '12px',
-            "& .MuiButton-startIcon": { margin: "0px" },
+            '& .MuiButton-startIcon': { margin: '0px' },
             textTransform: 'unset !important',
             color: '#43493E',
             ':hover': {
-              backgroundColor: 'transparent',
-            },
+              backgroundColor: 'transparent'
+            }
           }}
           style={{
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'column'
           }}
-          onClick={logout} 
+          onClick={logout}
           startIcon={<LogoutIcon />}
         >
-          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-            Déconnexion
-          </Typography>
+          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Déconnexion</Typography>
         </Button>
       </div>
-      <div style={{position: "fixed", bottom: 0, textAlign: "center", paddingBottom: 10, marginLeft: '8px'}}>
-        <Button 
-          variant="text" 
+      <div style={{ position: 'fixed', bottom: 0, textAlign: 'center', paddingBottom: 10, marginLeft: '8px' }}>
+        <Button
+          variant="text"
           sx={{
             fontSize: '12px',
             color: '#43493E',
-            "& .MuiButton-startIcon": { margin: "0px" },
+            '& .MuiButton-startIcon': { margin: '0px' },
             textTransform: 'unset !important',
             ':hover': {
-              backgroundColor: 'transparent',
-            },
-          }} 
-          onClick={()=>navigate("/traitement-des-données")} 
+              backgroundColor: 'transparent'
+            }
+          }}
+          onClick={() => navigate('/traitement-des-données')}
           startIcon={<GppGoodIcon />}
           style={{
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'column'
           }}
         >
-          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-            RGPD
-          </Typography>
+          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>RGPD</Typography>
         </Button>
       </div>
-      
     </Drawer>
   )
 }
