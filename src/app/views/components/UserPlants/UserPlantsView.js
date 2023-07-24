@@ -6,10 +6,12 @@ import { Check } from "@mui/icons-material"
 import SubtitleUserPlants from "./SubtitleUserPlants"
 import { useEffect, useState } from "react"
 import { getPlants } from "../../services/Api";
+import { useLang } from "../../../contexts/lang-context"
 
 function UserPlantsView() {
   const [isKeptPlants, setIsKeptPlants] = useState(false)
   const [plants, setPlants] = useState([])
+	const lgPlant = useLang('plant')
   
   useEffect(() => {
     const getData = async () => {
@@ -37,12 +39,12 @@ function UserPlantsView() {
             display: 'flex'
           }}
         >
-          <h1 className="titleUserPlants">Mes plantes</h1>
+          <h1 className="titleUserPlants">{lgPlant('myPlants')}</h1>
         </Container>
         {isKeptPlants ? (
-          <SubtitleUserPlants subtitle="Plantes actuellement gardées par des gardiens" />
+          <SubtitleUserPlants subtitle={lgPlant('currentlyKeptByJanitor')} />
         ) : (
-          <SubtitleUserPlants subtitle="Plantes en attente d'un gardien" />
+          <SubtitleUserPlants subtitle={lgPlant('plantWaitJanitor')} />
         )}
         <Grid
           container
@@ -79,7 +81,7 @@ function UserPlantsView() {
                 borderRadius: 100
               }}
             >
-              Gardées
+              {lgPlant('kept')}
             </Button>
           </Grid>
           <Grid
@@ -103,7 +105,7 @@ function UserPlantsView() {
                 borderRadius: 100
               }}
             >
-              Non gardées
+              {lgPlant('noKept')}
             </Button>
           </Grid>
         </Grid>

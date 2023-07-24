@@ -34,7 +34,7 @@ const ConversationList = () => {
     return () => {
       clearInterval(interval) // Nettoyer l'intervalle lors du démontage du composant
     }
-  }, [])
+  }, [user])
 
   const handleConversationClick = (conversationId) => {
     navigate(`/conversation/${conversationId}`) // Redirection vers l'URL spécifique de la conversation

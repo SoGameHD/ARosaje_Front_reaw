@@ -7,11 +7,15 @@ import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
 import { useNavigate } from "react-router-dom";
 import { Form, Field } from 'react-final-form';
 import { postAdvice } from "../../services/Api";
+import { useLang } from "../../../contexts/lang-context";
 
 const ShowPlantsToKeepMobile = (props) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { plant } = props
+	const lgCommon = useLang('common.root')
+	const lgPlant = useLang('plant')
+	const lgAdvice = useLang('advice')
 
   function post(values) {
     const data = {
@@ -61,10 +65,10 @@ const ShowPlantsToKeepMobile = (props) => {
         </Grid>
         <Grid item>
           <Typography variant="h4" gutterBottom>
-            Plantes à garder
+            {lgPlant('plantToKeep')}
           </Typography>
           <Typography variant="subtitle1" gutterBottom >
-            Plantes en attente d'un gardien
+            {lgPlant('plantWaitJanitor')}
           </Typography>
         </Grid>
       </Grid>
@@ -90,15 +94,15 @@ const ShowPlantsToKeepMobile = (props) => {
         <CardContent sx={{ flexGrow: 1 }}>
           <Box sx={{ mt: '5%' }}>
             <Typography variant="h5" gutterBottom>
-              Nom plante
+            	{lgPlant('plantName')}
             </Typography>
             <Typography variant="body1" gutterBottom>
-              Description de plante
+              {lgPlant('plantDescription')}
             </Typography>
           </Box>
           <Box sx={{ mt: '15%' }}>
             <Typography variant="h5" gutterBottom>
-              Conseils botaniste
+              {lgAdvice('botanistTips')}
             </Typography>
             <List>
               {plant.advices.map(advice => (
@@ -134,14 +138,14 @@ const ShowPlantsToKeepMobile = (props) => {
             },
           }}
         >
-          Ajouter un conseil
+          {lgAdvice('addAdvice')}
         </Button>
       </Box>
       <Dialog open={open} onClose={handleClose}>
       <DialogTitle sx={{ textAlign: 'center', pb: 0 }}>
         <AddCommentOutlinedIcon fontSize="large"/>
       </DialogTitle>
-      <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>Ajouter un conseil</DialogTitle>
+      <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>{lgAdvice('addAdvice')}</DialogTitle>
       <Form
           onSubmit={post}
           render={({ handleSubmit }) => (
@@ -150,8 +154,8 @@ const ShowPlantsToKeepMobile = (props) => {
                 <Field name="message" component="textarea" rows={6} placeholder="Conseil" />
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annulé</Button>
-                <Button startIcon={<Add />} sx={{ color: '#386A20' }} type="submit">Ajouter</Button>
+                <Button onClick={handleClose} sx={{ color: '#386A20' }}>{lgCommon('cancel')}</Button>
+                <Button startIcon={<Add />} sx={{ color: '#386A20' }} type="submit">{lgCommon('add')}</Button>
               </DialogActions>
             </form>
           )}

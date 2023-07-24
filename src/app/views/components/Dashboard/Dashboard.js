@@ -7,9 +7,12 @@ import plantKept from '../../../images/plantes-gardees.avif'
 import mailbox from '../../../images/messagerie.avif'
 import { useEffect, useState } from 'react'
 import { getPlants } from '../../services/Api'
+import { useLang } from '../../../contexts/lang-context'
 
 const Dashboard = () => {
   const [plants, setPlants] = useState([])
+	const lgCommon = useLang('common.root')
+	const lg = useLang('plant')
 
   useEffect(() => {
     const getData = async () => {
@@ -25,7 +28,7 @@ const Dashboard = () => {
       <Container maxWidth="xl">
         <Box>
           <Typography gutterBottom variant="h3">
-            ARosa-je
+            {lgCommon('appName')}
           </Typography>
         </Box>
         <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12 }}>
@@ -33,7 +36,7 @@ const Dashboard = () => {
             <DashboardCard
               path={'/mes-plantes'}
               title={'Mes plantes'}
-              description={"Retrouver les plantes que vous avez partagé. Vos plantes gardées et celles en attente d'un gardien."}
+              description={lg('myPlant')}
               image={myPlantImage}
             />
           </Grid>
@@ -41,7 +44,7 @@ const Dashboard = () => {
             <DashboardCard
               path={'/plantes-gardees'}
               title={'Plantes gardees'}
-              description={'Retrouver les plantes que vous gardées.'}
+              description={lg('findKeepPlant')}
               image={plantKept}
             />
           </Grid>
@@ -55,7 +58,7 @@ const Dashboard = () => {
           }}
         >
           <Typography gutterBottom variant="h3">
-            Plantes à garder
+            {lg('plantToKeep')}
           </Typography>
         </Box>
         <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12, lg: 12 }}>

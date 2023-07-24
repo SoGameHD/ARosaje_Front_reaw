@@ -4,15 +4,13 @@ export default {
     root: {
       appName: 'ARosa-je',
       logout: 'Déconnexion',
-      account: 'Compte',
-			conversation: 'Conversation',
+      profile: 'Profil',
+			message: 'Messagerie',
 			rgpd: 'RGPD',
+			cancel: 'Annulé',
+			add: 'Ajouter',
 			home: {
-				title: 'Accueil',
-				text: {
-					myPlant: 'Retrouver les plantes que vous avez partagé. Vos plantes gardées et celles en attente d\'un gardien.',
-					keepPlant:''
-				}
+				title: 'Accueil'
 			},
 			prefix: {
 				from: 'Du',
@@ -21,6 +19,7 @@ export default {
     }
 	},
 	plant: {
+		myPlants: 'Mes plantes',
 		plantToKeep: 'Plantes à garder',
 		myPlant: 'Retrouver les plantes que vous avez partagé. Vos plantes gardées et celles en attente d\'un gardien.',
 		findKeepPlant: 'Retrouver les plantes que vous gardées.',
@@ -30,11 +29,21 @@ export default {
 		orchidea: 'Orchidées',
 		currentPlant: 'Plantes dont j’ai ou j’ai eu la garde',
 		plantDescription: 'Description plante',
-		plantName: 'Nom plante'
+		plantName: 'Nom plante',
+		plantWaitJanitor : 'Plantes en attente d\'un gardien',
+		keptBy: 'Gardée par',
+		waitJanitor: 'En attente d\'un Gardien',
+		noKept: 'Non gardées',
+		currentlyKeptByJanitor: 'Plantes actuellement gardées par des gardiens',
+		kept: 'Gardées'
 	},
 	advice: {
 		title: 'Conseil',
+		addAdvice: 'Ajouter un conseil',
 		viewAdvice: 'Voir les conseils',
 		botanistTips: 'Conseils botaniste'
+	},
+	message: {
+		send: 'Envoyer un message'
 	}
 }

@@ -4,7 +4,6 @@ import { Box, CssBaseline } from '@mui/material'
 import Menu from '../Menu/Menu'
 import BtnCreatePlant from '../PlantsCreate/BtnCreatePlant';
 import Navigator from '../navigation/Navigator';
-// import PlantPhotoTaker from '../Photo/Photo'
 import { useLocation } from "react-router-dom"
 import { checkToken } from '../../services/auth.service';
 
@@ -45,7 +44,6 @@ const Home = () => {
           <BtnCreatePlant />
         )}
       </Box>
-      {/* <PlantPhotoTaker /> */}
     </Box>
   )
 }

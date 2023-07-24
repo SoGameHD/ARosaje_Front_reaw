@@ -4,12 +4,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link, useNavigate } from "react-router-dom";
+import { useLang } from "../../../contexts/lang-context";
 
 const CardPlantsToKeep = ({path, username, date1, date2, title, description, image, actionBtn1, iconBtnAction2, actionBtn2}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isKept, setIsKept] = useState(false);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+	const lg = useLang('common.root')
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,7 +58,7 @@ const CardPlantsToKeep = ({path, username, date1, date2, title, description, ima
             </IconButton>
           }
           title={username}
-          subheader={'Du ' + date1 + ' au ' + date2}
+          subheader={lg('prefix.from') + date1 + lg('prefix.at') + date2}
         />
         <Menu
           id="long-menu"

@@ -6,12 +6,17 @@ import React, { useState } from "react";
 import { Form, Field } from 'react-final-form';
 import { postAdvice, createConversation } from '../../services/Api';
 import {getCurrentUser} from '../../services/auth.service';
+import { useLang } from '../../../contexts/lang-context';
 
 const ShowPlantsToKeepDesktop = (props) => {
   const [open, setOpen] = useState(false);
   const [openMessage, setOpenMessage] = useState(false);
   const { plant } = props
   const [user, setUser] = useState(null)
+	const lgCommon = useLang('common.root')
+	const lgPlant = useLang('plant')
+	const lgAdvice = useLang('advice')
+	const lgMessage = useLang('message')
 
   getCurrentUser().then(response => {
     setUser(response.id)
@@ -71,10 +76,10 @@ const ShowPlantsToKeepDesktop = (props) => {
       <Container maxWidth="xl">
         <Box sx={{ ml: "4%" }}>
           <Typography variant="h1" sx={{ mb: "1%" }}>
-            Plantes à garder
+            {lgPlant('plantToKeep')}
           </Typography>
           <Typography variant="h4" gutterBottom >
-          Plantes en attente d'un gardien
+						{lgPlant('plantWaitJanitor')}
           </Typography>
         </Box>
         <Card sx={{ display: 'flex', borderRadius: "28px", margin: "3% 8% 3% 0", backgroundColor: "#EFF3E9" }}>
@@ -101,7 +106,7 @@ const ShowPlantsToKeepDesktop = (props) => {
                 {plant.title}
               </Typography>
               <Typography variant="subtitle2" color="text.secondary" component="div" sx={{ mt: "2%" }}>
-                Du {plant.start_date} Au {plant.end_date}
+                {lgCommon('prefix.from')} {plant.start_date} {lgCommon('prefix.at')} {plant.end_date}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div" sx={{ mt: "6%" }}>
                 {plant.description}
@@ -111,7 +116,7 @@ const ShowPlantsToKeepDesktop = (props) => {
         </Card>
         <Box sx={{ width: "85%" }}>
           <Typography variant="h2" sx={{ mb: "1%", ml: "4%" }}>
-            Conseils botaniste
+            {lgAdvice('botanistTips')}
           </Typography>
           <List>
             {plant.advices.map(advice => (
@@ -138,7 +143,7 @@ const ShowPlantsToKeepDesktop = (props) => {
             color: '#000000',
             elevation: 5,
         }}>
-          Ajouter un conseil
+          {lgAdvice('addAdvice')}
         </Button>
         <Button
           size="large"
@@ -153,14 +158,14 @@ const ShowPlantsToKeepDesktop = (props) => {
             color: '#000000',
             elevation: 5,
         }}>
-          Envoyer un message
+          {lgMessage('send')}
         </Button>
       </Container>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle sx={{ textAlign: 'center', pb: 0 }}>
           <AddCommentOutlinedIcon fontSize="large"/>
         </DialogTitle>
-        <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>Ajouter un conseil</DialogTitle>
+        <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>{lgAdvice('addAdvice')}</DialogTitle>
         <Form
           onSubmit={post}
           render={({ handleSubmit }) => (
@@ -169,15 +174,15 @@ const ShowPlantsToKeepDesktop = (props) => {
                 <Field name="message" component="textarea" rows={6} placeholder="Conseil" />
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose} sx={{ color: '#386A20' }}>Annuler</Button>
-                <Button startIcon={<Add />} sx={{ color: '#386A20' }} type="submit">Ajouter</Button>
+                <Button onClick={handleClose} sx={{ color: '#386A20' }}>{lgCommon('cancel')}</Button>
+                <Button startIcon={<Add />} sx={{ color: '#386A20' }} type="submit">{lgCommon('add')}</Button>
               </DialogActions>
             </form>
           )}
         />
       </Dialog>
       <Dialog open={openMessage} onClose={handleCloseMessage}>
-        <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>Envoyer un message</DialogTitle>
+        <DialogTitle sx={{ textAlign: 'center', pt: 0 }}>{lgMessage('send')}</DialogTitle>
         <Form
           onSubmit={postMessage}
           render={({ handleSubmitMessage }) => (
@@ -186,8 +191,8 @@ const ShowPlantsToKeepDesktop = (props) => {
                 <Field name="message" component="textarea" rows={6} placeholder="Message" />
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleCloseMessage} sx={{ color: '#386A20' }}>Annuler</Button>
-                <Button type="submit" startIcon={<Add />} sx={{ color: '#386A20' }} >Envoyer</Button>
+                <Button onClick={handleCloseMessage} sx={{ color: '#386A20' }}>{lgCommon('cancel')}</Button>
+                <Button type="submit" startIcon={<Add />} sx={{ color: '#386A20' }}>{lgCommon('add')}</Button>
               </DialogActions>
             </form>
           )}

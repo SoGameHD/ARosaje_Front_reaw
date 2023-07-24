@@ -3,7 +3,7 @@ import { Button, Box, Typography, Card, CardContent, CardActions, TextField, Ske
 import { useNavigate, useParams } from 'react-router-dom'
 import { sendMessage, getConversationById } from '../../services/Api'
 import { getCurrentUser } from '../../services/auth.service'
-import { ArrowBack, ArrowBackIos } from '@mui/icons-material'
+import { ArrowBackIos } from '@mui/icons-material'
 
 const Conversation = () => {
   const [message, setMessage] = useState('')

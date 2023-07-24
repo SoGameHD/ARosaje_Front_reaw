@@ -17,7 +17,7 @@ function PlantsBeingKeptView() {
         >
         <h1 className="titleUserPlants">{lg('keptPlant')}</h1>
       </Container>
-      <SubtitleUserPlants subtitle="Plantes dont j’ai ou j’ai eu la garde" />
+      <SubtitleUserPlants subtitle={lg('currentPlant')} />
       <PlantsBeingKeptList />
     </Container>
     </>

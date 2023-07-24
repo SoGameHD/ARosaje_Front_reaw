@@ -6,9 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link, useNavigate } from 'react-router-dom';
+import { useLang } from '../../../contexts/lang-context';
 
 const CardUserKeptPlants = ({path, plantName, image, username, date1, date2, action, icon}) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+	const lgCommon =useLang('common.root')
+	const lgPlant = useLang('plant')
 
   return (
     <Card sx={{ 
@@ -46,7 +49,7 @@ const CardUserKeptPlants = ({path, plantName, image, username, date1, date2, act
               fontSize: "14px",
             }}
             color="text.secondary">
-            Gardée par {username}
+            {lgPlant('keptBy')} {username}
           </Typography>
           <Typography
             sx={{
@@ -54,7 +57,7 @@ const CardUserKeptPlants = ({path, plantName, image, username, date1, date2, act
               mt: '4%'
             }}
             color="text.primary">
-            Du {date1} Au {date2}
+            {lgCommon('prefix.from')} {date1} {lgCommon('prefix.at')} {date2}
           </Typography>
         </CardContent>
       </Link>

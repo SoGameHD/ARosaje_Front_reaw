@@ -13,7 +13,8 @@ import HomeIcon from './svg/HomeIcon'
 import { Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../services/auth.service'
-import { EmailRounded, MailRounded } from '@mui/icons-material'
+import { EmailRounded } from '@mui/icons-material'
+import { useLang } from '../../../contexts/lang-context'
 
 const drawerWidth = 240
 
@@ -56,6 +57,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // Composant Menu Exporté
 const DesktopMenu = () => {
   const navigate = useNavigate()
+	const lg = useLang('common.root')
 
   return (
     <Drawer
@@ -107,7 +109,7 @@ const DesktopMenu = () => {
                       flexDirection: 'column'
                     }}
                   >
-                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Accueil</Typography>
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('home.title')}</Typography>
                   </Button>
                 ) : index === 1 ? (
                   <Button
@@ -170,7 +172,7 @@ const DesktopMenu = () => {
                       flexDirection: 'column'
                     }}
                   >
-                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Profil</Typography>
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('Profile')}</Typography>
                   </Button>
                 ) : (
                   <Button
@@ -190,7 +192,7 @@ const DesktopMenu = () => {
                       flexDirection: 'column'
                     }}
                   >
-                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Messagerie</Typography>
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('message')}</Typography>
                   </Button>
                 )}
               </ListItemIcon>
@@ -217,7 +219,7 @@ const DesktopMenu = () => {
           onClick={logout}
           startIcon={<LogoutIcon />}
         >
-          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Déconnexion</Typography>
+          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('logout')}</Typography>
         </Button>
       </div>
       <div style={{ position: 'fixed', bottom: 0, textAlign: 'center', paddingBottom: 10, marginLeft: '8px' }}>
@@ -239,7 +241,7 @@ const DesktopMenu = () => {
             flexDirection: 'column'
           }}
         >
-          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>RGPD</Typography>
+          <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('rgpd')}</Typography>
         </Button>
       </div>
     </Drawer>
