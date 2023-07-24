@@ -190,7 +190,7 @@ const DesktopMenu = () => {
                       flexDirection: 'column'
                     }}
                   >
-                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Conversation</Typography>
+                    <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Messagerie</Typography>
                   </Button>
                 )}
               </ListItemIcon>

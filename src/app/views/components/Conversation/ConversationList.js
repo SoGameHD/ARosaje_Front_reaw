@@ -112,7 +112,14 @@ const ConversationList = () => {
   return (
     <Container maxWidth="xl">
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Typography>Messagerie principale</Typography>
+        <Container
+          maxWidth="xl"
+          sx={{
+            display: 'flex'
+          }}
+        >
+          <h1 className="titleUserPlants">Messagerie</h1>
+        </Container>
       </Box>
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <Box sx={{ overflow: 'auto' }}>
