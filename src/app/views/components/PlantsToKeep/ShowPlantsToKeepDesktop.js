@@ -32,15 +32,20 @@ const ShowPlantsToKeepDesktop = (props) => {
       window.location.reload()
   }
 
-  function postMessage() {
-
-    createConversation(plant.title, user, plant.owner_user.id, "test").then(response => {
-      console.log(response);
-    }).catch(error => {
-      console.log(error);
-    })
-    setOpenMessage(false)
-      
+  function postMessage(event,message) {
+    event.preventDefault();
+    // Appelez ici la fonction pour envoyer le message au backend
+    createConversation(plant.title, user, plant.owner_user.id, message)
+      .then(response => {
+        console.log(response);
+        // Vous pouvez effectuer des actions supplémentaires ici si nécessaire
+      })
+      .catch(error => {
+        console.log(error);
+        // Gérez les erreurs ici si nécessaire
+      });
+  
+    setOpenMessage(false);
   }
   
   const handleClickOpen = () => {
@@ -176,13 +181,13 @@ const ShowPlantsToKeepDesktop = (props) => {
         <Form
           onSubmit={postMessage}
           render={({ handleSubmitMessage }) => (
-            <form onSubmit={handleSubmitMessage}>
+            <form onSubmit={(event) => postMessage(event, event.target.elements.message.value)}>
               <DialogContent sx={{ pt: '20px !important', width: 420 }}>
                 <Field name="message" component="textarea" rows={6} placeholder="Message" />
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleCloseMessage} sx={{ color: '#386A20' }}>Annuler</Button>
-                <Button onClick={postMessage} startIcon={<Add />} sx={{ color: '#386A20' }} >Envoyer</Button>
+                <Button type="submit" startIcon={<Add />} sx={{ color: '#386A20' }} >Envoyer</Button>
               </DialogActions>
             </form>
           )}

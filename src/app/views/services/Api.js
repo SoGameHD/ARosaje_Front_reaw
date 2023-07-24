@@ -91,7 +91,7 @@ const sendMessage = async (conv_id, user_id, content) => {
 
 const createConversation = async (name, sender_id, recept_id, content) => {
   try {
-    const response = await instance.post(`/conversation?name=${name}&sender=${sender_id}&recept=${recept_id}&content=test`)
+    const response = await instance.post(`/conversation?name=${name}&sender=${sender_id}&recept=${recept_id}&content=${content}`)
     return response.data
   } catch (error) {
     console.error(error)
