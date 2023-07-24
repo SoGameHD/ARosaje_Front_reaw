@@ -2,8 +2,10 @@ import { Container, CssBaseline } from "@mui/material"
 import '../UserPlants/UserPlantsView.css'
 import SubtitleUserPlants from "../UserPlants/SubtitleUserPlants"
 import PlantsBeingKeptList from "./PlantsBeingKeptList"
+import { useLang } from "../../../contexts/lang-context"
 
 function PlantsBeingKeptView() {
+	const lg = useLang('plant')
   return (
     <>
     <CssBaseline />
@@ -13,7 +15,7 @@ function PlantsBeingKeptView() {
           display: "flex",
         }}
         >
-        <h1 className="titleUserPlants">Plantes gardées</h1>
+        <h1 className="titleUserPlants">{lg('keptPlant')}</h1>
       </Container>
       <SubtitleUserPlants subtitle="Plantes dont j’ai ou j’ai eu la garde" />
       <PlantsBeingKeptList />

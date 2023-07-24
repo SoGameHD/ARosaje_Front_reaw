@@ -7,9 +7,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import { useNavigate } from 'react-router-dom';
+import { useLang } from '../../../contexts/lang-context';
 
 const CardPlantsBeingKept = ({path, image, dateStart, dateEnd}) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+	const lgCommon = useLang('common.root')
+	const lgPlant = useLang('plant')
+	const lgAdvice = useLang('advice')
 
   return (
     <Card sx={{ 
@@ -42,7 +46,7 @@ const CardPlantsBeingKept = ({path, image, dateStart, dateEnd}) => {
           fontWeight: 500,
         }}
         component="div">
-          Orchidées
+          {lgPlant('orchidea')}
         </Typography>
         <Typography sx={{ 
           fontSize: {
@@ -52,7 +56,7 @@ const CardPlantsBeingKept = ({path, image, dateStart, dateEnd}) => {
           },
           }}
           color="text.secondary">
-          Du {dateStart} Au {dateEnd}.
+          {lgCommon('prefix.from')} {dateStart} {lgCommon('prefix.at')} {dateEnd}.
         </Typography>
       </CardContent>
       <CardActions sx={{
@@ -76,7 +80,7 @@ const CardPlantsBeingKept = ({path, image, dateStart, dateEnd}) => {
           },
         }}
         >
-        Voir les conseils
+        {lgAdvice('viewAdvice')}
         </Button>
       </CardActions>
     </Card>

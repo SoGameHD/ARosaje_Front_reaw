@@ -6,9 +6,12 @@ import myPlantImage from '../../../images/mes-plantes.avif'
 import plantKept from '../../../images/plantes-gardees.avif'
 import { useEffect, useState } from "react";
 import { getPlants } from "../../services/Api";
+import { useLang } from "../../../contexts/lang-context";
 
 const Dashboard = () => {
   const [plants, setPlants] = useState([])
+	const lg = useLang('common.root')
+	const lgPlant = useLang('plant')
   
   useEffect(() => {
     const getData = async () => {
@@ -24,7 +27,7 @@ const Dashboard = () => {
     <Container maxWidth="xl">
       <Box>
         <Typography gutterBottom variant="h3">
-          ARosa-je
+          {lg('appName')}
         </Typography>
       </Box>
       <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12 }}>
@@ -32,7 +35,7 @@ const Dashboard = () => {
           <DashboardCard
           path={'/mes-plantes'}
           title={'Mes plantes'}
-          description={"Retrouver les plantes que vous avez partagé. Vos plantes gardées et celles en attente d'un gardien."}
+          description={lgPlant('myPlant')}
           image={myPlantImage}
           />
         </Grid>
@@ -40,7 +43,7 @@ const Dashboard = () => {
           <DashboardCard
           path={'/plantes-gardees'}
           title={'Plantes gardees'}
-          description={"Retrouver les plantes que vous gardées."}
+          description={lgPlant('findKeepPlant')}
           image={plantKept}
           />
         </Grid>
@@ -49,7 +52,7 @@ const Dashboard = () => {
         mt: '6%'
       }}>
         <Typography gutterBottom variant="h3">
-          Plantes à garder
+          {lgPlant('plantToKeep')}
         </Typography>
       </Box>
       <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 1, sm: 10, md: 12, lg: 12 }}>
@@ -67,9 +70,9 @@ const Dashboard = () => {
               title={plant.title}
               description={plant.description}
               image={pathPlant}
-              actionBtn1={'Garder la plante'}
+              actionBtn1={lgPlant('keepPlant')}
               iconBtnAction2={<VisibilityRoundedIcon />}
-              actionBtn2={'Voir la plante'}
+              actionBtn2={lgPlant('viewPlant')}
             />
           </Grid>
           )

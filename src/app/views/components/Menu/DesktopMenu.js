@@ -13,6 +13,7 @@ import HomeIcon from './svg/HomeIcon'
 import { Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../services/auth.service'
+import { useLang } from '../../../contexts/lang-context'
 
 const drawerWidth = 240
 
@@ -54,7 +55,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 // Composant Menu Exporté
 const DesktopMenu = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+	const lg = useLang('common.root')
 
   return (
     <Drawer variant="permanent" sx={{ width: "88px", }} PaperProps={{ sx: {
@@ -101,7 +103,7 @@ const DesktopMenu = () => {
                     flexDirection: 'column',
                 }}>
                   <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-                    Accueil
+                    {lg('home.title')}
                   </Typography>
                 </Button>
                 : index === 1 ? 
@@ -172,7 +174,7 @@ const DesktopMenu = () => {
                     flexDirection: 'column',
                 }}>
                   <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-                    Profil
+                    {lg('account')}
                   </Typography>
                 </Button>
                 :
@@ -193,7 +195,7 @@ const DesktopMenu = () => {
                     flexDirection: 'column',
                 }}>
                   <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-                    Conversation
+                    {lg('conversation')}
                   </Typography>
                 </Button>
                 }
@@ -222,7 +224,7 @@ const DesktopMenu = () => {
           startIcon={<LogoutIcon />}
         >
           <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-            Déconnexion
+            {lg('logout')}
           </Typography>
         </Button>
       </div>
@@ -246,7 +248,7 @@ const DesktopMenu = () => {
           }}
         >
           <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>
-            RGPD
+            {lg('rgpd')}
           </Typography>
         </Button>
       </div>

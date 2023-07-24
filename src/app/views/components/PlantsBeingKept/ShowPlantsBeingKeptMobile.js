@@ -2,10 +2,13 @@ import React from "react";
 import { IconButton, Typography, Box, Card, CardMedia, CardContent, Grid, List, ListItem, ListItemText, Divider } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import { useLang } from "../../../contexts/lang-context";
 
 const ShowPlantsBeingKeptMobile = (props) => {
   const navigate = useNavigate();
   const { plant } = props
+	const lgPlant = useLang('plant')
+	const lgAdvice = useLang('advice')
 
   return (
     <Box sx={{
@@ -32,10 +35,10 @@ const ShowPlantsBeingKeptMobile = (props) => {
         </Grid>
         <Grid item>
           <Typography variant="h4" gutterBottom>
-            Plantes gardées
+           {lgPlant('keptPlant')}
           </Typography>
           <Typography variant="subtitle1" gutterBottom >
-            Plantes dont j’ai ou j’ai eu la garde
+						{lgPlant('currentPlant')}
           </Typography>
         </Grid>
       </Grid>
@@ -61,15 +64,15 @@ const ShowPlantsBeingKeptMobile = (props) => {
         <CardContent sx={{ flexGrow: 1 }}>
           <Box sx={{ mt: '5%' }}>
             <Typography variant="h5" gutterBottom>
-              Nom plante
+              {lgPlant('plantName')}
             </Typography>
             <Typography variant="body1" gutterBottom>
-              Description de plante
+              {lgPlant('plantDescription')}
             </Typography>
           </Box>
           <Box sx={{ mt: '15%' }}>
             <Typography variant="h5" gutterBottom>
-              Conseils botaniste
+             {lgAdvice('botanistTips')}
             </Typography>
             <List>
               {plant.advices.map(advice => (

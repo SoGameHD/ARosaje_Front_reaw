@@ -1,18 +1,22 @@
 import { Box, Card, CardContent, CardMedia, Container, Divider, List, ListItem, ListItemText, Typography } from "@mui/material"
 import React from "react";
+import { useLang } from "../../../contexts/lang-context";
 
 const ShowPlantsBeingKeptDesktop = (props) => {
   const { plant } = props
+	const lgCommon = useLang('common.root')
+	const lgPlant = useLang('plant')
+	const lgAdvice = useLang('advice')
 
   return (
     <>
       <Container maxWidth="xl">
         <Box sx={{ ml: "4%" }}>
           <Typography variant="h1" sx={{ mb: "1%" }}>
-            Plantes gardées
+            {lgPlant('keptPlant')}
           </Typography>
           <Typography variant="h4" gutterBottom >
-            Plantes dont j’ai ou j’ai eu la garde
+            {lgPlant('currentPlant')}
           </Typography>
         </Box>
         <Card sx={{ display: 'flex', borderRadius: "28px", margin: "3% 8% 3% 0", backgroundColor: "#EFF3E9" }}>
@@ -37,10 +41,10 @@ const ShowPlantsBeingKeptDesktop = (props) => {
                 {plant.title}
               </Typography>
               <Typography variant="subtitle2" color="text.secondary" component="div" sx={{ mt: "2%" }}>
-                Du {plant.start_date} Au {plant.end_date}
+                {lgCommon('prefix.from')} {plant.start_date} {lgCommon('prefix.at')} {plant.end_date}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div" sx={{ mt: "6%" }}>
-                Description plante <br />
+                {lgPlant('plantDescription')} <br />
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus tenetur voluptatum earum expedita accusantium consequuntur, blanditiis tempora eaque quisquam illum. Obcaecati, iure possimus.
               </Typography>
             </CardContent>
@@ -48,7 +52,7 @@ const ShowPlantsBeingKeptDesktop = (props) => {
         </Card>
         <Box sx={{ width: "85%" }}>
           <Typography variant="h2" sx={{ mb: "1%", ml: "4%" }}>
-            Conseils botaniste
+            {lgAdvice('botanistTips')}
           </Typography>
           <List>
             {plant.advices.map(advice => (
