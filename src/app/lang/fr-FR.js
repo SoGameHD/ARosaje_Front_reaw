@@ -27,10 +27,14 @@ export default {
 		keptPlant: 'Plantes gardées',
 		keepPlant: 'Garder la planter',
 		viewPLant: 'Voir la plante',
-		orchidea: 'Orchidées'
+		orchidea: 'Orchidées',
+		currentPlant: 'Plantes dont j’ai ou j’ai eu la garde',
+		plantDescription: 'Description plante',
+		plantName: 'Nom plante'
 	},
 	advice: {
 		title: 'Conseil',
-		viewAdvice: 'Voir les conseils'
+		viewAdvice: 'Voir les conseils',
+		botanistTips: 'Conseils botaniste'
 	}
 }
