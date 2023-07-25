@@ -51,6 +51,14 @@ const CardPlantsToKeep = ({ path, username, date1, date2, title, description, im
     }
   }
 
+  function cropMessage(message, lengthMax) {
+    if (message.length <= lengthMax) {
+      return message // Retourne le message tel quel s'il est déjà assez court
+    } else {
+      return message.slice(0, lengthMax) + '...' // Retourne les premiers caractères jusqu'à la longueur maximale, suivi de "..."
+    }
+  }
+
   return (
     <>
       <Card
@@ -143,7 +151,7 @@ const CardPlantsToKeep = ({ path, username, date1, date2, title, description, im
               }}
               color="text.secondary"
             >
-              {description}
+              {cropMessage(description, 85)}
             </Typography>
           </CardContent>
         </Link>
