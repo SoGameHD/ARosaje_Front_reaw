@@ -10,7 +10,7 @@ import GppGoodIcon from '@mui/icons-material/GppGood'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import PlantIcon from './svg/PlantIcon'
 import HomeIcon from './svg/HomeIcon'
-import { Button, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../services/auth.service'
 import { EmailRounded } from '@mui/icons-material'
@@ -121,48 +121,14 @@ const DesktopMenu = () => {
         ))}
       </List>
       <div style={{ position: 'fixed', bottom: '7%', textAlign: 'center', paddingBottom: 10 }}>
-        <Button
-          variant="text"
-          sx={{
-            fontSize: '12px',
-            '& .MuiButton-startIcon': { margin: '0px' },
-            textTransform: 'unset !important',
-            color: '#43493E',
-            ':hover': {
-              backgroundColor: 'transparent'
-            }
-          }}
-          style={{
-            display: 'flex',
-            flexDirection: 'column'
-          }}
-          onClick={logout}
-          startIcon={<LogoutIcon />}
-        >
+        <ButtonOwn onClick={logout} icon={<LogoutIcon />}>
           <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('logout')}</Typography>
-        </Button>
+        </ButtonOwn>
       </div>
       <div style={{ position: 'fixed', bottom: 0, textAlign: 'center', paddingBottom: 10, marginLeft: '8px' }}>
-        <Button
-          variant="text"
-          sx={{
-            fontSize: '12px',
-            color: '#43493E',
-            '& .MuiButton-startIcon': { margin: '0px' },
-            textTransform: 'unset !important',
-            ':hover': {
-              backgroundColor: 'transparent'
-            }
-          }}
-          onClick={() => navigate('/traitement-des-données')}
-          startIcon={<GppGoodIcon />}
-          style={{
-            display: 'flex',
-            flexDirection: 'column'
-          }}
-        >
+        <ButtonOwn onClick={() => navigate('/traitement-des-données')} icon={<GppGoodIcon />}>
           <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('rgpd')}</Typography>
-        </Button>
+        </ButtonOwn>
       </div>
     </Drawer>
   )
