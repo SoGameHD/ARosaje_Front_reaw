@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { logout } from '../../services/auth.service'
 import { EmailRounded } from '@mui/icons-material'
 import { useLang } from '../../../contexts/lang-context'
+import ButtonOwn from '../../own/Button'
 
 const drawerWidth = 240
 
@@ -57,7 +58,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // Composant Menu Exporté
 const DesktopMenu = () => {
   const navigate = useNavigate()
-	const lg = useLang('common.root')
+  const lg = useLang('common.root')
 
   return (
     <Drawer
@@ -92,108 +93,27 @@ const DesktopMenu = () => {
                 }}
               >
                 {index === 0 ? (
-                  <Button
-                    onClick={() => navigate('/')}
-                    sx={{
-                      '& .MuiButton-startIcon': { margin: '0px' },
-                      textTransform: 'unset !important',
-                      color: '#386A20',
-                      ':hover': {
-                        backgroundColor: 'transparent'
-                      }
-                    }}
-                    startIcon={<HomeIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                    variant="text"
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column'
-                    }}
-                  >
+                  <ButtonOwn onClick={() => navigate('/')} icon={<HomeIcon fontSize="small" sx={{ color: '#43493E' }} />}>
                     <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('home.title')}</Typography>
-                  </Button>
+                  </ButtonOwn>
                 ) : index === 1 ? (
-                  <Button
-                    onClick={() => navigate('/mes-plantes')}
-                    sx={{
-                      '& .MuiButton-startIcon': { margin: '0px' },
-                      textTransform: 'unset !important',
-                      color: '#386A20',
-                      ':hover': {
-                        backgroundColor: 'transparent'
-                      }
-                    }}
-                    startIcon={<PlantIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                    variant="text"
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column'
-                    }}
-                  >
+                  <ButtonOwn onClick={() => navigate('/mes-plantes')} icon={<PlantIcon fontSize="small" sx={{ color: '#43493E' }} />}>
                     <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Mes</Typography>
                     <Typography sx={{ fontSize: '12px', color: '#43493E' }}>Plantes</Typography>
-                  </Button>
+                  </ButtonOwn>
                 ) : index === 2 ? (
-                  <Button
-                    onClick={() => navigate('/plantes-gardees')}
-                    sx={{
-                      '& .MuiButton-startIcon': { margin: '0px' },
-                      textTransform: 'unset !important',
-                      color: '#386A20',
-                      ':hover': {
-                        backgroundColor: 'transparent'
-                      }
-                    }}
-                    startIcon={<YardOutlinedIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                    variant="text"
-                    // onClick={handleClickOpen}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column'
-                    }}
-                  >
+                  <ButtonOwn onClick={() => navigate('/plantes-gardees')} icon={<YardOutlinedIcon fontSize="small" sx={{ color: '#43493E' }} />}>
                     <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>Plantes</Typography>
                     <Typography sx={{ fontSize: '12px', color: '#43493E' }}>gardées</Typography>
-                  </Button>
+                  </ButtonOwn>
                 ) : index === 3 ? (
-                  <Button
-                    onClick={() => navigate('/profil')}
-                    sx={{
-                      '& .MuiButton-startIcon': { margin: '0px' },
-                      textTransform: 'unset !important',
-                      color: '#386A20',
-                      ':hover': {
-                        backgroundColor: 'transparent'
-                      }
-                    }}
-                    startIcon={<AccountCircleIcon fontSize="small" sx={{ color: '#43493E' }} />}
-                    variant="text"
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column'
-                    }}
-                  >
+                  <ButtonOwn onClick={() => navigate('/profil')} icon={<AccountCircleIcon fontSize="small" sx={{ color: '#43493E' }} />}>
                     <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('profile')}</Typography>
-                  </Button>
+                  </ButtonOwn>
                 ) : (
-                  <Button
-                    onClick={() => navigate('/conversation')}
-                    sx={{
-                      '& .MuiButton-startIcon': { margin: '0px' },
-                      textTransform: 'unset !important',
-                      color: '#386A20',
-                      ':hover': {
-                        backgroundColor: 'transparent'
-                      }
-                    }}
-                    startIcon={<EmailRounded fontSize="small" sx={{ color: '#43493E' }} />}
-                    variant="text"
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column'
-                    }}
-                  >
+                  <ButtonOwn onClick={() => navigate('/conversation')} icon={<EmailRounded fontSize="small" sx={{ color: '#43493E' }} />}>
                     <Typography sx={{ fontSize: '12px', color: '#43493E', mt: '8px' }}>{lg('message')}</Typography>
-                  </Button>
+                  </ButtonOwn>
                 )}
               </ListItemIcon>
             </ListItemButton>
