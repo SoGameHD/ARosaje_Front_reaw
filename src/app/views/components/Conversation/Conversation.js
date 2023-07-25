@@ -30,10 +30,8 @@ const Conversation = () => {
     const fetchConversation = async () => {
       try {
         if (user) {
-          console.log(user)
           const messages = await getConversationById(id, user)
           setConversation(messages)
-          console.log(messages)
           setIsLoading(false)
         }
       } catch (error) {
@@ -67,6 +65,40 @@ const Conversation = () => {
       })
 
       setMessage('')
+    }
+  }
+
+  function formatDateTimeLastMessage(date) {
+    const now = new Date()
+    const dateMessage = new Date(date)
+    const differenceInMillis = now - dateMessage
+    const minuteInMillis = 60000 // 1 minute en millisecondes
+    const hourInMillis = 3600000 // 1 heure en millisecondes
+    const vingtQuatreHeuresEnMillis = 86400000 // 24 heures en millisecondes
+
+    if (differenceInMillis < vingtQuatreHeuresEnMillis) {
+      // Moins de 24 heures se sont écoulées
+      const hours = Math.floor(differenceInMillis / hourInMillis)
+      const minutes = Math.floor((differenceInMillis % hourInMillis) / minuteInMillis)
+      const seconds = Math.floor((differenceInMillis % minuteInMillis) / 1000) // Convertir en secondes
+
+      let timeString = ''
+
+      if (hours > 0) {
+        timeString += `${hours} h `
+      }
+
+      if (minutes > 0) {
+        timeString += `${minutes} min `
+      } else {
+        timeString += `${seconds} s`
+      }
+
+      return timeString.trim() // Supprimer les espaces en trop à la fin
+    } else {
+      // Plus de 24 heures se sont écoulées, retourner la date formatée
+      const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' }
+      return dateMessage.toLocaleDateString('fr-FR', optionsDate)
     }
   }
 
@@ -119,14 +151,20 @@ const Conversation = () => {
                   sx={{
                     mb: 1,
                     borderRadius: 6,
+                    borderColor: '#386A20',
                     marginLeft: message.user.id === user ? '55%' : '0',
                     marginRight: message.user.id === user ? '0' : '55%'
                   }}
                 >
                   <CardContent>
-                    <Typography variant="body2" color="text.secondary">
-                      <Box textAlign={message.user.id === user ? 'right' : 'left'}>{message.message}</Box>
-                    </Typography>
+                    <Box textAlign={message.user.id === user ? 'right' : 'left'}>
+                      <Typography variant="body2">{message.message}</Typography>
+                    </Box>
+                    <Box textAlign={message.user.id === user ? 'left' : 'right'}>
+                      <Typography variant="caption" color="text.secondary">
+                        {formatDateTimeLastMessage(message.date)}
+                      </Typography>
+                    </Box>
                   </CardContent>
                 </Card>
               ))}

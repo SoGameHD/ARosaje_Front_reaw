@@ -67,22 +67,76 @@ const ConversationList = () => {
     }
   }
 
-  function formatDateTimeLastMessage(date) {
+  function formatDateTimeLastMessage(messages) {
+    if (messages.length === 0) {
+      return null // Si le tableau est vide, il n'y a pas de message le plus récent
+    }
+
+    let objectDateMoreRecent = messages[0] // Supposons que le premier message est le plus récent
+    let dateMoreRecent = Date.parse(objectDateMoreRecent.date)
+
+    for (let i = 1; i < messages.length; i++) {
+      const message = messages[i]
+      const dateMessage = Date.parse(message.date)
+
+      if (dateMessage > dateMoreRecent) {
+        dateMoreRecent = dateMessage
+        objectDateMoreRecent = message
+      }
+    }
+
     const now = new Date()
-    const dateMessage = new Date(date)
+    const dateMessage = new Date(objectDateMoreRecent.date)
     const differenceInMillis = now - dateMessage
+    const minuteInMillis = 60000 // 1 minute en millisecondes
     const hourInMillis = 3600000 // 1 heure en millisecondes
     const vingtQuatreHeuresEnMillis = 86400000 // 24 heures en millisecondes
 
     if (differenceInMillis < vingtQuatreHeuresEnMillis) {
-      // Moins de 24 heures se sont écoulées, calculer le temps écoulé en heures et minutes
+      // Moins de 24 heures se sont écoulées
       const hours = Math.floor(differenceInMillis / hourInMillis)
-      return `${hours} h`
+      const minutes = Math.floor((differenceInMillis % hourInMillis) / minuteInMillis)
+      const seconds = Math.floor((differenceInMillis % minuteInMillis) / 1000) // Convertir en secondes
+
+      let timeString = ''
+
+      if (hours > 0) {
+        timeString += `${hours} h `
+      }
+
+      if (minutes > 0) {
+        timeString += `${minutes} min `
+      } else {
+        timeString += `${seconds} s`
+      }
+
+      return timeString.trim() // Supprimer les espaces en trop à la fin
     } else {
       // Plus de 24 heures se sont écoulées, retourner la date formatée
       const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' }
       return dateMessage.toLocaleDateString('fr-FR', optionsDate)
     }
+  }
+
+  function getRecentMessage(arrayMessage) {
+    if (arrayMessage.length === 0) {
+      return null // Si le tableau est vide, il n'y a pas de message le plus récent
+    }
+
+    let objectDateMoreRecent = arrayMessage[0] // Supposons que le premier message est le plus récent
+    let dateMoreRecent = Date.parse(objectDateMoreRecent.date)
+
+    for (let i = 1; i < arrayMessage.length; i++) {
+      const message = arrayMessage[i]
+      const dateMessage = Date.parse(message.date)
+
+      if (dateMessage > dateMoreRecent) {
+        dateMoreRecent = dateMessage
+        objectDateMoreRecent = message
+      }
+    }
+
+    return objectDateMoreRecent.message
   }
 
   if (isLoading) {
@@ -129,8 +183,8 @@ const ConversationList = () => {
                     <ListItemAvatar>
                       <Avatar alt={conversation.name} {...stringAvatar(conversation.name)} />
                     </ListItemAvatar>
-                    <ListItemText primary={conversation.name} secondary={formatDateTimeLastMessage(conversation.message[0].date)} />
-                    <ListItemText secondary={conversation.message[0].message} />
+                    <ListItemText primary={conversation.name} secondary={formatDateTimeLastMessage(conversation.message)} />
+                    <ListItemText secondary={getRecentMessage(conversation.message)} />
                   </ListItem>
                   <Divider />
                 </React.Fragment>
