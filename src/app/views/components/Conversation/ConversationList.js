@@ -67,8 +67,6 @@ const ConversationList = () => {
     }
   }
 
-  console.log(conversations)
-
   function formatDateTimeLastMessage(date) {
     const now = new Date()
     const dateMessage = new Date(date)
@@ -123,20 +121,34 @@ const ConversationList = () => {
       </Box>
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <Box sx={{ overflow: 'auto' }}>
-          <List style={{ flex: 1, width: '100%', cursor: 'pointer' }}>
-            {conversations?.map((conversation) => (
-              <React.Fragment key={conversation.id}>
-                <ListItem alignItems="flex-start" sx={{ textAlign: 'left' }} onClick={() => handleConversationClick(conversation.id)}>
-                  <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" {...stringAvatar(conversation.name)} />
-                  </ListItemAvatar>
-                  <ListItemText primary={conversation.name} secondary={formatDateTimeLastMessage(conversation.message[0].date)} />
-                  <ListItemText secondary={conversation.message[0].message} />
-                </ListItem>
-                <Divider />
-              </React.Fragment>
-            ))}
-          </List>
+          {conversations ? (
+            <List style={{ flex: 1, width: '100%', cursor: 'pointer' }}>
+              {conversations?.map((conversation) => (
+                <React.Fragment key={conversation.id}>
+                  <ListItem alignItems="flex-start" sx={{ textAlign: 'left' }} onClick={() => handleConversationClick(conversation.id)}>
+                    <ListItemAvatar>
+                      <Avatar alt={conversation.name} {...stringAvatar(conversation.name)} />
+                    </ListItemAvatar>
+                    <ListItemText primary={conversation.name} secondary={formatDateTimeLastMessage(conversation.message[0].date)} />
+                    <ListItemText secondary={conversation.message[0].message} />
+                  </ListItem>
+                  <Divider />
+                </React.Fragment>
+              ))}
+            </List>
+          ) : (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '6%'
+              }}
+            >
+              <Typography variant="h4" color="text.secondary">
+                Messagerie vide
+              </Typography>
+            </Box>
+          )}
         </Box>
       </div>
     </Container>

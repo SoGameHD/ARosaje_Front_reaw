@@ -69,7 +69,7 @@ const Dashboard = () => {
                 <CardPlantsToKeep
                   key={plant.id}
                   path={`/plantes-a-garder/${plant.id}`}
-                  username={'Yoda'}
+                  username={plant.owner_user.firstname + ' ' + plant.owner_user.lastname}
                   date1={plant.start_date}
                   date2={plant.end_date}
                   title={plant.title}

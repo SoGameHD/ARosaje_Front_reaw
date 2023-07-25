@@ -1,74 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import {Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import { Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { authenticate, checkToken } from '../../../services/auth.service';
+import { authenticate, checkToken } from '../../../services/auth.service'
 
 const UserLogin = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const isValid = checkToken();
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const isValid = checkToken()
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-  
-    if(data.get('email') !== "" && data.get('password') !== "") {
-      authenticate(data).then(response => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+
+    if (data.get('email') !== '' && data.get('password') !== '') {
+      authenticate(data).then((response) => {
         window.location.reload()
-        })
-        .catch(error => {
-          console.log(error);
-          
-        });
+      })
     } else {
-      setEmailError(data.get('email') === "" ? true : false)
-      setPasswordError(data.get('password') === "" ? true : false)
+      setEmailError(data.get('email') === '' ? true : false)
+      setPasswordError(data.get('password') === '' ? true : false)
     }
-    
-  };
+  }
 
   useEffect(() => {
     // Vérifiez si l'utilisateur est connecté ici
-    const loggedIn = isValid === true ? true : false;
-    setIsAuthenticated(loggedIn);
+    const loggedIn = isValid === true ? true : false
+    setIsAuthenticated(loggedIn)
   }, [isValid])
 
   if (isAuthenticated === true) {
-    navigate("/");
+    navigate('/')
   }
 
   return (
     <>
-    <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
-        
           <Typography component="h1" variant="h5">
             Connexion
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField error={emailError} margin="normal" required fullWidth id="email" label="Email" name="email" autoComplete="email" autoFocus />
             <TextField
-              error = {emailError}
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              error = {passwordError}
+              error={passwordError}
               margin="normal"
               required
               fullWidth
@@ -82,10 +66,14 @@ const UserLogin = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ width: "100%",marginTop: '5%', marginBottom: '2%', background: "linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397",
-                ":hover": {
+              sx={{
+                width: '100%',
+                marginTop: '5%',
+                marginBottom: '2%',
+                background: 'linear-gradient(0deg, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.12)), #B8F397',
+                ':hover': {
                   backgroundColor: '#386A20',
-                  color: '#FFFFFA',
+                  color: '#FFFFFA'
                 },
                 color: '#000000'
               }}
@@ -93,9 +81,8 @@ const UserLogin = () => {
               Connexion
             </Button>
             <Grid container>
-              
               <Grid item>
-                <Link onClick={()=>navigate("/inscription")} variant="body2" sx={{ cursor: 'pointer' }}>
+                <Link onClick={() => navigate('/inscription')} variant="body2" sx={{ cursor: 'pointer' }}>
                   {"Vous n'avez pas de compte ? Inscrivez-vous"}
                 </Link>
               </Grid>
@@ -104,7 +91,7 @@ const UserLogin = () => {
         </Box>
       </Container>
     </>
-  );
+  )
 }
 
 export default UserLogin
